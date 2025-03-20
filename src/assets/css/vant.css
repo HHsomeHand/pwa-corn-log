@@ -1,0 +1,7 @@
+:root {
+    /* vant 默认的 font-size 太小了, 这里用豆包每个加了 3px */
+    --van-font-size-xs: 13px !important;
+    --van-font-size-sm: 15px !important;
+    --van-font-size-md: 17px !important;
+    --van-font-size-lg: 19px !important;
+}
