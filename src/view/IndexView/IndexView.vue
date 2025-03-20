@@ -4,11 +4,6 @@
 
 <template>
   <div class="index-view">
-    <van-nav-bar
-        left-text="药律"
-        fixed
-        placeholder
-    />
 
     <van-button class="!fixed bottom-20 right-5 !size-13" round type="primary" icon="plus" />
 
