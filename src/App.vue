@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="app-component flex flex-col max-w-md mx-auto h-screen">
+  <div class="app-component flex flex-col max-w-md mx-auto fixed bottom-0 top-0 left-0 right-0">
     <van-nav-bar
         class="shrink-0"
         left-text="药律"
