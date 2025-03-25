@@ -1,6 +1,4 @@
 <script setup>
-import {onMounted} from "vue";
-
 const props = defineProps({
   gapX: {
     type: Number,
@@ -27,6 +25,8 @@ const props = defineProps({
     default: 'bottom'
   }
 });
+
+const emit = defineEmits(["click"]);
 
 const themeVars = reactive({
   floatingBubbleSize: `${props.size}px`,
@@ -123,6 +123,8 @@ function onClick(event) {
   nextTick(() => {
     offset.value = { ...lastValidOffset.value }; // 强制恢复到点击前的位置
   });
+
+  emit("click", event);
 }
 
 // 监听 offset 变化
