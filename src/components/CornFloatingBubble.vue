@@ -2,7 +2,11 @@
 import {onMounted} from "vue";
 
 const props = defineProps({
-  gap: {
+  gapX: {
+    type: Number,
+    default: 24
+  },
+  gapY: {
     type: Number,
     default: 24
   },
@@ -55,6 +59,8 @@ const offset = ref({ x: -1, y: -1 }); // 初始位置交给组件计算
 
 let restrictOffsetToContainer = null;
 
+let lastValidOffset = ref({ x: -1, y: -1 }); // 保存上一次有效位置
+
 watch(() => props.container, () => {
   if (!props.container) return;
 
@@ -65,12 +71,10 @@ watch(() => props.container, () => {
 
   // 获取父元素边界
   const rect = containerEl.getBoundingClientRect();
-  const minX = rect.left + props.gap; // 左边界
-  const maxX = rect.right - props.size - props.gap; // 右边界
-  const minY = rect.top + props.gap; // 上边界
-  const maxY = rect.bottom - props.size - props.gap; // 下边界
-
-
+  const minX = rect.left + props.gapX; // 左边界
+  const maxX = rect.right - props.size - props.gapX; // 右边界
+  const minY = rect.top + props.gapY; // 上边界
+  const maxY = rect.bottom - props.size - props.gapY; // 下边界
 
   if (props.posX === "left") {
     offset.value.x = minX;
@@ -92,6 +96,9 @@ watch(() => props.container, () => {
 
     return { x: restrictedX, y: restrictedY };
   }
+
+  // 初始化时保存有效位置
+  lastValidOffset.value = { ...offset.value };
 }, {immediate: true});
 
 
@@ -107,11 +114,21 @@ function onOffsetChange(newOffset) {
       offset.value = restrictedOffset; // 更新位置，确保不越界
     });
   }
+
+  lastValidOffset.value = { ...restrictedOffset };
+}
+
+// 点击时恢复上一次有效位置，防止 magnetic 吸附
+function onClick(event) {
+  nextTick(() => {
+    offset.value = { ...lastValidOffset.value }; // 强制恢复到点击前的位置
+  });
 }
 
 // 监听 offset 变化
 watch(offset, (newVal) => {
   onOffsetChange(newVal);
+  console.log("change"); // 点击的时候, 竟然不会触发
 }, { deep: true });
 </script>
 
@@ -123,8 +140,9 @@ watch(offset, (newVal) => {
         axis="xy"
         icon="plus"
         magnetic="x"
-        :gap="gap"
+        :gap="Math.min(gapX, gapY)"
         @offset-change="onOffsetChange"
+        @click="onClick"
     />
   </van-config-provider>
 </template>

@@ -8,7 +8,7 @@ const indexViewRef = ref(null);
 
 <template>
   <div class="index-view" ref="indexViewRef">
-    <corn-floating-bubble :container="indexViewRef"/>
+    <corn-floating-bubble :size="65" :gap-y="12" :container="indexViewRef"/>
   </div>
 </template>
 
