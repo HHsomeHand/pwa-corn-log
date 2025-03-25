@@ -1,4 +1,6 @@
 <script setup>
+import {onMounted} from "vue";
+
 const props = defineProps({
   gap: {
     type: Number,
@@ -11,6 +13,14 @@ const props = defineProps({
   container: {
     type: Object,
     default: () => document.body
+  },
+  posX: {
+    type: String,
+    default: 'right'
+  },
+  posY: {
+    type: String,
+    default: 'bottom'
   }
 });
 
@@ -41,54 +51,55 @@ function generateRandomClassName(prefix = 'el', length = 8) {
 
 const randomClassName = generateRandomClassName('bubble');
 
+const offset = ref({ x: -1, y: -1 }); // 初始位置交给组件计算
 
-let axis = ref("xy");
+watch(() => props.container, () => {
+  
+})
 
-let tmpX;
-let tmpY;
-function onOffsetChange({x, y}) {
-  if (!props.container) { return; }
+// 计算父元素边界并限制 offset
+function restrictOffsetToContainer({ x, y }) {
+  if (!props.container) return { x, y };
+
   const bubbleEl = document.querySelector(`.${randomClassName}`);
-  const containerEl = props.container instanceof HTMLElement ?
-      props.container : props.container.$el;
+  const containerEl = props.container instanceof HTMLElement
+      ? props.container
+      : props.container.$el;
 
-  let rect = containerEl.getBoundingClientRect();
-  const isOutside =
-      x - props.gap < rect.left ||
-      y - props.gap < rect.top ||
-      x + props.gap + props.size > rect.right ||
-      y + props.gap + props.size > rect.bottom;
+  // 获取父元素边界
+  const rect = containerEl.getBoundingClientRect();
+  const minX = rect.left + props.gap; // 左边界
+  const maxX = rect.right - props.size - props.gap; // 右边界
+  const minY = rect.top + props.gap; // 上边界
+  const maxY = rect.bottom - props.size - props.gap; // 下边界
 
+  // 限制 x 和 y 在父元素范围内
+  const restrictedX = Math.max(minX, Math.min(maxX, x));
+  const restrictedY = Math.max(minY, Math.min(maxY, y));
 
+  return { x: restrictedX, y: restrictedY };
+}
 
-  if (isOutside && tmpX !== x && tmpY !== y) {
-    tmpX = x;
-    tmpY = y;
+// 当 offset 变化时，检查并限制位置
+function onOffsetChange(newOffset) {
+  const restrictedOffset = restrictOffsetToContainer(newOffset);
 
-    // 让浮动泡泡不超出父元素的范围
-    // console.log(isOutside);
-    // // 创建 touchEnd 事件
-    // const touchEndEvent = new TouchEvent('touchcancel', {
-    //   bubbles: false,
-    //   cancelable: true
-    // });
-    //
-    // // 触发 touchEnd 事件
-    // bubbleEl.dispatchEvent(touchEndEvent);
-    //
-    // axis.value = "lock";
-    // setTimeout(() => {
-    //   axis.value = "xy";
-    // }, 1000);
+  // 如果位置被限制，更新 offset
+  if (restrictedOffset.x !== newOffset.x || restrictedOffset.y !== newOffset.y) {
+    nextTick(() => {
+      offset.value = restrictedOffset; // 更新位置，确保不越界
+    });
   }
 }
 
-const offset = ref({ x: -1, y: -1 });
+// 监听 offset 变化
+watch(offset, (newVal) => {
+  onOffsetChange(newVal);
+}, { deep: true });
 
-watch(offset, () => {
+onMounted(() => {
   onOffsetChange(offset.value);
 })
-
 </script>
 
 <template>
@@ -96,11 +107,11 @@ watch(offset, () => {
     <van-floating-bubble
         v-model:offset="offset"
         :class="randomClassName"
-        :axis="axis"
+        axis="xy"
         icon="plus"
         magnetic="x"
         :gap="gap"
-
+        @offset-change="onOffsetChange"
     />
   </van-config-provider>
 </template>
