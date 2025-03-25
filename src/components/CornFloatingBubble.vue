@@ -128,7 +128,6 @@ function onClick(event) {
 // 监听 offset 变化
 watch(offset, (newVal) => {
   onOffsetChange(newVal);
-  console.log("change"); // 点击的时候, 竟然不会触发
 }, { deep: true });
 </script>
 
