@@ -53,13 +53,10 @@ const randomClassName = generateRandomClassName('bubble');
 
 const offset = ref({ x: -1, y: -1 }); // 初始位置交给组件计算
 
-watch(() => props.container, () => {
-  
-})
+let restrictOffsetToContainer = null;
 
-// 计算父元素边界并限制 offset
-function restrictOffsetToContainer({ x, y }) {
-  if (!props.container) return { x, y };
+watch(() => props.container, () => {
+  if (!props.container) return;
 
   const bubbleEl = document.querySelector(`.${randomClassName}`);
   const containerEl = props.container instanceof HTMLElement
@@ -73,15 +70,35 @@ function restrictOffsetToContainer({ x, y }) {
   const minY = rect.top + props.gap; // 上边界
   const maxY = rect.bottom - props.size - props.gap; // 下边界
 
-  // 限制 x 和 y 在父元素范围内
-  const restrictedX = Math.max(minX, Math.min(maxX, x));
-  const restrictedY = Math.max(minY, Math.min(maxY, y));
 
-  return { x: restrictedX, y: restrictedY };
-}
+
+  if (props.posX === "left") {
+    offset.value.x = minX;
+  } else if (props.posX === "right") {
+    offset.value.x = maxX;
+  }
+
+  if (props.posY === "top") {
+    offset.value.y = minY;
+  } else if (props.posY === "bottom") {
+    offset.value.y = maxY;
+  }
+
+  // 计算父元素边界并限制 offset
+  restrictOffsetToContainer = ({ x, y }) => {
+    // 限制 x 和 y 在父元素范围内
+    const restrictedX = Math.max(minX, Math.min(maxX, x));
+    const restrictedY = Math.max(minY, Math.min(maxY, y));
+
+    return { x: restrictedX, y: restrictedY };
+  }
+}, {immediate: true});
+
 
 // 当 offset 变化时，检查并限制位置
 function onOffsetChange(newOffset) {
+  if (!restrictOffsetToContainer) return;
+
   const restrictedOffset = restrictOffsetToContainer(newOffset);
 
   // 如果位置被限制，更新 offset
@@ -96,10 +113,6 @@ function onOffsetChange(newOffset) {
 watch(offset, (newVal) => {
   onOffsetChange(newVal);
 }, { deep: true });
-
-onMounted(() => {
-  onOffsetChange(offset.value);
-})
 </script>
 
 <template>
