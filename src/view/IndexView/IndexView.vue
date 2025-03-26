@@ -1,12 +1,17 @@
 <script setup>
 import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
 import CornPowerfulList from "@/components/CornPowerfulList.vue";
+import {useLogStore} from "@/store/logs.store.js";
 
 
 const indexViewRef = ref(null);
 
+const store = useLogStore()
+
 function onClick() {
   console.log("clicked");
+
+  store.generateTestData();
 }
 </script>
 

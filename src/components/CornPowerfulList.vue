@@ -1,33 +1,220 @@
 <script setup>
-let list = ref([]);
-for (let i = 1; i <= 399; i++) {
-  list.value.push({ id: i - 1, name: `hzx${i}` });
+import { vScroll } from '@vueuse/components'
+import {useLogStore} from "@/store/logs.store.js";
+import {useEventListener, useScroll} from "@vueuse/core";
+import {throttle} from "underscore";
+import {fmtDate, getDomElement} from "@/utils/index.js";
+
+const logsCache = ref([])
+
+const store = useLogStore()
+
+let oldestDate;
+// 一直获取
+// 到末尾就返回[]
+async function _getLogs(date) {
+  date = new Date(date);
+
+  let logs = [];
+
+  if (!oldestDate) {
+    oldestDate = await store.getOldestDate();
+    if (!oldestDate) {
+      oldestDate = new Date();
+    }
+  }
+
+  do {
+    console.log("获取日期:" + fmtDate(date));
+
+    logs = await store.getLogsByDate(date);
+
+    date.setDate(date.getDate() - 1);
+
+    if (date.getTime() < oldestDate.getTime()) {
+      break;
+    }
+  } while (logs.length === 0);
+
+
+  return logs;
 }
+
+async function _getLogsWithSeparator(date) {
+  let logs = [];
+
+  logs = await _getLogs(date);
+
+  if (logs.length !== 0) {
+    logs.unshift(generatorSeparator(date));
+  }
+
+  return logs;
+}
+
+function generatorSeparator(date) {
+  date = new Date(date);
+
+  return {
+    type: "separator",
+    content: date.toISOString().split("T")[0],
+    date: date
+  }
+}
+
+// 初始化日志缓存, 不带分隔符
+async function initLogs() {
+  let logs = await _getLogs(new Date());
+
+  logsCache.value.push(...logs);
+}
+
+let _update = () => {};
+
+
+// TODO: 删掉
+async function onClick() {
+  // store.generateTestData();
+  _update();
+}
+
+const scrollerRef = ref(null)
+
+let stopTouchStart = () => {};
+
+let stopTouchMove = () => {};
+
+onUnmounted(() => {
+  stopTouchStart();
+
+  stopTouchMove();
+})
+
+onMounted(async () => {
+  const scrollerEl = getDomElement(scrollerRef.value);
+
+  async function init() {
+    await initLogs();
+
+    await nextTick(() => {
+      scrollerEl.scrollTop = scrollerEl.scrollHeight; // 滚动到底部
+    });
+  }
+
+  await init();
+
+  // 实现触顶刷新
+  async function enableTopUpdate() {
+    const { arrivedState } = useScroll(scrollerEl);
+
+    const { top: isTop} = toRefs(arrivedState);
+
+    let startY = 0;
+
+    stopTouchStart = useEventListener(scrollerEl, 'touchstart', (event) => {
+      startY = event.touches[0].pageY;
+    });
+
+    stopTouchMove = useEventListener(scrollerEl, 'touchmove', (event) => {
+      const currentY = event.touches[0].pageY;
+      const deltaY = currentY - startY;
+
+      // 只在顶部且向下拖动超过阈值时阻止默认行为
+      if (isTop.value && deltaY > 0) {
+        event.preventDefault();
+        console.log("取消")
+      }
+
+      onScroll(deltaY);
+    },  { passive: false });
+
+    const onScroll = throttle((deltaY) => {
+      if (deltaY < 0) {
+        // 向上拖动会到这里, 这里要向下拖动才加载 logs
+        return;
+      }
+
+      // 如果不在顶部, 就不做处理
+      if (!isTop.value) {
+        return;
+      }
+
+      // console.log("逻辑");
+      _update();
+
+    }, 500);
+  }
+
+  await enableTopUpdate();
+
+  _update = async () => {
+    let date = new Date(logsCache.value[0].date);
+
+    if (logsCache.value[0].type !== "separator") {
+      logsCache.value.unshift(generatorSeparator(date));
+    }
+
+    date.setDate(date.getDate() - 1);
+
+    let logs = await _getLogsWithSeparator(date);
+
+    const prevHeight = scrollerEl.scrollHeight;
+    logsCache.value.unshift(...logs);
+
+    await nextTick(() => {
+      scrollerEl.scrollTop = scrollerEl.scrollHeight - prevHeight;
+    });
+  }
+});
+
+function onScroll(state) {
+  let {y} = state;
+
+  if (y.value < 150) {
+    // console.log("逻辑");
+    _update();
+  }
+}
+
+// 渲染时动态分隔
+// const getSeparator = (index) => {
+//   if (index === 0) return null;
+//
+//   const currentDate = logsCache.value[index]?.date;
+//   if (!currentDate) return null;
+//
+//   const prevDate = logsCache.value[index - 1]?.date;
+//   if (!prevDate) return null;
+//
+//   return currentDate?.getTime?.() !== prevDate?.getTime?.() ? currentDate : null;
+// };
 </script>
 
 <template>
-  <RecycleScroller
-      class="scroller"
-      :items="list"
-      :item-size="32"
-      key-field="id"
-      v-slot="{ item }"
-  >
-    <div class="user">
-      {{ item.name }}
-    </div>
-  </RecycleScroller>
+  <div class="h-full flex flex-col">
+    <button @click="onClick">
+      click me
+    </button>
+    <ul ref="scrollerRef" class="overflow-auto" v-scroll="[onScroll, { throttle: 10 }]">
+      <template v-for="item in logsCache">
+        <template v-if="item.type==='separator'">
+          <li>separator {{fmtDate(item.date)}}</li>
+        </template>
+        <template v-else>
+          <li class="item">
+            {{ item.log + fmtDate(item.date)}}
+          </li>
+        </template>
+      </template>
+
+    </ul>
+  </div>
 </template>
 
 <style scoped>
-.scroller {
-  height: 100%;
-}
-
-.user {
-  height: 32%;
-  padding: 0 12px;
-  display: flex;
-  align-items: center;
+.item {
+  border: 5px solid #ccc;
+  height: 200px;
+  margin: 20px;
 }
 </style>
