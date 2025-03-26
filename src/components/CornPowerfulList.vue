@@ -3,7 +3,7 @@ import { vScroll } from '@vueuse/components'
 import {useLogStore} from "@/store/logs.store.js";
 import {useEventListener, useScroll} from "@vueuse/core";
 import {throttle} from "underscore";
-import {fmtDate, getDomElement} from "@/utils/index.js";
+import {fmtDate, getDomElement, vh2px} from "@/utils/index.js";
 
 const logsCache = ref([])
 
@@ -71,7 +71,6 @@ async function initLogs() {
 
 let _update = () => {};
 
-
 // TODO: 删掉
 async function onClick() {
   // store.generateTestData();
@@ -111,8 +110,11 @@ onMounted(async () => {
 
     let startY = 0;
 
+    let isAtTopOnTouchStart;
     stopTouchStart = useEventListener(scrollerEl, 'touchstart', (event) => {
       startY = event.touches[0].pageY;
+
+      isAtTopOnTouchStart = isTop.value;
     });
 
     stopTouchMove = useEventListener(scrollerEl, 'touchmove', (event) => {
@@ -120,9 +122,8 @@ onMounted(async () => {
       const deltaY = currentY - startY;
 
       // 只在顶部且向下拖动超过阈值时阻止默认行为
-      if (isTop.value && deltaY > 0) {
+      if (isAtTopOnTouchStart && deltaY > 0) {
         event.preventDefault();
-        console.log("取消")
       }
 
       onScroll(deltaY);
@@ -158,11 +159,20 @@ onMounted(async () => {
 
     let logs = await _getLogsWithSeparator(date);
 
-    const prevHeight = scrollerEl.scrollHeight;
+    const prevScrollTop = scrollerEl.scrollTop;
+    const prevScrollHeight = scrollerEl.scrollHeight;
+
     logsCache.value.unshift(...logs);
 
+    function setScrollPos() {
+      // 计算新内容的增量高度
+      const heightDelta = scrollerEl.scrollHeight - prevScrollHeight;
+      // 保持用户视角不变：原偏移 + 新增高度
+      scrollerEl.scrollTop = prevScrollTop + heightDelta;
+    }
+
     await nextTick(() => {
-      scrollerEl.scrollTop = scrollerEl.scrollHeight - prevHeight;
+      setScrollPos();
     });
   }
 });
@@ -170,7 +180,7 @@ onMounted(async () => {
 function onScroll(state) {
   let {y} = state;
 
-  if (y.value < 150) {
+  if (y.value < vh2px(50)) {
     // console.log("逻辑");
     _update();
   }
@@ -195,7 +205,7 @@ function onScroll(state) {
     <button @click="onClick">
       click me
     </button>
-    <ul ref="scrollerRef" class="overflow-auto" v-scroll="[onScroll, { throttle: 10 }]">
+    <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
       <template v-for="item in logsCache">
         <template v-if="item.type==='separator'">
           <li>separator {{fmtDate(item.date)}}</li>
