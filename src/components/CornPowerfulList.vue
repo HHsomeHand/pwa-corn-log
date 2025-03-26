@@ -4,67 +4,17 @@ import {useLogStore} from "@/store/logs.store.js";
 import {useEventListener, useScroll} from "@vueuse/core";
 import {throttle} from "underscore";
 import {fmtDate, getDomElement, vh2px} from "@/utils/index.js";
+import {useStoreUtils} from "@/hooks/storeUtils.hook.js";
 
 const logsCache = ref([])
 
 const store = useLogStore()
 
-let oldestDate;
-// 一直获取
-// 到末尾就返回[]
-async function _getLogs(date) {
-  date = new Date(date);
-
-  let logs = [];
-
-  if (!oldestDate) {
-    oldestDate = await store.getOldestDate();
-    if (!oldestDate) {
-      oldestDate = new Date();
-    }
-  }
-
-  do {
-    console.log("获取日期:" + fmtDate(date));
-
-    logs = await store.getLogsByDate(date);
-
-    date.setDate(date.getDate() - 1);
-
-    if (date.getTime() < oldestDate.getTime()) {
-      break;
-    }
-  } while (logs.length === 0);
-
-
-  return logs;
-}
-
-async function _getLogsWithSeparator(date) {
-  let logs = [];
-
-  logs = await _getLogs(date);
-
-  if (logs.length !== 0) {
-    logs.unshift(generatorSeparator(date));
-  }
-
-  return logs;
-}
-
-function generatorSeparator(date) {
-  date = new Date(date);
-
-  return {
-    type: "separator",
-    content: date.toISOString().split("T")[0],
-    date: date
-  }
-}
+const  {getLogs, getLogsWithSeparator, generatorSeparator} = useStoreUtils(store);
 
 // 初始化日志缓存, 不带分隔符
 async function initLogs() {
-  let logs = await _getLogs(new Date());
+  let logs = await getLogs(new Date());
 
   logsCache.value.push(...logs);
 }
@@ -157,7 +107,7 @@ onMounted(async () => {
 
     date.setDate(date.getDate() - 1);
 
-    let logs = await _getLogsWithSeparator(date);
+    let logs = await getLogsWithSeparator(date);
 
     const prevScrollTop = scrollerEl.scrollTop;
     const prevScrollHeight = scrollerEl.scrollHeight;
