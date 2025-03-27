@@ -6,7 +6,7 @@ import {throttle} from "underscore";
 // 需要指定 scrollerRef 容器, 进行滚动监听
 // logsCache 需要为 ref
 export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
-    const {getLogs, getLogsWithSeparator, generatorSeparator} = storeUtils;
+    const {getLogs, getLogsWithSeparator, generatorSeparator, generatorEnd} = storeUtils;
 
     let update = () => {};
 
@@ -19,6 +19,8 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
 
         stopTouchMove();
     })
+
+    let isEnd = ref(false);
 
     onMounted(async () => {
         const scrollerEl = getDomElement(scrollerRef.value);
@@ -87,6 +89,8 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         await enableTopUpdate();
 
         update = async () => {
+            if (isEnd.value) return;
+
             let date = new Date(logsCache.value[0].date); // 获取最新一条的日期
 
             // 如果不是分割符, 就添加分割符
@@ -98,6 +102,11 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
             date.setDate(date.getDate() - 1);
 
             let logs = await getLogsWithSeparator(date);
+
+            if (logs.length === 0) {
+                isEnd.value = true;
+                logs.push(generatorEnd());
+            }
 
             const prevScrollTop = scrollerEl.scrollTop;
             const prevScrollHeight = scrollerEl.scrollHeight;
@@ -126,5 +135,5 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         }
     }
 
-    return {onScroll};
+    return {isEnd, onScroll};
 }

@@ -1,4 +1,10 @@
 <script setup>
+import {cornMitt} from "@/utils/mitt.js";
+
+function onClickRight(event) {
+  cornMitt.emit('nav-right-click', {event})
+}
+
 
 </script>
 
@@ -9,7 +15,12 @@
         left-text="药律"
         fixed
         placeholder
-    />
+        @click-right="onClickRight"
+    >
+      <template #right>
+        <van-icon name="wap-nav" size="25"/>
+      </template>
+    </van-nav-bar>
 
     <router-view class="overflow-auto grow"></router-view>
 
