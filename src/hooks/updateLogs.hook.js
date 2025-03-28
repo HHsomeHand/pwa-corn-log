@@ -89,7 +89,7 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         await enableTopUpdate();
 
         update = async () => {
-            if (isEnd.value) return;
+            if (isEnd.value) return [];
 
             let date = new Date(logsCache.value[0].date); // 获取最新一条的日期
 
@@ -105,7 +105,7 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
 
             if (logs.length === 0) {
                 isEnd.value = true;
-                logs.push(generatorEnd());
+                logs.push(generatorEnd(date));
             }
 
             const prevScrollTop = scrollerEl.scrollTop;
@@ -123,6 +123,8 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
             await nextTick(() => {
                 setScrollPos();
             });
+
+            return logs;
         }
     });
 
@@ -135,5 +137,20 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         }
     }
 
-    return {isEnd, onScroll};
+    async function updateToDate(date) {
+        if (isEnd.value) return;
+
+        do {
+            let logs = await update();
+
+            if (logs.length === 0 || logs[0].type === "end") break;
+
+            if (logs[0].date === date) break;
+
+            if (logs[0].date.getTime() < date.getTime()) break;
+        } while(true);
+
+    }
+
+    return {isEnd, onScroll, updateToDate};
 }

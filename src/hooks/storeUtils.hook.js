@@ -56,13 +56,14 @@ export function useStoreUtils(store) {
         return {
             type: "separator",
             content: fmtDate(date),
-            date: date
+            date
         }
     }
 
-    function generatorEnd() {
+    function generatorEnd(date) {
         return {
             type: "end",
+            date
         }
     }
 

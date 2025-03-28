@@ -17,4 +17,17 @@ export function vh2px(vh) {
     return px;
 }
 
+export function getDateInfo(date = new Date()) {
+    const d = dayjs(date);
+    return {
+        year: d.year(),
+        month: d.month() + 1,
+        date: d.date()
+    };
+}
+
+export function convertToDate(year, month, day) {
+    return dayjs(`${year}-${month}-${day}`).toDate();
+}
+
 export * from './store.js'

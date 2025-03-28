@@ -4,6 +4,7 @@ import {useLogStore} from "@/store/logs.store.js";
 import {fmtDate, getDomElement} from "@/utils/index.js";
 import {useStoreUtils} from "@/hooks/storeUtils.hook.js";
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
+import {showToast} from "vant";
 
 const logsCache = ref([])
 
@@ -13,7 +14,7 @@ const storeUtils = useStoreUtils(store);
 
 const scrollerRef = ref(null)
 
-const {onScroll} = useUpdateLogs(scrollerRef, storeUtils, logsCache);
+const {onScroll, updateToDate} = useUpdateLogs(scrollerRef, storeUtils, logsCache);
 
 async function toBottom() {
   if (!scrollerRef.value) return;
@@ -24,8 +25,81 @@ async function toBottom() {
   });
 }
 
+async function scrollToDate(date) {
+  if (!scrollerRef.value) return;
+
+  await updateToDate(date);
+
+  const targetDate = new Date(date);
+
+  let targetDateFmt = fmtDate(targetDate);
+
+  const scrollerEl = getDomElement(scrollerRef.value);
+
+  // 是否是就近查找
+  let isClose = false;
+
+  let targetEl;
+
+  let _targetDate = new Date(targetDate);
+
+  do {
+    let _targetDateFmt = fmtDate(_targetDate);
+
+    // console.log(_targetDateFmt);
+
+    // 查找对应日期的 DOM 元素
+    targetEl = scrollerEl.querySelector(`[data-date="${_targetDateFmt}"]`);
+
+    if (!targetEl) {
+      // 如果没有早到, 就向前查找, 如果向后查早, 可能条目还没 update 出来
+      _targetDate.setDate(_targetDate.getDate() + 1);
+
+      // 如果传递的时间小于最早的时间, 那就使用最早的时间
+      let endEntry = logsCache.value[0];
+      if (endEntry.type === "end"
+          && _targetDate.getTime() < endEntry.date.getTime()) {
+        _targetDate = endEntry.date;
+      }
+
+      let lastEntry = logsCache.value[logsCache.value.length - 1];
+      if (_targetDate.getTime() > lastEntry?.date?.getTime?.()) {
+        _targetDate = lastEntry.date;
+      }
+
+      isClose = true;
+    } else {
+      if (isClose) {
+        showToast(`未找到日期 ${targetDateFmt} 的日志项, 已就近查找 ${_targetDateFmt}`)
+      }
+      break;
+    }
+  } while (true);
+
+  if (targetEl) {
+    /**
+     * block: 'start' 的作用
+     * block 是 scrollIntoView 方法配置对象中的一个属性，它定义了元素在块级方向（通常是垂直方向）上的对齐方式。block: 'start' 意味着元素的顶部会与滚动容器的顶部对齐，这样元素会滚动到滚动容器可见区域的顶部位置。
+     * 其他可选值如下：
+     * 'end'：元素的底部会与滚动容器的底部对齐。
+     * 'center'：元素会在滚动容器的垂直方向上居中显示。
+     * 'nearest'：元素会尽可能少地滚动以进入可见区域，具体取决于元素当前相对于滚动容器的位置。
+     */
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+      showToast(`未找到日期 ${targetDateFmt} 的日志项`);
+  }
+}
+
+async function _scrollToDate(date) {
+  const targetDate = new Date(date);
+
+  let targetDateFmt = fmtDate(targetDate);
+}
+
 defineExpose({
-  toBottom
+  toBottom,
+  scrollToDate
 })
 </script>
 
@@ -33,8 +107,8 @@ defineExpose({
   <div class="h-full flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
       <template v-for="item in logsCache">
-          <li v-if="item.type==='separator'">separator {{fmtDate(item.date)}}</li>
-          <li v-if="item.type==='end'">end</li>
+          <li v-if="item.type==='separator'" :data-date="fmtDate(item.date)">separator {{fmtDate(item.date)}}</li>
+          <li v-else-if="item.type==='end'">end</li>
           <li v-else class="item">
             {{ item.log + fmtDate(item.date)}}
           </li>
