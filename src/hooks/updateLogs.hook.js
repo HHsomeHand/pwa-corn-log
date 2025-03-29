@@ -65,12 +65,12 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
     };
 
     // 快触顶时, 进行数据更新
-    function onScroll(state) {
+    async function onScroll(state) {
         let {y} = state;
 
         if (y.value < vh2px(50)) {
             // console.log("逻辑");
-            update();
+            await update();
         }
     }
 

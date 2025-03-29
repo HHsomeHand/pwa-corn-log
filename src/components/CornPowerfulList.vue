@@ -1,9 +1,18 @@
 <script setup>
 import { vScroll } from '@vueuse/components'
 import {useLogStore} from "@/store/logs.store.js";
-import {canScroll, fmtDate, getDomElement, stripTime} from "@/utils/index.js";
+import {
+  canScroll,
+  fmtDate,
+  getDomElement,
+  getTotalHeightUntilSeparator,
+  isSameDay,
+  stripTime,
+  vh2px
+} from "@/utils/index.js";
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
 import {showToast} from "vant";
+import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 
 const logsCache = ref([])
 
@@ -11,15 +20,19 @@ const store = useLogStore()
 
 const scrollerRef = ref(null)
 
-const {onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
+const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
 
 // 让体内元素可以滚动
 onMounted(async () => {
-  let cnt = 0;
-  while (!canScroll(getDomElement(scrollerRef.value)) && cnt < 5) {
+  const scrollerEl = getDomElement(scrollerRef.value);
+
+  while (!canScroll(scrollerEl) && !isEnd.value) {
     await update();
-    cnt++;
   }
+
+  await nextTick(() => {
+    scrollerEl.scrollTop = scrollerEl.scrollHeight; // 滚动到底部
+  })
 });
 
 function toBottom() {
@@ -106,6 +119,34 @@ async function updateEntry(id, updatedData) {
   await store.updateLog(id, updatedData);
 }
 
+function date2str(date) {
+  if (!(date instanceof Date)) return "日期格式错误";
+
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  let result = ref(fmtDate(date, "MM-DD"));
+
+  function checkDate() {
+    setTimeout(() => {
+      result.value = date2str(date);
+    }, 1000 * 60 * 10);
+  }
+
+  if (isSameDay(date, today)) {
+    result.value = "今天";
+    checkDate()
+  } else if (isSameDay(date, yesterday)) {
+    result.value = "昨天";
+    checkDate()
+  }
+
+  return result;
+}
+
+
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -121,13 +162,23 @@ defineExpose({
           <li v-if="
             index > 0 &&
             stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
-          " :data-date="fmtDate(item.date)">
-            separator {{fmtDate(item.date)}}
+          " :data-date="fmtDate(item.date)" data-type="separator">
+            <van-divider>{{fmtDate(item.date)}}</van-divider>
           </li>
 
-          <li v-if="item.type==='end'">end</li>
-          <li v-else class="item">
-            {{ item.log + fmtDate(item.date)}}
+          <li v-if="item.type==='end'">
+            <van-divider>这里是日志的尽头</van-divider>
+          </li>
+          <li v-else :key="item.id">
+            <van-cell
+                :value="item.log"
+                :label="item.comment"
+            >
+              <template #title>
+                {{date2str(item.date)}}
+                <corn-time-displayer :date="item.date" />
+              </template>
+            </van-cell>
           </li>
       </template>
 
@@ -136,9 +187,5 @@ defineExpose({
 </template>
 
 <style scoped>
-.item {
-  border: 5px solid #ccc;
-  height: 200px;
-  margin: 20px;
-}
+
 </style>

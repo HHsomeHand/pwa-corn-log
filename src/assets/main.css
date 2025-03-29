@@ -11,3 +11,8 @@
         @apply bg-gray-50;
     }
 }
+
+/* 阻止下拉刷新 */
+html, body {
+    overscroll-behavior: none;
+}

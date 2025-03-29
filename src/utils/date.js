@@ -23,9 +23,18 @@ export function convertToDate(year, month, day) {
     return dayjs(`${year}-${month}-${day}`).toDate();
 }
 
+// 克隆date, 只保留年月日, 去除时分秒
 export function stripTime(date) {
     if (!(date instanceof Date)) {
         throw new TypeError("Expected a Date object");
     }
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+export function isSameDay(d1, d2) {
+    return (
+        d1.getFullYear() === d2.getFullYear() &&
+        d1.getMonth() === d2.getMonth() &&
+        d1.getDate() === d2.getDate()
+    );
 }
