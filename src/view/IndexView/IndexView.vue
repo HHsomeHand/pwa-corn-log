@@ -5,6 +5,7 @@ import {useLogStore} from "@/store/logs.store.js";
 import {cornMitt} from "@/utils/mitt.js";
 import {convertToDate, getDateInfo} from "@/utils/index.js";
 import CornTimePickerDialog from "@/dialog/CornTimePickerDialog.vue";
+import CornField from "@/view/IndexView/cpns/CornField.vue";
 
 
 const indexViewRef = ref(null);
@@ -16,7 +17,7 @@ function onClick() {
 
   // store.generateTestData();
 
-  showPopup.value = true;
+  showField.value = true;
 }
 
 const showActionSheet = ref(false);
@@ -52,14 +53,12 @@ function onDialogConfirm(selectDate) {
   listRef.value.scrollToDate(selectDate);
 }
 
-const showPopup = ref(false);
+const showField = ref(false);
 
-const themeVars = reactive({
-  overlayBackground: 'rgba(0, 0, 0, 0.1)',
-});
-
-const textContent = ref("");
-
+async function onSubmit(logData) {
+  await listRef.value.addEntry(logData);
+  listRef.value.toBottom();
+}
 </script>
 
 <template>
@@ -74,42 +73,17 @@ const textContent = ref("");
         teleport="body"
     />
 
-    <van-config-provider :theme-vars="themeVars">
-      <van-popup
-          v-model:show="showPopup"
-          round
-          position="bottom"
-          class="popup-item h-[30%] h-auto pt-2"
-          teleport="body"
-      >
-        <template #default>
-          <div class="flex pr-3">
-            <van-field
-                v-model="textContent"
-                rows="1"
-                autosize
-                label="日志"
-                type="textarea"
-                placeholder="请输入日志内容"
-            />
-            <van-button class="flex-shrink-0 !m-2" plain type="primary">记录!</van-button>
-          </div>
-        </template>
-      </van-popup>
-    </van-config-provider>
-
     <corn-time-picker-dialog
         v-model:show="showDialog"
         @confirm="onDialogConfirm"
     />
 
-
+    <corn-field
+      v-model:show="showField"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
 <style scoped>
-.popup-item :deep(.van-field__label) {
-  width: auto;
-  margin-right: 20px;
-}
 </style>

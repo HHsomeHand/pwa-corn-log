@@ -16,7 +16,7 @@ const scrollerRef = ref(null)
 
 const {onScroll, updateToDate} = useUpdateLogs(scrollerRef, storeUtils, logsCache);
 
-async function toBottom() {
+function toBottom() {
   if (!scrollerRef.value) return;
   const scrollerEl = getDomElement(scrollerRef.value);
   scrollerEl.scrollTo({
@@ -97,9 +97,20 @@ async function _scrollToDate(date) {
   let targetDateFmt = fmtDate(targetDate);
 }
 
+async function addEntry(logData) {
+  let logEntry = await store.addLog(logData);
+  logsCache.value.push(logEntry);
+}
+
+async function updateEntry(id, updatedData) {
+  await store.updateLog(id, updatedData);
+}
+
 defineExpose({
   toBottom,
-  scrollToDate
+  scrollToDate,
+  addEntry,
+  updateEntry,
 })
 </script>
 

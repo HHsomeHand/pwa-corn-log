@@ -6,9 +6,12 @@ import {throttle} from "underscore";
 // 需要指定 scrollerRef 容器, 进行滚动监听
 // logsCache 需要为 ref
 export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
-    const {getLogs, getLogsWithSeparator, generatorSeparator, generatorEnd} = storeUtils;
+    const {getLogs, getLogsWithSeparator, generatorSeparator, generatorEnd, getStore} = storeUtils;
 
-    let update = () => {};
+    let store = getStore();
+
+    // 从 indexedDB 获取数据, 保证列表的视觉效果
+    let update = async () => {};
 
     let stopTouchStart = () => {};
 
@@ -89,7 +92,12 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         await enableTopUpdate();
 
         update = async () => {
+            if (!scrollerRef.value) return [];
             if (isEnd.value) return [];
+
+            let oldestDate = await store.getOldestDate();
+
+            console.log(oldestDate);
 
             let date = new Date(logsCache.value[0].date); // 获取最新一条的日期
 
@@ -98,14 +106,23 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
                 logsCache.value.unshift(generatorSeparator(date));
             }
 
-            // 获取前一天的日期
-            date.setDate(date.getDate() - 1);
+            let logs = [];
 
-            let logs = await getLogsWithSeparator(date);
+            // 获取前一天的日期, 如果前一天没有数据, 就循环获取
+            while (true) {
+                date.setDate(date.getDate() - 1);
 
-            if (logs.length === 0) {
-                isEnd.value = true;
-                logs.push(generatorEnd(date));
+                logs = await getLogsWithSeparator(date);
+
+                if (logs.length !== 0) {
+                    break;
+                }
+
+                if (date.getTime() < oldestDate.getTime()) {
+                    isEnd.value = true;
+                    logs.push(generatorEnd(date));
+                    break;
+                }
             }
 
             const prevScrollTop = scrollerEl.scrollTop;
@@ -125,7 +142,7 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
             });
 
             return logs;
-        }
+        };
     });
 
     function onScroll(state) {
@@ -137,6 +154,7 @@ export function useUpdateLogs(scrollerRef, storeUtils, logsCache) {
         }
     }
 
+    // 更新到指定日期
     async function updateToDate(date) {
         if (isEnd.value) return;
 

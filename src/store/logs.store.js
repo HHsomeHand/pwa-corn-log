@@ -47,7 +47,8 @@ export const useLogStore = defineStore('logStore', () => {
     const getOldestDate = async () => {
         const db = await getDB();
         const tx = db.transaction('logs', 'readonly');
-        const cursor = await tx.store.openCursor(null, 'prev'); // 从最后一条向前
+        const index = tx.store.index('by_date'); // 使用日期索引
+        const cursor = await index.openCursor(null, 'next'); // 从头开始，按日期升序
         return cursor ? cursor.value.date : null;
     };
 
@@ -93,6 +94,48 @@ export const useLogStore = defineStore('logStore', () => {
         return logs.sort((a, b) => a.date - b.date);
     };
 
+    // 新增日志条目
+    const addLog = async (logData) => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readwrite');
+        const store = tx.objectStore('logs');
+
+        const newLog = {
+            date: new Date(), // 默认使用当前时间
+            log: '',
+            comment: '',
+            ...logData // 允许传入的对象覆盖默认值
+        };
+
+        const id = await store.add(newLog);
+        await tx.done;
+        return { id, ...newLog }; // 返回新添加的日志对象，包括自动生成的id
+    };
+
+    // 修改日志条目
+    const updateLog = async (id, updatedData) => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readwrite');
+        const store = tx.objectStore('logs');
+
+        // 先获取原有数据
+        const existingLog = await store.get(id);
+        if (!existingLog) {
+            throw new Error(`Log with id ${id} not found`);
+        }
+
+        // 合并现有数据和新数据
+        const updatedLog = {
+            ...existingLog,
+            ...updatedData,
+            id // 确保id不被覆盖
+        };
+
+        await store.put(updatedLog);
+        await tx.done;
+        return updatedLog; // 返回更新后的日志对象
+    };
+
 // 生成多天的测试数据
     const generateTestData = async () => {
         const db = await getDB();
@@ -121,6 +164,8 @@ export const useLogStore = defineStore('logStore', () => {
         getOldestDate,
         searchLogsByLog,
         searchLogsByComment,
+        addLog,
+        updateLog,
         generateTestData,
     };
 });

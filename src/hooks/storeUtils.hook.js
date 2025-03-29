@@ -67,5 +67,9 @@ export function useStoreUtils(store) {
         }
     }
 
-    return {getLogs, getLogsWithSeparator, generatorSeparator, generatorEnd};
+    function getStore() {
+        return store;
+    }
+
+    return {getLogs, getLogsWithSeparator, generatorSeparator, generatorEnd, getStore};
 }
