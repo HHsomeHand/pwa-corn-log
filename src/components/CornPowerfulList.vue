@@ -1,8 +1,7 @@
 <script setup>
 import { vScroll } from '@vueuse/components'
 import {useLogStore} from "@/store/logs.store.js";
-import {fmtDate, getDomElement} from "@/utils/index.js";
-import {useStoreUtils} from "@/hooks/storeUtils.hook.js";
+import {canScroll, fmtDate, getDomElement, stripTime} from "@/utils/index.js";
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
 import {showToast} from "vant";
 
@@ -10,11 +9,18 @@ const logsCache = ref([])
 
 const store = useLogStore()
 
-const storeUtils = useStoreUtils(store);
-
 const scrollerRef = ref(null)
 
-const {onScroll, updateToDate} = useUpdateLogs(scrollerRef, storeUtils, logsCache);
+const {onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
+
+// 让体内元素可以滚动
+onMounted(async () => {
+  let cnt = 0;
+  while (!canScroll(getDomElement(scrollerRef.value)) && cnt < 5) {
+    await update();
+    cnt++;
+  }
+});
 
 function toBottom() {
   if (!scrollerRef.value) return;
@@ -91,12 +97,6 @@ async function scrollToDate(date) {
   }
 }
 
-async function _scrollToDate(date) {
-  const targetDate = new Date(date);
-
-  let targetDateFmt = fmtDate(targetDate);
-}
-
 async function addEntry(logData) {
   let logEntry = await store.addLog(logData);
   logsCache.value.push(logEntry);
@@ -117,9 +117,15 @@ defineExpose({
 <template>
   <div class="h-full flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
-      <template v-for="item in logsCache">
-          <li v-if="item.type==='separator'" :data-date="fmtDate(item.date)">separator {{fmtDate(item.date)}}</li>
-          <li v-else-if="item.type==='end'">end</li>
+      <template v-for="(item, index) in logsCache">
+          <li v-if="
+            index > 0 &&
+            stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
+          " :data-date="fmtDate(item.date)">
+            separator {{fmtDate(item.date)}}
+          </li>
+
+          <li v-if="item.type==='end'">end</li>
           <li v-else class="item">
             {{ item.log + fmtDate(item.date)}}
           </li>
