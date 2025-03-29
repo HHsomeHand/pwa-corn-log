@@ -11,7 +11,7 @@ import {
   vh2px
 } from "@/utils/index.js";
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
-import {showToast} from "vant";
+import {closeToast, showLoadingToast, showToast} from "vant";
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 
 const logsCache = ref([])
@@ -47,6 +47,12 @@ function toBottom() {
 async function scrollToDate(date) {
   if (!scrollerRef.value) return;
 
+  showLoadingToast({
+    duration: 0,
+    forbidClick: true,
+    message: '加载中',
+  });
+
   await updateToDate(date);
 
   const targetDate = new Date(date);
@@ -61,6 +67,8 @@ async function scrollToDate(date) {
   let targetEl;
 
   let _targetDate = new Date(targetDate);
+
+  closeToast();
 
   do {
     let _targetDateFmt = fmtDate(_targetDate);
