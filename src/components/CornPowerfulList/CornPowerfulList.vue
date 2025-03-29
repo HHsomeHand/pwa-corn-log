@@ -145,7 +145,9 @@ function date2str(date) {
   return result;
 }
 
+function onCellClick() {
 
+}
 
 defineExpose({
   toBottom,
@@ -173,6 +175,7 @@ defineExpose({
             <van-cell
                 :value="item.log"
                 :label="item.comment"
+                @click="onCellClick(item.id)"
             >
               <template #title>
                 {{date2str(item.date)}}

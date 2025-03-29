@@ -1,6 +1,7 @@
 <script setup>
+const modifyTime = ref(false);
 
-const showPopup = defineModel("show");
+const showPopup = ref(false);
 
 const themeVars = reactive({
   overlayBackground: 'rgba(0, 0, 0, 0.1)',
@@ -10,19 +11,19 @@ const logContent = ref("");
 
 const commentContent = ref("");
 
-const emits = defineEmits(["submit"]);
-
 let isClean = false;
 
-function onSubmit() {
-  emits("submit", {
-    log: logContent.value,
-    comment: commentContent.value,
-  });
+let resolveCallback = null;
 
+function onSubmit() {
   showPopup.value = false;
 
   isClean = true;
+
+  resolveCallback?.({
+    log: logContent.value,
+    comment: commentContent.value,
+  });
 }
 
 function onClosed() {
@@ -31,7 +32,16 @@ function onClosed() {
     commentContent.value = "";
     isClean = false;
   }
+
+  resolveCallback?.(null);
 }
+
+defineExpose({
+  showPopup: (callback) => {
+    showPopup.value = true
+    resolveCallback = callback
+  }
+})
 </script>
 
 <template>
@@ -64,6 +74,15 @@ function onClosed() {
                 type="textarea"
                 placeholder="请输入备注内容"
             />
+            <van-button
+                v-if="modifyTime"
+                class="flex-shrink-0 !m-2"
+                plain
+                type="primary"
+                @click="openDatePickerDialog"
+            >
+              记录!
+            </van-button>
             <van-button
                 class="flex-shrink-0 !m-2"
                 plain

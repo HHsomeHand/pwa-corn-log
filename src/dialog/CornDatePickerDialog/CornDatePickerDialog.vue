@@ -2,7 +2,7 @@
 
 import {convertToDate, getDateInfo} from "@/utils/index.js";
 
-const showDialog = defineModel('show');
+const showDialog = ref(false);
 
 const currentDateInfo = getDateInfo();
 
@@ -12,19 +12,28 @@ const currentDate = ref([
   currentDateInfo.date
 ]);
 
-const emits = defineEmits(["confirm"]);
+let resolveCallback = null;
 
 function onConfirm() {
   showDialog.value = false;
 
   const selectDate = convertToDate(...currentDate.value);
 
-  emits("confirm", selectDate);
+  resolveCallback?.(selectDate);
 }
 
 function onCancel() {
   showDialog.value = false;
+
+  resolveCallback?.(null);
 }
+
+defineExpose({
+  showDialog: (callback) => {
+    showDialog.value = true
+    resolveCallback = callback
+  }
+})
 </script>
 
 <template>

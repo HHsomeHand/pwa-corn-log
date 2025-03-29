@@ -1,11 +1,13 @@
 <script setup>
 import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
-import CornPowerfulList from "@/components/CornPowerfulList.vue";
+import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue";
 import {useLogStore} from "@/store/logs.store.js";
 import {cornMitt} from "@/utils/mitt.js";
 import {convertToDate, getDateInfo} from "@/utils/index.js";
-import CornTimePickerDialog from "@/dialog/CornTimePickerDialog.vue";
-import CornField from "@/view/IndexView/cpns/CornField.vue";
+import CornTimePickerDialog from "@/dialog/CornDatePickerDialog/CornDatePickerDialog.vue";
+import CornField from "@/components/CornLogFormPopup/CornLogFormPopup.vue";
+import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 
 
 const indexViewRef = ref(null);
@@ -17,7 +19,13 @@ function onClick() {
 
   // store.generateTestData();
 
-  showField.value = true;
+  async function onSubmit(logData) {
+    console.trace()
+    await listRef.value.addEntry(logData);
+    listRef.value.toBottom();
+  }
+
+  showLogFormPopup(onSubmit);
 }
 
 const showActionSheet = ref(false);
@@ -35,7 +43,7 @@ const actions = ref([
   {
     name: '滚动到日期',
     callback() {
-      showDialog.value = true;
+      showDatePickerDialog(onDialogConfirm);
     }
   },
   { name: '选项三' },
@@ -45,19 +53,10 @@ cornMitt.on('nav-right-click', (event) => {
   showActionSheet.value = true;
 });
 
-const showDialog = ref(false);
-
 function onDialogConfirm(selectDate) {
   if (!listRef.value) return;
 
   listRef.value.scrollToDate(selectDate);
-}
-
-const showField = ref(false);
-
-async function onSubmit(logData) {
-  await listRef.value.addEntry(logData);
-  listRef.value.toBottom();
 }
 </script>
 
@@ -71,16 +70,6 @@ async function onSubmit(logData) {
         :actions="actions"
         close-on-click-action
         teleport="body"
-    />
-
-    <corn-time-picker-dialog
-        v-model:show="showDialog"
-        @confirm="onDialogConfirm"
-    />
-
-    <corn-field
-      v-model:show="showField"
-      @submit="onSubmit"
     />
   </div>
 </template>
