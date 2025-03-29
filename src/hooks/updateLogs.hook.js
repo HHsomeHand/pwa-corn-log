@@ -1,7 +1,4 @@
-import {fmtDate, generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
-import {useEventListener, useScroll} from "@vueuse/core";
-import {throttle} from "underscore";
-
+import {generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
 
 // 需要指定 scrollerRef 容器, 进行滚动监听
 // logsCache 需要为 ref

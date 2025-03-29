@@ -48,7 +48,6 @@ defineExpose({
   <teleport to="body">
     <van-config-provider :theme-vars="themeVars">
       <van-popup
-          v-model:show="showPopup"
           closeable
           round
           position="bottom"

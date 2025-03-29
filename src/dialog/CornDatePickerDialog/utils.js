@@ -1,5 +1,4 @@
 // useDatePicker.js
-import { createApp } from 'vue'
 import CornDatePickerDialog from "@/dialog/CornDatePickerDialog/CornDatePickerDialog.vue";
 import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
 

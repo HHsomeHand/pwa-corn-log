@@ -1,4 +1,3 @@
-import { createApp } from 'vue'
 import CornLogFormPopup from "@/components/CornLogFormPopup/CornLogFormPopup.vue";
 import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
 

@@ -179,7 +179,7 @@ defineExpose({
             >
               <template #title>
                 {{date2str(item.date)}}
-                <corn-time-displayer :date="item.date" />
+                <CornTimeDisplayer :date="item.date" />
               </template>
             </van-cell>
           </li>
