@@ -21,7 +21,7 @@ const this_entries = entries;
 function onSubmit() {
   showPopup.value = false;
 
-  isClean = true;
+  // isClean = true;
 
   resolveCallback?.(getResult());
 }
@@ -40,16 +40,16 @@ function getResult() {
 }
 
 function onClosed() {
-  if (isClean) {
-    const _entries = entries.value;
-
-    for (const key in _entries) {
-      let content = _entries[key].content;
-
-      _entries[key].content = getDefaultValue(content);
-    }
-    isClean = false;
-  }
+  // if (isClean) {
+  //   const _entries = entries.value;
+  //
+  //   for (const key in _entries) {
+  //     let content = _entries[key].content;
+  //
+  //     _entries[key].content = getDefaultValue(content);
+  //   }
+  //   isClean = false;
+  // }
 
   resolveCallback?.(null);
 }
