@@ -39,7 +39,7 @@ function date2str(date) {
 </script>
 
 <template>
-  <div class="mx-2 mb-1 rounded-lg overflow-hidden">
+  <div class="corn-log mx-2 mb-1 rounded-lg overflow-hidden">
     <van-cell
         :value="item.log"
     >
@@ -53,10 +53,13 @@ function date2str(date) {
         v-if="item.comment"
         :scrollable="false"
         :text="item.comment"
+        background="#ecf9ff"
     />
   </div>
 </template>
 
 <style scoped>
-
+.corn-log {
+ --van-notice-bar-text-color: var(--van-primary-color);
+}
 </style>
