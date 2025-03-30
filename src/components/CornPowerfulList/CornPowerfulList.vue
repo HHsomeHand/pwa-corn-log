@@ -15,6 +15,7 @@ import {closeToast, showLoadingToast, showToast} from "vant";
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import CornLog from "@/components/CornPowerfulList/cpn/CornLog.vue";
 
 const logsCache = ref([])
 
@@ -143,31 +144,7 @@ async function updateEntry(id, updatedData) {
   // logsCache.value = [..._logsCache];
 }
 
-function date2str(date) {
-  if (!(date instanceof Date)) return "日期格式错误";
 
-  const today = new Date();
-  const yesterday = new Date();
-  yesterday.setDate(today.getDate() - 1);
-
-  let result = ref(fmtDate(date, "MM-DD"));
-
-  function checkDate() {
-    setTimeout(() => {
-      result.value = date2str(date);
-    }, 1000 * 60 * 10);
-  }
-
-  if (isSameDay(date, today)) {
-    result.value = "今天";
-    checkDate()
-  } else if (isSameDay(date, yesterday)) {
-    result.value = "昨天";
-    checkDate()
-  }
-
-  return result;
-}
 
 function onCellClick(item) {
   showLogFormPopup(async (updatedData) => {
@@ -223,23 +200,12 @@ defineExpose({
         <li v-if="item.type==='end'">
           <van-divider>这里是日志的尽头</van-divider>
         </li>
-        <li v-else :key="item.id">
-          <van-cell
-              :value="item.log"
-              @click="onCellClick(item)"
-          >
-            <template #title>
-              {{date2str(item.date)}}
-              <CornTimeDisplayer :date="item.date" />
-            </template>
-          </van-cell>
-          <van-notice-bar
-              wrapable
-              v-if="item.comment"
-              :scrollable="false"
-              :text="item.comment"
-              class="mx-2 mb-1 rounded-b-lg overflow-hidden"
-          />
+        <li
+            v-else
+            :key="item.id"
+            @click="onCellClick(item)"
+        >
+          <corn-log :item="item"/>
         </li>
       </template>
 
