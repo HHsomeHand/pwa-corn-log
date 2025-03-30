@@ -12,12 +12,9 @@ const indexViewRef = ref(null);
 const store = useLogStore()
 
 function onClick() {
-  console.log("clicked");
-
   // store.generateTestData();
 
   async function onSubmit(logData) {
-    console.trace()
     await listRef.value.addEntry(logData);
     listRef.value.toBottom();
   }
