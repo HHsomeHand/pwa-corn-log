@@ -6,21 +6,25 @@ export const ENTRY_TYPE =  Object.freeze({
     STR: 'string',
 })
 
-export const LOG_ENTRY = Object.freeze({
-    log: generateEntry({
+export const LOG_ENTRY = Object.freeze(
+    generateEntry({
         label: "日志",
         placeholder: "请输入日志内容"
     }),
-});
+);
 
-export const COMMENT_ENTRY = Object.freeze({
-    comment: generateEntry({
+export const COMMENT_ENTRY = Object.freeze(
+    generateEntry({
         label: "备注",
         placeholder: "请输入备注内容",
-    }),
-});
+    })
+);
 
 export const DEFAULT_ENTRIES = Object.freeze({
-    ...LOG_ENTRY,
-    ...COMMENT_ENTRY,
+    log: {
+        ...LOG_ENTRY
+    },
+    comment: {
+        ...COMMENT_ENTRY
+    },
 })

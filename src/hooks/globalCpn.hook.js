@@ -9,10 +9,10 @@ import { createApp } from 'vue'
  * @param {string} [options.showMethod='showDialog'] 组件实例的显示方法名
  * @returns {function(): Promise}
  */
-export function useGlobalCpn(component, { showMethod = 'showDialog' } = {}) {
+export function useGlobalCpn(component, { showMethod = 'showDialog'} = {}) {
     let instance = null
 
-    return (callback) => {
+    return (callback, options = {}) => {
         return new Promise((resolve) => {
             // 单例检查
             if (!instance) {
@@ -28,7 +28,7 @@ export function useGlobalCpn(component, { showMethod = 'showDialog' } = {}) {
                     callback?.(...args)
                 }
                 resolve(args[0] ?? null) // 默认解析第一个参数
-            })
+            }, options)
         })
     }
 }

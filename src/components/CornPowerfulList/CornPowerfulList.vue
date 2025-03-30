@@ -13,6 +13,8 @@ import {
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
 import {closeToast, showLoadingToast, showToast} from "vant";
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
+import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 
 const logsCache = ref([])
 
@@ -125,6 +127,20 @@ async function addEntry(logData) {
 
 async function updateEntry(id, updatedData) {
   await store.updateLog(id, updatedData);
+
+  const _logsCache = logsCache.value;
+
+  const index = _logsCache.findIndex(item => item.id === id);
+
+  if (index === -1) return;
+
+  _logsCache[index] = {
+    ..._logsCache[index],
+    ...updatedData,
+    id // 确保id不被覆盖
+  };
+
+  // logsCache.value = [..._logsCache];
 }
 
 function date2str(date) {
@@ -153,8 +169,21 @@ function date2str(date) {
   return result;
 }
 
-function onCellClick() {
-
+function onCellClick(item) {
+  showLogFormPopup(async (updatedData) => {
+    await updateEntry(item.id, updatedData);
+  }, {
+    entries: {
+      log: {
+        ...LOG_ENTRY,
+        defaultVal: item.log
+      },
+      comment: {
+        ...COMMENT_ENTRY,
+        defaultVal: item.comment
+      },
+    }
+  });
 }
 
 defineExpose({
@@ -183,7 +212,7 @@ defineExpose({
             <van-cell
                 :value="item.log"
                 :label="item.comment"
-                @click="onCellClick(item.id)"
+                @click="onCellClick(item)"
             >
               <template #title>
                 {{date2str(item.date)}}
