@@ -44,6 +44,12 @@ function date2str(date) {
         :value="item.log"
     >
       <template #title>
+        <template v-if="item.originalDate">
+          <p class="inline origin-date-container">
+            {{date2str(item.originalDate)}} <CornTimeDisplayer :date="item.originalDate" />
+          </p>
+          <br/>
+        </template>
         {{date2str(item.date)}}
         <CornTimeDisplayer :date="item.date" />
       </template>
@@ -61,5 +67,20 @@ function date2str(date) {
 <style scoped>
 .corn-log {
  --van-notice-bar-text-color: var(--van-primary-color);
+}
+
+.origin-date-container {
+  position: relative;
+}
+
+.origin-date-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--van-primary-color);
+  transform: translateY(-50%);
 }
 </style>

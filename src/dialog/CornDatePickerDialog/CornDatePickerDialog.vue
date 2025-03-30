@@ -28,8 +28,13 @@ function onCancel() {
   resolveCallback?.(null);
 }
 
+let maxDate = ref(new Date());
+
 defineExpose({
-  showDialog: (callback) => {
+  showDialog: (callback, {isMaxToday = true}) => {
+    if (isMaxToday) {
+      maxDate.value = new Date();
+    }
     showDialog.value = true
     resolveCallback = callback
   }
@@ -48,6 +53,7 @@ defineExpose({
       <van-date-picker
           v-model="currentDate"
           type="time"
+          :max-date="maxDate"
       />
     </template>
   </van-dialog>

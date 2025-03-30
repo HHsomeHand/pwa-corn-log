@@ -135,16 +135,21 @@ async function updateEntry(id, updatedData) {
 
   if (index === -1) return;
 
-  _logsCache[index] = {
+  console.log(_logsCache[index].date);
+  let tmpLog = {
     ..._logsCache[index],
     ...updatedData,
-    id // 确保id不被覆盖
+    id, // 确保id不被覆盖
   };
+
+  if (!tmpLog.originalDate) {
+    tmpLog.originalDate = new Date(_logsCache[index].date);
+  }
+
+  _logsCache[index] = tmpLog;
 
   // logsCache.value = [..._logsCache];
 }
-
-
 
 function onCellClick(item) {
   showLogFormPopup(async (updatedData) => {
@@ -161,7 +166,7 @@ function onCellClick(item) {
       },
       date: {
         type: ENTRY_TYPE.DATE,
-        defaultVal: item.date
+        defaultVal: new Date(item.date)
       }
     },
     id: item.id,
@@ -191,7 +196,8 @@ defineExpose({
 
       <template v-for="(item, index) in logsCache">
         <li v-if="
-          index > 0 &&
+          index > 0 && // 防止 index 为 0, 访问下标为 -1 的元素
+          !logsCache[index].originalDate && // 如果有 originalDate 就不显示分隔符了
           stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
         " :data-date="fmtDate(item.date)" data-type="separator">
           <van-divider>{{fmtDate(item.date)}}</van-divider>
@@ -202,7 +208,7 @@ defineExpose({
         </li>
         <li
             v-else
-            :key="item.id"
+            :key="item.id + '' + item.date.getTime()"
             @click="onCellClick(item)"
         >
           <corn-log :item="item"/>
