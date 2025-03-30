@@ -113,6 +113,7 @@ defineExpose({
               />
 
               <corn-date-select-button
+                  :key="entry.content.getTime()"
                   v-else-if="entry.type === ENTRY_TYPE.DATE"
                   v-model="entry.content"
               />
