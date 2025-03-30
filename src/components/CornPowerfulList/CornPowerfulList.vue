@@ -178,6 +178,10 @@ const themeVars = reactive({
   cellLabelColor: 'color-mix(in srgb, var(--van-cell-text-color) 50%, gray)',
 });
 
+function getDisplayDate(item) {
+  return item.originalDate || item.date;
+}
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -197,13 +201,13 @@ defineExpose({
       <template v-for="(item, index) in logsCache">
         <li v-if="
             index > 0 && // 防止 index 为 0, 访问下标为 -1 的元素
-            stripTime(logsCache[index - 1].originalDate || logsCache[index - 1].date).getTime()
-              !== stripTime(item.originalDate || item.date).getTime()
+            stripTime(getDisplayDate(logsCache[index - 1])).getTime()
+              !== stripTime(getDisplayDate(item)).getTime()
             "
-            :data-date="fmtDate(item.originalDate || item.date)"
+            :data-date="fmtDate(getDisplayDate(item))"
             data-type="separator"
         >
-          <van-divider>{{fmtDate(item.originalDate || item.date)}}</van-divider>
+          <van-divider>{{fmtDate(getDisplayDate(item))}}</van-divider>
         </li>
 
         <li v-if="item.type==='end'">
