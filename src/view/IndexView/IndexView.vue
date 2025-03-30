@@ -19,7 +19,7 @@ function onClick() {
     listRef.value.toBottom();
   }
 
-  showLogFormPopup(onSubmit);
+  showLogFormPopup(onSubmit, {id: "add"});
 }
 
 const showActionSheet = ref(false);

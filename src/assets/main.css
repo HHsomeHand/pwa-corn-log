@@ -12,6 +12,12 @@
     }
 }
 
+@layer components {
+    .popup-btn {
+        @apply !mx-2;
+    }
+}
+
 /* 阻止下拉刷新 */
 html, body {
     overscroll-behavior: none;

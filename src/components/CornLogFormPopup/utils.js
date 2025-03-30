@@ -27,6 +27,8 @@ export function generateEntry({
 }
 
 export function getDefaultValue(variable) {
+    if (variable instanceof Date) return new Date();
+
     const type = typeof variable;
 
     const defaults = {

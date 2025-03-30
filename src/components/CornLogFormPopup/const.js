@@ -2,7 +2,6 @@ import {generateEntry} from "@/components/CornLogFormPopup/utils.js";
 
 export const ENTRY_TYPE =  Object.freeze({
     DATE: 'date',
-    TIME: 'time',
     STR: 'string',
 })
 

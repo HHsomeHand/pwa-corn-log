@@ -14,7 +14,7 @@ import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
 import {closeToast, showLoadingToast, showToast} from "vant";
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
-import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 
 const logsCache = ref([])
 
@@ -182,7 +182,12 @@ function onCellClick(item) {
         ...COMMENT_ENTRY,
         defaultVal: item.comment
       },
-    }
+      date: {
+        type: ENTRY_TYPE.DATE,
+        defaultVal: item.date
+      }
+    },
+    id: item.id,
   });
 }
 
