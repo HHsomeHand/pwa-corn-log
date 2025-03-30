@@ -196,11 +196,14 @@ defineExpose({
 
       <template v-for="(item, index) in logsCache">
         <li v-if="
-          index > 0 && // 防止 index 为 0, 访问下标为 -1 的元素
-          !logsCache[index].originalDate && // 如果有 originalDate 就不显示分隔符了
-          stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
-        " :data-date="fmtDate(item.date)" data-type="separator">
-          <van-divider>{{fmtDate(item.date)}}</van-divider>
+            index > 0 && // 防止 index 为 0, 访问下标为 -1 的元素
+            stripTime(logsCache[index - 1].originalDate || logsCache[index - 1].date).getTime()
+              !== stripTime(item.originalDate || item.date).getTime()
+            "
+            :data-date="fmtDate(item.originalDate || item.date)"
+            data-type="separator"
+        >
+          <van-divider>{{fmtDate(item.originalDate || item.date)}}</van-divider>
         </li>
 
         <li v-if="item.type==='end'">
