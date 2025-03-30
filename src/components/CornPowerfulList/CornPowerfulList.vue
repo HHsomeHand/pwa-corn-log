@@ -191,6 +191,11 @@ function onCellClick(item) {
   });
 }
 
+const themeVars = reactive({
+  cellValueColor: 'color-mix(in srgb, var(--van-cell-text-color) 70%, gray)',
+  cellLabelColor: 'color-mix(in srgb, var(--van-cell-text-color) 50%, gray)',
+});
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -200,31 +205,42 @@ defineExpose({
 </script>
 
 <template>
+  <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
+
+  </van-config-provider>
+
   <div class="h-full flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
-      <template v-for="(item, index) in logsCache">
-          <li v-if="
-            index > 0 &&
-            stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
-          " :data-date="fmtDate(item.date)" data-type="separator">
-            <van-divider>{{fmtDate(item.date)}}</van-divider>
-          </li>
 
-          <li v-if="item.type==='end'">
-            <van-divider>这里是日志的尽头</van-divider>
-          </li>
-          <li v-else :key="item.id">
-            <van-cell
-                :value="item.log"
-                :label="item.comment"
-                @click="onCellClick(item)"
-            >
-              <template #title>
-                {{date2str(item.date)}}
-                <CornTimeDisplayer :date="item.date" />
-              </template>
-            </van-cell>
-          </li>
+      <template v-for="(item, index) in logsCache">
+        <li v-if="
+          index > 0 &&
+          stripTime(logsCache[index - 1].date).getTime() !== stripTime(item.date).getTime()
+        " :data-date="fmtDate(item.date)" data-type="separator">
+          <van-divider>{{fmtDate(item.date)}}</van-divider>
+        </li>
+
+        <li v-if="item.type==='end'">
+          <van-divider>这里是日志的尽头</van-divider>
+        </li>
+        <li v-else :key="item.id">
+          <van-cell
+              :value="item.log"
+              @click="onCellClick(item)"
+          >
+            <template #title>
+              {{date2str(item.date)}}
+              <CornTimeDisplayer :date="item.date" />
+            </template>
+          </van-cell>
+          <van-notice-bar
+              wrapable
+              v-if="item.comment"
+              :scrollable="false"
+              :text="item.comment"
+              class="mx-2 mb-1 rounded-b-lg overflow-hidden"
+          />
+        </li>
       </template>
 
     </ul>
