@@ -1,7 +1,4 @@
 <script setup>
-import {cornMitt} from "@/utils/mitt.js";
-
-
 </script>
 
 <template>

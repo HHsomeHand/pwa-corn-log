@@ -2,14 +2,15 @@ import { createWebHistory, createRouter } from 'vue-router'
 
 import IndexView from '@/view/IndexView/IndexView.vue'
 import CalendarView from "@/view/CalendarView/CalendarView.vue";
+import {ROUTE_CALENDAR, ROUTE_INDEX} from "@/const/route.js";
 
 const routes = [
     {
-        path: '/',
+        path: ROUTE_INDEX,
         component: IndexView
     },
     {
-        path: '/cal',
+        path: ROUTE_CALENDAR,
         component: CalendarView
     }
 ]

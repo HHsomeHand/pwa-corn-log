@@ -1,3 +1,5 @@
 import mitt from "mitt";
 
-export const cornMitt = mitt();
+const cornMitt = mitt();
+
+export default cornMitt;

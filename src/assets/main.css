@@ -16,6 +16,10 @@
     .popup-btn {
         @apply !mx-2;
     }
+
+    .corn-view {
+        @apply overflow-y-scroll grow;
+    }
 }
 
 /* 阻止下拉刷新 */

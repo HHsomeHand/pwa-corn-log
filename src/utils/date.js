@@ -51,3 +51,7 @@ export function isSameDay(d1, d2) {
         d1.getDate() === d2.getDate()
     );
 }
+
+export function isInvalidDate(date) {
+    return isNaN(date.getTime());
+}

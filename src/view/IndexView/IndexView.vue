@@ -2,9 +2,14 @@
 import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
 import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue";
 import {useLogStore} from "@/store/logs.store.js";
-import {cornMitt} from "@/utils/mitt.js";
+
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
+import {EVENT_SCROLL_TO} from "@/const/mittEvent.js";
+import cornMitt from "@/utils/mitt.js";
+import {onMounted} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {isInvalidDate} from "@/utils/index.js";
 
 
 const indexViewRef = ref(null);
@@ -43,15 +48,47 @@ const actions = ref([
   { name: '选项三' },
 ]);
 
-function onDialogConfirm(selectDate) {
+function scrollToDate(date) {
   if (!listRef.value) return;
+  if (isInvalidDate(date)) {
+    throw new Error("错误的日期");
+  }
 
-  listRef.value.scrollToDate(selectDate);
+  listRef.value.scrollToDate(date);
+}
+
+function onDialogConfirm(selectDate) {
+  scrollToDate(selectDate);
 }
 
 function onClickRight(event) {
   showActionSheet.value = true;
 }
+
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => {
+  const route = useRoute();
+
+  const timestamp = Number(route.query.timestamp);
+
+  if (timestamp) {
+    scrollToDate(new Date(timestamp));
+  }
+
+  clearQueryParams();
+})
+
+const clearQueryParams = () => {
+  // 使用 router.push 清除 query 参数
+  router.replace({
+    path: route.path,
+    query: {}
+  });
+}
+
+
 </script>
 
 <template>
@@ -68,7 +105,7 @@ function onClickRight(event) {
     </van-nav-bar>
   </teleport>
 
-  <div class="index-view overflow-y-scroll grow" ref="indexViewRef">
+  <div class="index-view corn-view" ref="indexViewRef">
     <corn-powerful-list ref="listRef"/>
     <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="indexViewRef"/>
 
