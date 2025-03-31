@@ -1,0 +1,8 @@
+// useDatePicker.js
+
+import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
+import CornTimePickerDialog from "@/dialog/CornTimePickerDialog/CornTimePickerDialog.vue";
+
+// 用户选择了就 resolve date
+// 用户没有选择, 就 resolve null
+export const showTimePickerDialog = useGlobalCpn(CornTimePickerDialog);

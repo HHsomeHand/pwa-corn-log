@@ -19,8 +19,21 @@ export function getDateInfo(date = new Date()) {
     };
 }
 
+export function getTimeInfo(date = new Date()) {
+    const d = dayjs(date);
+    return {
+        hour: d.hour(),
+        min: d.minute(),
+        sec: d.second()
+    };
+}
+
 export function convertToDate(year, month, day) {
     return dayjs(`${year}-${month}-${day}`).toDate();
+}
+
+export function convertToTime(hour, min, sec) {
+    return dayjs().hour(hour).minute(min).second(sec).toDate();
 }
 
 // 克隆date, 只保留年月日, 去除时分秒

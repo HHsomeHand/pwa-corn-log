@@ -2,6 +2,7 @@
 import {fmtDate, stripTime} from "../../../utils/index.js";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
+import {showTimePickerDialog} from "@/dialog/CornTimePickerDialog/utils.js";
 
 const date= defineModel();
 
@@ -27,9 +28,11 @@ onMounted(() => {
   watch(YMDDate, () => applyYMDToDate(YMDDate.value, date.value));
 })
 
-// const HMSDate = ref(new Date(date.value))
-//
-// watch(HMSDate, () => applyHMSToDate(HMSDate.value, date.value));
+const HMSDate = ref(new Date(date.value))
+
+onMounted(() => {
+  watch(HMSDate, () => applyHMSToDate(HMSDate.value, date.value));
+})
 
 function onYMDClick() {
   // store.generateTestData();
@@ -37,12 +40,20 @@ function onYMDClick() {
   function onDialogConfirm(newDate) {
     console.log("触发");
     YMDDate.value = newDate;
-    console.log(fmtDate(YMDDate.value));
   }
 
   showDatePickerDialog(onDialogConfirm);
 }
 
+
+function onHMSClick() {
+  function onDialogConfirm(newTime) {
+    console.log("触发");
+    HMSDate.value = newTime;
+  }
+
+  showTimePickerDialog(onDialogConfirm);
+}
 </script>
 
 <template>
@@ -55,14 +66,14 @@ function onYMDClick() {
     日期选择 {{fmtDate(YMDDate, "YYYY/MM/DD")}}
   </van-button>
 
-<!--  <van-button-->
-<!--      :key="YMDDate.getTime()"-->
-<!--      class="popup-btn"-->
-<!--      plain-->
-<!--      type="primary"-->
-<!--  >-->
-<!--    时间选择 {{fmtDate(HMSDate.value, "HH:mm:ss")}}-->
-<!--  </van-button>-->
+  <van-button
+      class="popup-btn"
+      plain
+      type="primary"
+      @click="onHMSClick"
+  >
+    时间选择 {{fmtDate(HMSDate, "HH:mm:ss")}}
+  </van-button>
 </template>
 
 <style scoped>
