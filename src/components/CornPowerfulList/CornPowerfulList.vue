@@ -191,9 +191,7 @@ defineExpose({
 </script>
 
 <template>
-  <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
-
-  </van-config-provider>
+  <van-config-provider :theme-vars="themeVars" theme-vars-scope="global" />
 
   <div class="h-full flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">

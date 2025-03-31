@@ -43,19 +43,32 @@ const actions = ref([
   { name: '选项三' },
 ]);
 
-cornMitt.on('nav-right-click', (event) => {
-  showActionSheet.value = true;
-});
-
 function onDialogConfirm(selectDate) {
   if (!listRef.value) return;
 
   listRef.value.scrollToDate(selectDate);
 }
+
+function onClickRight(event) {
+  showActionSheet.value = true;
+}
 </script>
 
 <template>
-  <div class="index-view" ref="indexViewRef">
+  <teleport to=".nav-teleport">
+    <van-nav-bar
+        left-text="药律"
+        fixed
+        placeholder
+        @click-right="onClickRight"
+    >
+      <template #right>
+        <van-icon name="wap-nav" size="25"/>
+      </template>
+    </van-nav-bar>
+  </teleport>
+
+  <div class="index-view overflow-y-scroll grow" ref="indexViewRef">
     <corn-powerful-list ref="listRef"/>
     <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="indexViewRef"/>
 

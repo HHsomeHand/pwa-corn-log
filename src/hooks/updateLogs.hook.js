@@ -35,7 +35,8 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
                 break;
             }
 
-            if (date.getTime() < oldestDate.getTime()) {
+            if (date.getTime() < oldestDate.getTime()
+                && logsCache.value[0].type !== "end") {
                 isEnd.value = true;
                 logs.push(generatorEnd(date));
                 break;
