@@ -25,7 +25,7 @@ function padNum(num) {
 .colon {
   display: inline-block;
   margin: 0 2px;
-  color: #1989fa;
+  color: var(--van-primary-color);
 }
 .block {
   display: inline-block;
@@ -33,7 +33,7 @@ function padNum(num) {
   color: #fff;
   font-size: 12px;
   text-align: center;
-  background-color: #1989fa;
+  background-color: var(--van-primary-color);
   border-radius: 3px;
 }
 </style>

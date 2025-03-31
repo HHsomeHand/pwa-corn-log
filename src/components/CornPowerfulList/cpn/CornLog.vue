@@ -59,7 +59,7 @@ function date2str(date) {
         v-if="item.comment"
         :scrollable="false"
         :text="item.comment"
-        background="#ecf9ff"
+        background="var(--van-primary-color-2)"
     />
   </div>
 </template>

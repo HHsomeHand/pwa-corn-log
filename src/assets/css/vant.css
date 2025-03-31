@@ -5,4 +5,6 @@
     --van-font-size-sm: 15px !important;
     --van-font-size-md: 17px !important;
     --van-font-size-lg: 19px !important;
+
+    --van-primary-color-2: color-mix(in srgb, var(--van-primary-color) 11%, white);
 }
