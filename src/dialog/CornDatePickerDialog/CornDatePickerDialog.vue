@@ -4,13 +4,18 @@ import {convertToDate, getDateInfo} from "@/utils/index.js";
 
 const showDialog = ref(false);
 
-const currentDateInfo = getDateInfo();
+const currentDate = ref([]);
 
-const currentDate = ref([
-  currentDateInfo.year,
-  currentDateInfo.month,
-  currentDateInfo.date
-]);
+function applyDate(newDate) {
+  const currentDateInfo = getDateInfo(newDate);
+
+  currentDate.value = [
+    currentDateInfo.year,
+    currentDateInfo.month,
+    currentDateInfo.date
+  ];
+}
+applyDate(new Date());
 
 let resolveCallback = null;
 
@@ -31,10 +36,11 @@ function onCancel() {
 let maxDate = ref(new Date());
 
 defineExpose({
-  showDialog: (callback, {isMaxToday = true}) => {
+  showDialog: (callback, {isMaxToday = true, date = new Date()}) => {
     if (isMaxToday) {
       maxDate.value = new Date();
     }
+    applyDate(date);
     showDialog.value = true
     resolveCallback = callback
   }

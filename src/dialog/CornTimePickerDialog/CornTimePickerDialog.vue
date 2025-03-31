@@ -6,11 +6,18 @@ const showDialog = ref(false);
 
 const currentTimeInfo = getTimeInfo();
 
-const currentTime = ref([
-  currentTimeInfo.year,
-  currentTimeInfo.month,
-  currentTimeInfo.date
-]);
+const currentTime = ref([]);
+
+function applyTime(newTime) {
+  const currentTimeInfo = getTimeInfo(newTime);
+
+  currentTime.value = [
+    currentTimeInfo.hour,
+    currentTimeInfo.min,
+    currentTimeInfo.sec
+  ];
+}
+applyTime(new Date());
 
 let resolveCallback = null;
 
@@ -30,7 +37,9 @@ function onCancel() {
 
 
 defineExpose({
-  showDialog: (callback) => {
+  showDialog: (callback, { date = new Date()}) => {
+    applyTime(date);
+
     showDialog.value = true
     resolveCallback = callback
   }

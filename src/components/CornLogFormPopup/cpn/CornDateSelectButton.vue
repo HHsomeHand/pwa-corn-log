@@ -42,7 +42,7 @@ function onYMDClick() {
     YMDDate.value = newDate;
   }
 
-  showDatePickerDialog(onDialogConfirm);
+  showDatePickerDialog(onDialogConfirm, {date: YMDDate.value});
 }
 
 
@@ -52,7 +52,7 @@ function onHMSClick() {
     HMSDate.value = newTime;
   }
 
-  showTimePickerDialog(onDialogConfirm);
+  showTimePickerDialog(onDialogConfirm, {date: YMDDate.value});
 }
 </script>
 
