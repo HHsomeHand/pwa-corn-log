@@ -94,7 +94,7 @@ const clearQueryParams = () => {
 <template>
   <teleport to=".nav-teleport">
     <van-nav-bar
-        left-text="药律"
+        left-text="日志"
         fixed
         placeholder
         @click-right="onClickRight"

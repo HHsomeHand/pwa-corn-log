@@ -2,7 +2,8 @@ import { createWebHistory, createRouter } from 'vue-router'
 
 import IndexView from '@/view/IndexView/IndexView.vue'
 import CalendarView from "@/view/CalendarView/CalendarView.vue";
-import {ROUTE_CALENDAR, ROUTE_INDEX} from "@/const/route.js";
+import {ROUTE_CALENDAR, ROUTE_INDEX, ROUTE_SEARCH} from "@/const/route.js";
+import SearchView from "@/view/SearchView/SearchView.vue";
 
 const routes = [
     {
@@ -12,6 +13,10 @@ const routes = [
     {
         path: ROUTE_CALENDAR,
         component: CalendarView
+    },
+    {
+        path: ROUTE_SEARCH,
+        component: SearchView
     }
 ]
 

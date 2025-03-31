@@ -12,7 +12,7 @@
     <van-tabbar class="!w-screen" route placeholder>
       <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item to="/cal" icon="calendar-o">日历</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">药物</van-tabbar-item>
+      <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
       <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
     </van-tabbar>
   </div>
