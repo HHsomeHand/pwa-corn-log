@@ -10,4 +10,6 @@
     --van-primary-color-2: color-mix(in srgb, var(--van-primary-color) 11%, white);
 
     --van-dropdown-menu-shadow: none;
+
+    --van-dropdown-menu-background: transparent;
 }
