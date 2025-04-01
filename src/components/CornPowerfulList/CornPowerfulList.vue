@@ -2,11 +2,11 @@
 import { vScroll } from '@vueuse/components'
 import {useLogStore} from "@/store/logs.store.js";
 import {
-  canScroll,
+  canScroll, copyToClipboard,
   fmtDate,
   getDomElement,
   getTotalHeightUntilSeparator,
-  isSameDay,
+  isSameDay, removeEmptyLines,
   stripTime,
   vh2px
 } from "@/utils/index.js";
@@ -153,9 +153,34 @@ function getDisplayDate(item) {
   return item.originalDate || item.date;
 }
 
-function onSeparatorClick() {
+function onSeparatorClick(index) {
   showCheckboxPopup((checked) => {
-    console.log(checked);
+    let _date = logsCache.value[index].date;
+
+    let _date_fmt = fmtDate(_date);
+
+    let cursor = index;
+    let result = "";
+
+    while (fmtDate(logsCache.value[cursor]?.date) === _date_fmt) {
+      for (let name of checked) {
+        let value =  logsCache.value[cursor][name];
+        if (!value) {
+          continue;
+        }
+        if (name === 'date') {
+          value = fmtDate(value, "YYYY-MM-DD HH:mm:ss");
+        } else if (name === 'comment') {
+          result += " 备注: "
+        }
+        result += value + " ";
+      }
+      result += '\n';
+      cursor++;
+    }
+
+    result = removeEmptyLines(result);
+    copyToClipboard(result);
   }, {
     entries: [{
       name: 'date',
@@ -192,7 +217,7 @@ defineExpose({
             "
             :data-date="fmtDate(getDisplayDate(item))"
             data-type="separator"
-            @click="onSeparatorClick"
+            @click="onSeparatorClick(index)"
         >
           <van-divider>{{fmtDate(getDisplayDate(item))}}</van-divider>
         </li>
