@@ -15,7 +15,8 @@ import {closeToast, showLoadingToast, showToast} from "vant";
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
-import CornLog from "@/components/CornPowerfulList/cpn/CornLog.vue";
+import CornLog from "@/components/CornLog/CornLog.vue";
+import {useCornLog} from "@/components/CornLog/hook.js";
 
 const logsCache = ref([])
 
@@ -126,51 +127,19 @@ async function addEntry(logData) {
   logsCache.value.push(logEntry);
 }
 
-async function updateEntry(id, updatedData) {
-  await store.updateLog(id, updatedData);
+let updateOption =  {
+  logsCache: logsCache.value,
+  store
+};
 
-  const _logsCache = logsCache.value;
-
-  const index = _logsCache.findIndex(item => item.id === id);
-
-  if (index === -1) return;
-
-  console.log(_logsCache[index].date);
-  let tmpLog = {
-    ..._logsCache[index],
-    ...updatedData,
-    id, // 确保id不被覆盖
-  };
-
-  if (!tmpLog.originalDate) {
-    tmpLog.originalDate = new Date(_logsCache[index].date);
-  }
-
-  _logsCache[index] = tmpLog;
-
-  // logsCache.value = [..._logsCache];
-}
+let {onCellClick: _onCellClick, updateEntry: _updateEntry } = useCornLog(logsCache.value, store);
 
 function onCellClick(item) {
-  showLogFormPopup(async (updatedData) => {
-    await updateEntry(item.id, updatedData);
-  }, {
-    entries: {
-      log: {
-        ...LOG_ENTRY,
-        defaultVal: item.log
-      },
-      comment: {
-        ...COMMENT_ENTRY,
-        defaultVal: item.comment
-      },
-      date: {
-        type: ENTRY_TYPE.DATE,
-        defaultVal: new Date(item.date)
-      }
-    },
-    id: item.id,
-  });
+  return _onCellClick(item, updateOption);
+}
+
+function updateEntry(...args) {
+  return _updateEntry(...args, updateOption);
 }
 
 const themeVars = reactive({
