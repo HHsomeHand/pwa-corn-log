@@ -36,24 +36,34 @@ function date2str(date) {
 
   return result;
 }
+
+const emits = defineEmits(["delete"]);
+function onDelete() {
+  emits("delete", props.item);
+}
 </script>
 
 <template>
   <div class="corn-log mx-2 mb-1 rounded-lg overflow-hidden">
-    <van-cell
-        :value="item.log"
-    >
-      <template #title>
-        <template v-if="item.originalDate">
-          <p class="inline origin-date-container">
-            {{date2str(item.originalDate)}} <CornTimeDisplayer :date="item.originalDate" />
-          </p>
-          <br/>
+    <van-swipe-cell>
+      <van-cell
+          :value="item.log"
+      >
+        <template #title>
+          <template v-if="item.originalDate">
+            <p class="inline origin-date-container">
+              {{date2str(item.originalDate)}} <CornTimeDisplayer :date="item.originalDate" />
+            </p>
+            <br/>
+          </template>
+          {{date2str(item.date)}}
+          <CornTimeDisplayer :date="item.date" />
         </template>
-        {{date2str(item.date)}}
-        <CornTimeDisplayer :date="item.date" />
+      </van-cell>
+      <template #right>
+        <van-button @click="onDelete" square text="删除" type="danger" class="delete-button" />
       </template>
-    </van-cell>
+    </van-swipe-cell>
     <van-notice-bar
         wrapable
         v-if="item.comment"

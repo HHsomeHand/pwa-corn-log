@@ -159,6 +159,22 @@ export const useLogStore = defineStore('logStore', () => {
         await tx.done;
     };
 
+    // 删除日志条目
+    const deleteLog = async (id) => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readwrite');
+        const store = tx.objectStore('logs');
+
+        const existingLog = await store.get(id);
+        if (!existingLog) {
+            throw new Error(`Log with id ${id} not found`);
+        }
+
+        await store.delete(id);
+        await tx.done;
+        return true; // 表示删除成功
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -168,6 +184,7 @@ export const useLogStore = defineStore('logStore', () => {
         searchLogsByComment,
         addLog,
         updateLog,
+        deleteLog,
         generateTestData,
     };
 });

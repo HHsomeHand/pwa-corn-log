@@ -195,6 +195,11 @@ function onSeparatorClick(index) {
   });
 }
 
+function onDelete(item, index) {
+  store.deleteLog(item.id);
+  logsCache.value.splice(index, 1);
+}
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -230,7 +235,7 @@ defineExpose({
             :key="item.id + '' + item.date.getTime()"
             @click="onCellClick(item)"
         >
-          <corn-log :item="item"/>
+          <corn-log :item="item" @delete="onDelete($event, index)"/>
         </li>
       </template>
 
