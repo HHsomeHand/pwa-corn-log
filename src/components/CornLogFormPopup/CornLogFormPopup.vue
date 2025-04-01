@@ -95,7 +95,7 @@ defineExpose({
           closeable
           round
           position="bottom"
-          class="h-[30%] h-auto py-2"
+          class="h-auto py-2"
           @closed="onClosed"
       >
         <template #default>

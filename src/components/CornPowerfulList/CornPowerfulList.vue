@@ -17,6 +17,7 @@ import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.js";
+import {showActionSheet} from "@/components/CornActionSheet/utils.js";
 
 const logsCache = ref([])
 
@@ -151,6 +152,10 @@ function getDisplayDate(item) {
   return item.originalDate || item.date;
 }
 
+function onSeparatorClick() {
+
+}
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -173,6 +178,7 @@ defineExpose({
             "
             :data-date="fmtDate(getDisplayDate(item))"
             data-type="separator"
+            @click="onSeparatorClick"
         >
           <van-divider>{{fmtDate(getDisplayDate(item))}}</van-divider>
         </li>

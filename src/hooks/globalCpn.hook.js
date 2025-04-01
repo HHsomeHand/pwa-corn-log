@@ -1,6 +1,35 @@
 // useDialog.js
 import { createApp } from 'vue'
 
+function createSingletonInstance(component) {
+    let instance = null
+
+    return () => {
+        if (!instance) {
+            const div = document.createElement('div')
+            document.body.appendChild(div)
+            instance = createApp(component).mount(div)
+        }
+        return instance
+    }
+}
+
+export function useGlobalCpn(component, { showMethod = 'showDialog'} = {}) {
+    const getInstance = createSingletonInstance(component)
+
+    return (...args) => {
+        return new Promise((resolve) => {
+            const instance = getInstance()
+
+            // 调用组件实例的显示方法
+            instance[showMethod](...args)
+
+            resolve()
+        })
+    }
+}
+
+
 /**
  * 创建全局组件 Hook
  * @param {Component} component Vue 组件
@@ -9,17 +38,13 @@ import { createApp } from 'vue'
  * @param {string} [options.showMethod='showDialog'] 组件实例的显示方法名
  * @returns {function(): Promise}
  */
-export function useGlobalCpn(component, { showMethod = 'showDialog'} = {}) {
-    let instance = null
+export function useGlobalCpnCallback(component, { showMethod = 'showDialog'} = {}) {
+    const getInstance = createSingletonInstance(component)
 
     return (callback, options = {}) => {
         return new Promise((resolve) => {
             // 单例检查
-            if (!instance) {
-                const div = document.createElement('div')
-                document.body.appendChild(div)
-                instance = createApp(component).mount(div)
-            }
+            const instance = getInstance()
 
             // 调用组件实例的显示方法
             instance[showMethod]((...args) => {

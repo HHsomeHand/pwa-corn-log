@@ -1,5 +1,5 @@
 import CornLogFormPopup from "@/components/CornLogFormPopup/CornLogFormPopup.vue";
-import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
+import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/const.js";
 import {stripTime} from "@/utils/index.js";
 
@@ -7,7 +7,7 @@ import {stripTime} from "@/utils/index.js";
 // showLogFormPopup(callback, {entries})
 // 用户提交了 resolve {log, comment}
 // 用户关闭了, 就 resolve null
-export const showLogFormPopup = useGlobalCpn(CornLogFormPopup, {
+export const showLogFormPopup = useGlobalCpnCallback(CornLogFormPopup, {
     showMethod: "showPopup"
 });
 

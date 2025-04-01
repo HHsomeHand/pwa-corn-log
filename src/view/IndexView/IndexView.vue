@@ -10,6 +10,7 @@ import cornMitt from "@/utils/mitt.js";
 import {onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {isInvalidDate} from "@/utils/index.js";
+import {showActionSheet} from "@/components/CornActionSheet/utils.js";
 
 
 const indexViewRef = ref(null);
@@ -27,8 +28,6 @@ function onClick() {
   showLogFormPopup(onSubmit, {id: "add"});
 }
 
-const showActionSheet = ref(false);
-
 const listRef = ref(null);
 
 const actions = ref([
@@ -45,7 +44,6 @@ const actions = ref([
       showDatePickerDialog(onDialogConfirm);
     }
   },
-  { name: '选项三' },
 ]);
 
 function scrollToDate(date) {
@@ -62,7 +60,7 @@ function onDialogConfirm(selectDate) {
 }
 
 function onClickRight(event) {
-  showActionSheet.value = true;
+  showActionSheet(actions.value);
 }
 
 const router = useRouter();
@@ -108,13 +106,6 @@ const clearQueryParams = () => {
   <div class="index-view corn-view" ref="indexViewRef">
     <corn-powerful-list ref="listRef"/>
     <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="indexViewRef"/>
-
-    <van-action-sheet
-        v-model:show="showActionSheet"
-        :actions="actions"
-        close-on-click-action
-        teleport="body"
-    />
   </div>
 </template>
 
