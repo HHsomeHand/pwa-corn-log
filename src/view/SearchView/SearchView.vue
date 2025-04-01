@@ -1,6 +1,8 @@
 <script setup>
 
 import {useLogStore} from "@/store/logs.store.js";
+import CornLog from "@/components/CornLog/CornLog.vue";
+import {useCornLog} from "@/components/CornLog/hook.js";
 
 const SEARCH_TYPE = Object.freeze({
   LOG: 'log',
@@ -29,36 +31,46 @@ async function onSearch() {
 
   console.log(logs.value);
 }
+
+let { onCellClick } = useCornLog(logs, store);
 </script>
 
 <template>
+  <teleport to=".nav-teleport">
+    <div class="nav-bar flex justify-between items-center px-2">
+      <van-dropdown-menu>
+        <van-dropdown-item v-model="searchType" :options="searchOption" />
+      </van-dropdown-menu>
+
+      <van-search
+          class="grow"
+          v-model="searchContent"
+          shape="round"
+          placeholder="请输入搜索内容"
+          background="transparent"
+          @search="onSearch"
+      />
+
+      <van-button
+          plain
+          type="primary"
+          size="small"
+          class="shrink-0"
+          @click="onSearch"
+      >
+        搜索
+      </van-button>
+    </div>
+  </teleport>
+
   <div class="search-view view">
-    <teleport to=".nav-teleport">
-        <div class="nav-bar flex justify-between items-center px-2">
-          <van-dropdown-menu>
-            <van-dropdown-item v-model="searchType" :options="searchOption" />
-          </van-dropdown-menu>
+    <ul>
+      <li v-for="(item, index) in logs" @click="onCellClick(item)">
+        <corn-log :item="item"/>
+      </li>
+    </ul>
 
-          <van-search
-              class="grow"
-              v-model="searchContent"
-              shape="round"
-              placeholder="请输入搜索内容"
-              background="transparent"
-              @search="onSearch"
-          />
-
-          <van-button
-              plain
-              type="primary"
-              size="small"
-              class="shrink-0"
-              @click="onSearch"
-          >
-            搜索
-          </van-button>
-        </div>
-    </teleport>
+    <van-empty v-if="logs.length === 0" image="search" description="无搜索结果" />
   </div>
 </template>
 

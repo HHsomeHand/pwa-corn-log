@@ -132,7 +132,7 @@ let updateOption =  {
   store
 };
 
-let {onCellClick: _onCellClick, updateEntry: _updateEntry } = useCornLog(logsCache.value, store);
+let {onCellClick: _onCellClick, updateEntry: _updateEntry } = useCornLog(logsCache, store);
 
 function onCellClick(item) {
   return _onCellClick(item, updateOption);

@@ -38,7 +38,6 @@ function onYMDClick() {
   // store.generateTestData();
 
   function onDialogConfirm(newDate) {
-    console.log("触发");
     YMDDate.value = newDate;
   }
 
@@ -48,7 +47,6 @@ function onYMDClick() {
 
 function onHMSClick() {
   function onDialogConfirm(newTime) {
-    console.log("触发");
     HMSDate.value = newTime;
   }
 
