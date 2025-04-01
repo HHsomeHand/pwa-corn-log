@@ -1,5 +1,7 @@
 <script setup>
 
+import {useLogStore} from "@/store/logs.store.js";
+
 const SEARCH_TYPE = Object.freeze({
   LOG: 'log',
   COMMENT: 'comment',
@@ -13,6 +15,20 @@ const searchOption = [
 ];
 
 const searchContent = ref("");
+
+const store = useLogStore();
+
+const logs = ref([]);
+
+async function onSearch() {
+  if (searchType.value === SEARCH_TYPE.LOG) {
+    logs.value = await store.searchLogsByLog(searchContent.value);
+  } else if (searchType.value === SEARCH_TYPE.COMMENT) {
+    logs.value = await store.searchLogsByComment(searchContent.value);
+  }
+
+  console.log(logs.value);
+}
 </script>
 
 <template>
@@ -29,6 +45,7 @@ const searchContent = ref("");
               shape="round"
               placeholder="请输入搜索内容"
               background="transparent"
+              @search="onSearch"
           />
 
           <van-button
@@ -36,6 +53,7 @@ const searchContent = ref("");
               type="primary"
               size="small"
               class="shrink-0"
+              @click="onSearch"
           >
             搜索
           </van-button>

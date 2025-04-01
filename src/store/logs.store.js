@@ -58,16 +58,18 @@ export const useLogStore = defineStore('logStore', () => {
         const tx = db.transaction('logs', 'readonly');
         const store = tx.store;
         const logs = [];
-        const cursor = await store.openCursor();
+        let cursor = await store.openCursor();
 
         if (!keyword) return logs;
 
         while (cursor) {
             const log = cursor.value;
-            if (log.log.toLowerCase().includes(keyword.toLowerCase())) {
+
+            if (log.log && log.log.toLowerCase().includes(keyword.toLowerCase())) {
                 logs.push(log);
             }
-            await cursor.continue();
+
+            cursor = await cursor.continue();
         }
 
         return logs.sort((a, b) => a.date - b.date);
@@ -79,7 +81,7 @@ export const useLogStore = defineStore('logStore', () => {
         const tx = db.transaction('logs', 'readonly');
         const store = tx.store;
         const logs = [];
-        const cursor = await store.openCursor();
+        let cursor = await store.openCursor();
 
         if (!keyword) return logs;
 
@@ -88,7 +90,7 @@ export const useLogStore = defineStore('logStore', () => {
             if (log.comment && log.comment.toLowerCase().includes(keyword.toLowerCase())) {
                 logs.push(log);
             }
-            await cursor.continue();
+            cursor = await cursor.continue();
         }
 
         return logs.sort((a, b) => a.date - b.date);
