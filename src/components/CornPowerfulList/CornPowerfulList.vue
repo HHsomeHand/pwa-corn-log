@@ -18,6 +18,7 @@ import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/component
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.js";
 import {showActionSheet} from "@/components/CornActionSheet/utils.js";
+import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 
 const logsCache = ref([])
 
@@ -153,7 +154,20 @@ function getDisplayDate(item) {
 }
 
 function onSeparatorClick() {
-
+  showCheckboxPopup((checked) => {
+    console.log(checked);
+  }, {
+    entries: [{
+      name: 'date',
+      text: '日期'
+    }, {
+      name: 'log',
+      text: '日志'
+    }, {
+      name: 'comment',
+      text: '备注'
+    }]
+  });
 }
 
 defineExpose({
@@ -197,6 +211,8 @@ defineExpose({
 
     </ul>
   </div>
+
+
 </template>
 
 <style scoped>
