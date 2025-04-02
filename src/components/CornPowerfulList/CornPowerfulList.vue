@@ -76,13 +76,17 @@ async function scrollToDate(date) {
 
   closeToast();
 
+  let latestDate = await store.getLatestDate() || new Date();
+
   do {
     let _targetDateFmt = fmtDate(_targetDate);
 
-    // console.log(_targetDateFmt);
-
     // 查找对应日期的 DOM 元素
     targetEl = scrollerEl.querySelector(`[data-date="${_targetDateFmt}"]`);
+
+    if (_targetDate.getTime() > latestDate.getTime()) {
+      break;
+    }
 
     if (!targetEl) {
       // 如果没有早到, 就向前查找, 如果向后查早, 可能条目还没 update 出来
@@ -102,6 +106,7 @@ async function scrollToDate(date) {
 
       isClose = true;
     } else {
+      // 这里是找到了的情况
       if (isClose) {
         showToast(`未找到日期 ${targetDateFmt} 的日志项, 已就近查找 ${_targetDateFmt}`)
       }

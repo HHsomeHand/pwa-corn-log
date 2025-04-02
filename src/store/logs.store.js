@@ -52,6 +52,15 @@ export const useLogStore = defineStore('logStore', () => {
         return cursor ? cursor.value.date : null;
     };
 
+    // 获取最新的日志日期
+    const getLatestDate = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readonly');
+        const index = tx.store.index('by_date'); // 使用日期索引
+        const cursor = await index.openCursor(null, 'prev'); // 从末尾开始，按日期降序
+        return cursor ? cursor.value.date : null;
+    };
+
     // 模糊查询 log 字段
     const searchLogsByLog = async (keyword) => {
         const db = await getDB();
@@ -180,6 +189,7 @@ export const useLogStore = defineStore('logStore', () => {
         getLogsCount,
         getLogsByDate,
         getOldestDate,
+        getLatestDate,
         searchLogsByLog,
         searchLogsByComment,
         addLog,

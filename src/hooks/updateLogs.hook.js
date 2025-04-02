@@ -1,4 +1,5 @@
-import {generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
+import {fmtDate, generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
+import {useQueueAsync} from "@/utils/async.js";
 
 // 需要指定 scrollerRef 容器, 进行滚动监听
 // logsCache 需要为 ref
@@ -6,7 +7,7 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
     let isEnd = ref(false);
 
     // 从 indexedDB 获取数据, 保证列表的视觉效果
-    let update =  async () => {
+    let update =  useQueueAsync(async () => {
         if (!scrollerRef.value) return [];
         if (isEnd.value) return [];
 
@@ -35,10 +36,13 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
                 break;
             }
 
-            if (date.getTime() < oldestDate.getTime()
-                && logsCache.value[0].type !== "end") {
+            if (date.getTime() < oldestDate.getTime()) {
                 isEnd.value = true;
-                logs.push(generatorEnd(date));
+
+                // 防止多次 push end 符
+                if (logsCache?.value[0]?.type !== "end") {
+                    logs.push(generatorEnd(date));
+                }
                 break;
             }
         }
@@ -60,7 +64,7 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
         });
 
         return logs;
-    };
+    });
 
     // 快触顶时, 进行数据更新
     async function onScroll(state) {
@@ -85,7 +89,6 @@ export function useUpdateLogs(scrollerRef, store, logsCache) {
 
             if (logs[0].date.getTime() < date.getTime()) break;
         } while(true);
-
     }
 
     return {isEnd, onScroll, updateToDate, update};
