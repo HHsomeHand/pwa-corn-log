@@ -82,10 +82,16 @@ function onModeCellClick() {
   </teleport>
 
   <div class="config-view corn-view">
-    <pick-colors v-model:value="primaryColor" :colors="colors"/>
 
-    <van-cell-group title="分组2">
-      <van-cell title="当前模式" :value="currentMode.title" @click="onModeCellClick"/>
+
+    <van-cell-group title="模式">
+      <van-cell title="当前模式" :value="currentMode.title" @click="onModeCellClick" is-link/>
+
+      <van-cell title="当前主题色">
+        <template #value>
+          <pick-colors v-model:value="primaryColor" :colors="colors"/>
+        </template>
+      </van-cell>
     </van-cell-group>
   </div>
 </template>
