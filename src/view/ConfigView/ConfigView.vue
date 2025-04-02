@@ -8,6 +8,7 @@ import {showActionSheet} from "@/components/CornActionSheet/utils.js";
 import {useAppStore} from "@/store/app.store.js";
 import {storeToRefs} from "pinia";
 import {useWallpaperStore} from "@/store/wallpaper.store.js";
+import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
 
 function onClickLeft() {
   history.back();
@@ -33,7 +34,7 @@ function onModeCellClick() {
 
 const wallpaperStore = useWallpaperStore();
 
-const {currentWallpaperBase64} = storeToRefs(wallpaperStore);
+const {currentWallpaperBase64, vantBackground2Color, wallpaperBgColor} = storeToRefs(wallpaperStore);
 
 let initFileList = [];
 
@@ -66,11 +67,7 @@ watch(fileList, () => {
     <van-cell-group title="模式">
       <van-cell title="当前模式" :value="currentMode.title" @click="onModeCellClick" is-link/>
 
-      <van-cell title="当前主题色">
-        <template #value>
-          <pick-colors v-model:value="primaryColor" :colors="colors"/>
-        </template>
-      </van-cell>
+      <corn-cell-color-picker title="当前主题色" v-model="primaryColor" :colors="colors"/>
     </van-cell-group>
 
     <van-cell-group title="背景图片">
@@ -79,6 +76,9 @@ watch(fileList, () => {
           <van-uploader v-model="fileList" reupload max-count="1" />
         </template>
       </van-cell>
+
+      <corn-cell-color-picker title="全局元素背景色" v-model="vantBackground2Color"/>
+      <corn-cell-color-picker title="壁纸背景色" v-model="wallpaperBgColor"/>
 
     </van-cell-group>
   </div>

@@ -14,33 +14,10 @@ const wallpaperStore = useWallpaperStore();
 
 const {currentWallpaperBase64} = storeToRefs(wallpaperStore);
 
-
-const bBgImageStyle = useStyleElement('bg-image-style', false, `
-  :root {
-    --van-background-2: rgba(255, 255, 255, 0.3);
-  }
-
-  .van-tabbar,
-  .van-cell,
-  .van-calendar {
-    backdrop-filter: blur(var(--corn-backdrop-px));
-  }
-
-  .app-component {
-    background-color: var(--wallpaper-bg-color);
-  }
-`);
-
 onMounted(() => {
   watch(currentWallpaperBase64, () => {
     // 不要在下面的style块中使用v-bind, 不稳定, 有时候无法正确设置图片
     appRef.value.style.backgroundImage = `url(${currentWallpaperBase64.value})`
-
-    if (currentWallpaperBase64.value === 'none') {
-      bBgImageStyle.value = false;
-    } else {
-      bBgImageStyle.value = true;
-    }
   }, { immediate: true })
 });
 </script>
@@ -70,7 +47,9 @@ onMounted(() => {
 .app-component {
   background-repeat: no-repeat;
 
-  background-size: var(--wallpaper-size) ;
+  background-size: var(--wallpaper-size);
+
+  background-color: var(--wallpaper-bg-color);
 
   background-position: var(--wallpaper-pos-x) var(--wallpaper-pos-y);
 }

@@ -30,6 +30,7 @@ const emit = defineEmits(["click"]);
 
 const themeVars = reactive({
   floatingBubbleSize: `${props.size}px`,
+  floatingBubbleColor: `var(--van-white)`,
 });
 
 /**
@@ -137,6 +138,7 @@ watch(offset, (newVal) => {
   <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
     <van-floating-bubble
         v-model:offset="offset"
+        class="corn-fab"
         :class="randomClassName"
         axis="xy"
         icon="plus"

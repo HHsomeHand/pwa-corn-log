@@ -48,5 +48,9 @@ export function useConfig(key, defaultValue) {
     }
   }, {deep: true});
 
+  config.setDefault = () => {
+    config.value = defaultValue;
+  };
+
   return config;
 }
