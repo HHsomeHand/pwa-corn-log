@@ -12,9 +12,6 @@ function onClickLeft() {
 
 const colors = ref([CUSTOM_ORANGE_HEX, ...Object.values(colorValues)]);
 
-const PRIMARY_COLOR_VAR_NAME = '--van-primary-color';
-const primaryColor = useCssVar(PRIMARY_COLOR_VAR_NAME, `var(${PRIMARY_COLOR_VAR_NAME})`);
-
 const APP_MODE = Object.freeze({
   LOG: {
     title: "日志",
@@ -34,6 +31,8 @@ const APP_MODE = Object.freeze({
   }
 });
 
+const customAppMode = useConfig('customAppMode', {...APP_MODE});
+
 // 不要直接修改, 使用 changeAppMode 来修改
 const currentModeKey = useConfig('currentMode', 'LOG');
 
@@ -43,11 +42,19 @@ const currentMode = computed(() => {
   }
 })
 
+const PRIMARY_COLOR_VAR_NAME = '--van-primary-color';
+
+const primaryColor = useCssVar(PRIMARY_COLOR_VAR_NAME, CUSTOM_ORANGE_HEX);
+
+watch(primaryColor, () => {
+  customAppMode.value[currentModeKey.value].customPrimaryColor = primaryColor.value;
+});
+
 // changeAppMode(APP_MODE.LOG)
 function changeAppMode(key) {
-  let mode = APP_MODE[key];
+  let mode = customAppMode.value[key];
   currentModeKey.value = key;
-  primaryColor.value = mode.defaultPrimaryColor;
+  primaryColor.value = mode.customPrimaryColor || mode.defaultPrimaryColor;
 }
 
 function onModeCellClick() {
