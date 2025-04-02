@@ -20,7 +20,7 @@ import {useCornLog} from "@/components/CornLog/hook.js";
 import {showActionSheet} from "@/components/CornActionSheet/utils.js";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 
-const logsCache = ref([])
+const logsCache = defineModel();
 
 const store = useLogStore()
 

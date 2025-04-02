@@ -86,7 +86,7 @@ const clearQueryParams = () => {
   });
 }
 
-
+const logsCache = ref([])
 </script>
 
 <template>
@@ -104,7 +104,7 @@ const clearQueryParams = () => {
   </teleport>
 
   <div class="index-view corn-view" ref="indexViewRef">
-    <corn-powerful-list ref="listRef"/>
+    <corn-powerful-list v-model="logsCache" ref="listRef"/>
     <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="indexViewRef"/>
   </div>
 </template>

@@ -47,6 +47,9 @@ importers:
       vue:
         specifier: ^3.5.13
         version: 3.5.13
+      vue-pick-colors:
+        specifier: ^1.8.0
+        version: 1.8.0(@popperjs/core@2.11.8)(vue@3.5.13)
       vue-router:
         specifier: '4'
         version: 4.5.0(vue@3.5.13)
@@ -788,6 +791,9 @@ packages:
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
+
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
   '@rollup/plugin-babel@5.3.1':
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
@@ -2462,6 +2468,12 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
+  vue-pick-colors@1.8.0:
+    resolution: {integrity: sha512-lIP28A1BZEPp0v0Y6m9lNbsC6jNM2LP+Dc2tJbUXiNRvDgXqBMe/msX3svqjspV4B+SZdPAjx75JY2zem0hA2Q==}
+    peerDependencies:
+      '@popperjs/core': ^2.11.2
+      vue: ^3.2.26
+
   vue-resize@2.0.0-alpha.1:
     resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
     peerDependencies:
@@ -3369,6 +3381,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@polka/url@1.0.0-next.28': {}
+
+  '@popperjs/core@2.11.8': {}
 
   '@rollup/plugin-babel@5.3.1(@babel/core@7.26.10)(rollup@2.79.2)':
     dependencies:
@@ -5128,6 +5142,11 @@ snapshots:
 
   vue-observe-visibility@2.0.0-alpha.1(vue@3.5.13):
     dependencies:
+      vue: 3.5.13
+
+  vue-pick-colors@1.8.0(@popperjs/core@2.11.8)(vue@3.5.13):
+    dependencies:
+      '@popperjs/core': 2.11.8
       vue: 3.5.13
 
   vue-resize@2.0.0-alpha.1(vue@3.5.13):

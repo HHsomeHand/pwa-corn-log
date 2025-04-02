@@ -1,0 +1,1 @@
+const rootStyles = getComputedStyle(document.documentElement);
