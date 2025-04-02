@@ -43,7 +43,7 @@ let { onCellClick } = useCornLog(logs, store);
       </van-dropdown-menu>
 
       <van-search
-          class="grow"
+          class="nav-bar__search grow rounded-r-full overflow-hidden"
           v-model="searchContent"
           shape="round"
           placeholder="请输入搜索内容"
@@ -77,13 +77,17 @@ let { onCellClick } = useCornLog(logs, store);
 <style scoped>
 .nav-bar {
   --van-dropdown-menu-title-text-color: var(--van-primary-color);
-  background: white;
+  background: var(--van-background-2);
   --van-search-label-padding: 0px 0px;
   /* 上、右、下、左 */
   --van-search-padding: 10px 8px 10px 0px;
 
   :deep(.van-dropdown-menu__title::after) {
     display: none;
+  }
+
+  .nav-bar__search {
+    margin-right: -2px;
   }
 }
 </style>

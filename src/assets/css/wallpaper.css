@@ -1,0 +1,9 @@
+:root {
+    --wallpaper-pos-x: center;
+    --wallpaper-pos-y: center;
+    --wallpaper-size: cover;
+    --wallpaper-bg-color: whitesmoke;
+
+    /* 毛玻璃的模糊半径 */
+    --corn-backdrop-px: 10px;
+}

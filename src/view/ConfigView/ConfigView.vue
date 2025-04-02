@@ -7,6 +7,7 @@ import {useConfig} from "@/hooks/useConfig.js";
 import {showActionSheet} from "@/components/CornActionSheet/utils.js";
 import {useAppStore} from "@/store/app.store.js";
 import {storeToRefs} from "pinia";
+import {useWallpaperStore} from "@/store/wallpaper.store.js";
 
 function onClickLeft() {
   history.back();
@@ -30,6 +31,23 @@ function onModeCellClick() {
   showActionSheet(actions);
 }
 
+const wallpaperStore = useWallpaperStore();
+
+const {currentWallpaperBase64} = storeToRefs(wallpaperStore);
+
+let initFileList = [];
+
+if (currentWallpaperBase64.value !== 'none') {
+  initFileList.push({
+    content: currentWallpaperBase64.value,
+  })
+}
+
+const fileList = ref([...initFileList]);
+
+watch(fileList, () => {
+  currentWallpaperBase64.value = fileList.value[0]?.content || 'none';
+})
 </script>
 
 <template>
@@ -53,6 +71,15 @@ function onModeCellClick() {
           <pick-colors v-model:value="primaryColor" :colors="colors"/>
         </template>
       </van-cell>
+    </van-cell-group>
+
+    <van-cell-group title="背景图片">
+      <van-cell title="当前背景图片">
+        <template #value>
+          <van-uploader v-model="fileList" reupload max-count="1" />
+        </template>
+      </van-cell>
+
     </van-cell-group>
   </div>
 </template>
