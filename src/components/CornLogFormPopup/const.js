@@ -8,7 +8,8 @@ export const ENTRY_TYPE =  Object.freeze({
 export const LOG_ENTRY = Object.freeze(
     generateEntry({
         label: "日志",
-        placeholder: "请输入日志内容"
+        placeholder: "请输入日志内容",
+        isReturnSubmit: true
     }),
 );
 

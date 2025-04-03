@@ -16,13 +16,15 @@ export function generateEntry({
     label = "标签名",
     placeholder = "提示",
     type = ENTRY_TYPE.STR,
-    defaultVal = ""
+    defaultVal = "",
+    isReturnSubmit = false,
 } = {}) {
     return {
         label,
         placeholder,
         type,
-        defaultVal
+        defaultVal,
+        isReturnSubmit
     }
 }
 

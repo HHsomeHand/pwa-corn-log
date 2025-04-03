@@ -37,7 +37,7 @@ export function useCornLog(logsCacheRef, store) {
             entries: {
                 log: {
                     ...LOG_ENTRY,
-                    defaultVal: item.log
+                    defaultVal: item.log,
                 },
                 comment: {
                     ...COMMENT_ENTRY,
