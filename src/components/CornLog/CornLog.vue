@@ -50,14 +50,21 @@ function onDelete() {
           :value="item.log"
       >
         <template #title>
-          <template v-if="item.originalDate">
-            <p class="inline origin-date-container">
-              {{date2str(item.originalDate)}} <CornTimeDisplayer :date="item.originalDate" />
-            </p>
-            <br/>
-          </template>
-          {{date2str(item.date)}}
-          <CornTimeDisplayer :date="item.date" />
+          <div class="corn-log__container flex flex-col gap-2">
+              <div
+                  v-if="item.originalDate"
+                  class="corn-log__time-displayer"
+              >
+                <p class="inline origin-date-container">
+                  {{date2str(item.originalDate)}}
+                  <CornTimeDisplayer :date="item.originalDate" />
+                </p>
+              </div>
+            <div class="corn-log__time-displayer">
+              {{date2str(item.date)}}
+              <CornTimeDisplayer :date="item.date" />
+            </div>
+          </div>
         </template>
       </van-cell>
       <template #right>

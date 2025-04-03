@@ -12,20 +12,6 @@ const props = defineProps({
   }
 });
 
-console.log(props.title);
-
-
-
-function getCSSVariableValue(cssVar) {
-  // 提取变量名，去掉 'var(' 和 ')'
-  const variableName = cssVar.replace(/^var\((--[^)]+)\)$/, '$1');
-
-  // 从 :root 获取变量值
-  const value = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
-
-  return value;
-}
-
 let color = defineModel();
 
 if (!color.value.startsWith('#') && color !== 'transparent') {
