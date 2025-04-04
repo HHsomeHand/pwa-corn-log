@@ -34,7 +34,13 @@ function onModeCellClick() {
 
 const wallpaperStore = useWallpaperStore();
 
-const {currentWallpaperBase64, vantBackground2Color, wallpaperBgColor} = storeToRefs(wallpaperStore);
+const {
+  currentWallpaperBase64,
+  vantBackground2Color,
+  wallpaperBgColor,
+  isBlur,
+  cornBackdropPx
+} = storeToRefs(wallpaperStore);
 
 let initFileList = [];
 
@@ -80,6 +86,20 @@ watch(fileList, () => {
       <corn-cell-color-picker title="全局元素背景色" v-model="vantBackground2Color"/>
       <corn-cell-color-picker title="壁纸背景色" v-model="wallpaperBgColor"/>
 
+    </van-cell-group>
+
+    <van-cell-group title="背景图片毛玻璃特效">
+      <van-cell title="是否启用">
+        <template #right-icon>
+          <van-checkbox v-model="isBlur"/>
+        </template>
+      </van-cell>
+
+      <van-cell title="是否启用">
+        <template #right-icon>
+          <van-stepper v-model="cornBackdropPx" />
+        </template>
+      </van-cell>
     </van-cell-group>
   </div>
 </template>

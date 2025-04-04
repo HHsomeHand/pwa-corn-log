@@ -16,7 +16,7 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
     const vantBackground2Color = useCssVar('--van-background-2', 'var(--van-white)');
 
     // rgba(255, 255, 255, 0.3)
-    const bBlurStyle = useStyleElement('bg-image-style', false, `
+    const isBlurStyle = useStyleElement('bg-image-style', false, `
       .van-tabbar,
       .van-cell,
       .van-calendar {
@@ -24,16 +24,21 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
       }
     `);
 
+    const isBlur = useConfig('isBlur', false);
+
     // 设置了图片后才启用毛玻璃特效
-    watch(currentWallpaperBase64, () => {
-        if (currentWallpaperBase64.value === 'none') {
-            bBlurStyle.value = false;
+    watch([isBlur, currentWallpaperBase64], () => {
+        console.log(isBlur.value);
+        if (currentWallpaperBase64.value === 'none' || !isBlur.value) {
+            isBlurStyle.value = false;
         } else {
-            bBlurStyle.value = true;
+            if (isBlur.value) {
+                isBlurStyle.value = true;
+            }
         }
     }, {immediate: true})
 
-    const cornBackdropPx = useCssVar('--corn-backdrop-px', 10, 'px');
+    const cornBackdropPx = useCssVarFormat('--corn-backdrop-px', 10, 'px');
 
     return {
         currentWallpaperBase64,
@@ -41,5 +46,6 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
         wallpaperBgColor, // 壁纸背景色
         wallpaperSize, // 大小的百分比
         cornBackdropPx, // 模糊半径
+        isBlur, // 是否启用毛玻璃特效
     }
 })

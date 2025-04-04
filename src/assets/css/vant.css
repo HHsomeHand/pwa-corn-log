@@ -7,7 +7,10 @@
     --van-font-size-lg: 19px !important;
 
     --van-primary-color: #ff8917;
-    --van-primary-color-2: color-mix(in srgb, var(--van-primary-color) 11%, white);
+
+    --corn-comment-color: white;
+
+    --van-primary-color-2: color-mix(in srgb, var(--van-primary-color) 11%, var(--corn-comment-color));
 
     --van-dropdown-menu-shadow: none;
 

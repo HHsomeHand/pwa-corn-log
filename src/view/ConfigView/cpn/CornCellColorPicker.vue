@@ -28,7 +28,7 @@ function getRootCSSVariableValue(cssVar) {
 <template>
   <van-cell :title="title">
     <template #value>
-      <pick-colors v-model:value="color" :colors="[color, ...colors]"/>
+      <pick-colors v-model:value="color" :colors="[color, ...colors]" show-alpha/>
     </template>
   </van-cell>
 </template>

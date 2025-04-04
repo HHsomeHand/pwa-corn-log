@@ -86,6 +86,7 @@ function onDelete() {
  --van-notice-bar-text-color: var(--van-primary-color);
 }
 
+/* 删除线 */
 .origin-date-container {
   position: relative;
 }
