@@ -28,10 +28,11 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
 
     // 设置了图片后才启用毛玻璃特效
     watch([isBlur, currentWallpaperBase64], () => {
-        if (currentWallpaperBase64.value === 'none' || !isBlur.value) {
+        if (currentWallpaperBase64.value === 'none' || !Boolean(isBlur.value)) {
             isBlurStyle.value = false;
         } else {
-            if (isBlur.value) {
+            if (Boolean(isBlur.value)) {
+                console.log(isBlur.value);
                 isBlurStyle.value = true;
             }
         }

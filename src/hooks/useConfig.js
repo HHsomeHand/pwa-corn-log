@@ -34,7 +34,11 @@ export function useConfig(key, defaultValue) {
     if (storeValue === null) {
       storeValue = defaultValue;
     }
-  } 
+  }
+
+  if (typeof defaultValue === 'boolean') {
+    storeValue = Boolean(defaultValue);
+  }
 
   const config = ref(storeValue);
 

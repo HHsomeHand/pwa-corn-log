@@ -59,6 +59,7 @@ watch(fileList, () => {
 
 function onClick() {
   wallpaperStore.setDefault();
+  fileList.value = [];
 }
 </script>
 
