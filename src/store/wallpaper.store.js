@@ -28,7 +28,6 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
 
     // 设置了图片后才启用毛玻璃特效
     watch([isBlur, currentWallpaperBase64], () => {
-        console.log(isBlur.value);
         if (currentWallpaperBase64.value === 'none' || !isBlur.value) {
             isBlurStyle.value = false;
         } else {
@@ -40,12 +39,25 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
 
     const cornBackdropPx = useCssVarFormat('--corn-backdrop-px', 10, 'px');
 
-    return {
+    const cornCommentColor = useCssVar('--corn-comment-color', '##FFFFFFFF');
+
+    const entries = {
         currentWallpaperBase64,
         vantBackground2Color, // 全局背景色
         wallpaperBgColor, // 壁纸背景色
         wallpaperSize, // 大小的百分比
         cornBackdropPx, // 模糊半径
         isBlur, // 是否启用毛玻璃特效
+        cornCommentColor, // 备注的背景色
+    };
+
+    function setDefault() {
+        for (let entry of Object.values(entries)) {
+            entry?.setDefault?.();
+        }
     }
+    return {
+        ...entries,
+        setDefault
+    };
 })

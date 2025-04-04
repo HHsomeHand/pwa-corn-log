@@ -14,9 +14,12 @@ const props = defineProps({
 
 let color = defineModel();
 
-if (!color.value.startsWith('#') && color !== 'transparent') {
-  color.value = getRootCSSVariableValue(color.value);
-}
+watch(color, () => {
+  if (!color.value.startsWith('#') && color !== 'transparent') {
+    color.value = getRootCSSVariableValue(color.value);
+  }
+})
+
 
 function getRootCSSVariableValue(cssVar) {
   const variableName = cssVar.replace(/^var\((--[^)]+)\)$/, '$1');

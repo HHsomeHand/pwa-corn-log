@@ -39,7 +39,8 @@ const {
   vantBackground2Color,
   wallpaperBgColor,
   isBlur,
-  cornBackdropPx
+  cornBackdropPx,
+  cornCommentColor
 } = storeToRefs(wallpaperStore);
 
 let initFileList = [];
@@ -55,6 +56,10 @@ const fileList = ref([...initFileList]);
 watch(fileList, () => {
   currentWallpaperBase64.value = fileList.value[0]?.content || 'none';
 })
+
+function onClick() {
+  wallpaperStore.setDefault();
+}
 </script>
 
 <template>
@@ -85,6 +90,7 @@ watch(fileList, () => {
 
       <corn-cell-color-picker title="全局元素背景色" v-model="vantBackground2Color"/>
       <corn-cell-color-picker title="壁纸背景色" v-model="wallpaperBgColor"/>
+      <corn-cell-color-picker title="注释背景色" v-model="cornCommentColor"/>
 
     </van-cell-group>
 
@@ -95,11 +101,15 @@ watch(fileList, () => {
         </template>
       </van-cell>
 
-      <van-cell title="是否启用">
+      <van-cell title="模糊半径">
         <template #right-icon>
           <van-stepper v-model="cornBackdropPx" />
         </template>
       </van-cell>
+    </van-cell-group>
+
+    <van-cell-group title="恢复">
+      <van-button plain type="primary" @click="onClick">朴素按钮</van-button>
     </van-cell-group>
   </div>
 </template>

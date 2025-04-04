@@ -24,6 +24,9 @@ export function useCssVarFormat(varName, defaultValue, format) {
         }
     });
 
+    cssVarFormat.setDefault = () => {
+        cssVarFormat.value = defaultValue;
+    };
 
     return cssVarFormat;
 }
