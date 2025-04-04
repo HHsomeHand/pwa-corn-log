@@ -72,7 +72,7 @@ function onClick() {
     />
   </teleport>
 
-  <div class="config-view corn-view">
+  <div class="config-view corn-view flex flex-col">
 
 
     <van-cell-group title="模式">
@@ -108,9 +108,8 @@ function onClick() {
       </van-cell>
     </van-cell-group>
 
-    <van-cell-group title="恢复">
-      <van-button plain type="primary" @click="onClick">朴素按钮</van-button>
-    </van-cell-group>
+
+    <van-button class="!m-2 shrink-0" plain type="primary" @click="onClick">朴素按钮</van-button>
   </div>
 </template>
 
