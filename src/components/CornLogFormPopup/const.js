@@ -1,9 +1,5 @@
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 import {generateEntry} from "@/components/CornLogFormPopup/utils.js";
-
-export const ENTRY_TYPE =  Object.freeze({
-    DATE: 'date',
-    STR: 'string',
-})
 
 export const LOG_ENTRY = Object.freeze(
     generateEntry({

@@ -1,5 +1,6 @@
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
-import {COMMENT_ENTRY, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import {COMMENT_ENTRY, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 
 
 export function useCornLog(logsCacheRef, store) {

@@ -8,7 +8,14 @@ import {useStyleElement} from "@/hooks/useStyleElement.js";
 export const useWallpaperStore = defineStore('wallpaperStore', () => {
     const wallpaperPosX= useCssVarFormat('--wallpaper-pos-x', 'center', 'px');
     const wallpaperPosY= useCssVarFormat('--wallpaper-pos-y', 'center', 'px');
+
+    const WALLPAPER_SIZE_MAPPER = Object.freeze({
+        contain: '包含',
+        cover: '覆盖',
+    });
+
     const wallpaperSize= useCssVarFormat('--wallpaper-size', 'cover', '%');
+
     const wallpaperBgColor = useCssVar('--wallpaper-bg-color', 'transparent');
 
     const currentWallpaperBase64 = useConfig('currentWallpaperBase64', 'none');
@@ -32,7 +39,6 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
             isBlurStyle.value = false;
         } else {
             if (Boolean(isBlur.value)) {
-                console.log(isBlur.value);
                 isBlurStyle.value = true;
             }
         }
@@ -59,6 +65,7 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
     }
     return {
         ...entries,
+        WALLPAPER_SIZE_MAPPER,
         setDefault
     };
 })

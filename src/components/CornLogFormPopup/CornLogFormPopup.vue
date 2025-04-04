@@ -1,7 +1,8 @@
 <script setup>
 import {generateEntry, getDefaultValue} from "@/components/CornLogFormPopup/utils.js";
-import {COMMENT_ENTRY, DEFAULT_ENTRIES, ENTRY_TYPE, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import CornDateSelectButton from "@/components/CornLogFormPopup/cpn/CornDateSelectButton.vue";
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 
 const modifyTime = ref(false);
 
@@ -77,18 +78,23 @@ function generateEntries(entries) {
 }
 
 let this_id = 0;
+
+const submitText = ref("记录!");
+
 defineExpose({
   showPopup: (callback, {
     entries = {
       ...DEFAULT_ENTRIES
     },
-    id = null
+    id = null,
+    submitText: _submitText = "记录!",
   } = {}) => {
     // 如果 id 为 null, 就刷新
     if (!id || id !== this_id) {
       this_entries.value = generateEntries(entries);
       this_id = id;
     }
+    submitText.value = _submitText;
     showPopup.value = true
     resolveCallback = callback
   }
@@ -132,7 +138,7 @@ defineExpose({
                 type="primary"
                 @click="onSubmit"
             >
-              记录!
+              {{ submitText }}
             </van-button>
           </div>
         </template>

@@ -3,6 +3,11 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
+    "baseUrl": ".",  // 设置基准目录为项目根目录
+    "paths": {
+      "@/*": ["src/*"]  // 将 @/ 映射到 src/ 目录
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

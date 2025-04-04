@@ -22,9 +22,9 @@ export function useGlobalCpn(component, { showMethod = 'showDialog'} = {}) {
             const instance = getInstance()
 
             // 调用组件实例的显示方法
-            instance[showMethod](...args)
+            let result = instance[showMethod](...args)
 
-            resolve()
+            resolve(result)
         })
     }
 }

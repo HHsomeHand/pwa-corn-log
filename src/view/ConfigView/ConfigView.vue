@@ -9,6 +9,8 @@ import {useAppStore} from "@/store/app.store.js";
 import {storeToRefs} from "pinia";
 import {useWallpaperStore} from "@/store/wallpaper.store.js";
 import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
+import CornCellEnumNumber from "./cpn/CornCellEnumNumber.vue";
+
 
 function onClickLeft() {
   history.back();
@@ -40,7 +42,8 @@ const {
   wallpaperBgColor,
   isBlur,
   cornBackdropPx,
-  cornCommentColor
+  cornCommentColor,
+  wallpaperSize
 } = storeToRefs(wallpaperStore);
 
 let initFileList = [];
@@ -95,7 +98,7 @@ function onClick() {
 
     </van-cell-group>
 
-    <van-cell-group title="背景图片毛玻璃特效">
+    <van-cell-group title="背景图片・毛玻璃特效">
       <van-cell title="是否启用">
         <template #right-icon>
           <van-checkbox v-model="isBlur"/>
@@ -109,8 +112,16 @@ function onClick() {
       </van-cell>
     </van-cell-group>
 
+    <van-cell-group title="背景图片・高级设置">
+      <corn-cell-enum-number
+          title="背景图片大小"
+          :mapper="wallpaperStore.WALLPAPER_SIZE_MAPPER"
+          v-model="wallpaperSize"
+      />
+    </van-cell-group>
 
-    <van-button class="!m-2 shrink-0" plain type="primary" @click="onClick">朴素按钮</van-button>
+
+    <van-button class="!m-2 shrink-0" plain type="primary" @click="onClick">设为默认值</van-button>
   </div>
 </template>
 
