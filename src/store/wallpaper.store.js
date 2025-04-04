@@ -39,7 +39,7 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
 
     const cornBackdropPx = useCssVarFormat('--corn-backdrop-px', 10, 'px');
 
-    const cornCommentColor = useCssVar('--corn-comment-color', '##FFFFFFFF');
+    const cornCommentColor = useCssVar('--corn-comment-color', '#FFFFFFFF');
 
     const entries = {
         currentWallpaperBase64,
