@@ -17,7 +17,7 @@ import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.js";
-import {showActionSheet} from "@/components/CornActionSheet/utils.js";
+import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 

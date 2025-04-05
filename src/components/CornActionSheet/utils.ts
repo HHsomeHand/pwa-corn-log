@@ -1,4 +1,4 @@
-import {useGlobalCpn, useGlobalCpnCallback} from "@/hooks/globalCpn.hook.js";
+import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
 import CornActionSheet from "@/components/CornActionSheet/CornActionSheet.vue";
 
 // 就显示一个 action sheet, 具体参数的使用, 请查看 vant 文档, 或是直接查看用法

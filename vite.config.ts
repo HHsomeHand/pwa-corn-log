@@ -30,6 +30,9 @@ export default defineConfig({
       resolvers: [VantResolver()],
     }),
     Components({
+      dirs: ['src'], // ✅ 扫描整个 src 文件夹（默认只扫描 src/components）
+      extensions: ['vue'], // 可选，默认就是 ['vue']
+      deep: true, // ✅ 递归子目录
       resolvers: [VantResolver()],
     }),
     tailwindcss(),

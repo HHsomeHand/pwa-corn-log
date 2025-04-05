@@ -10,7 +10,7 @@ import cornMitt from "@/utils/mitt.js";
 import {onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {isInvalidDate} from "@/utils/index.js";
-import {showActionSheet} from "@/components/CornActionSheet/utils.js";
+import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 
 
 const indexViewRef = ref(null);

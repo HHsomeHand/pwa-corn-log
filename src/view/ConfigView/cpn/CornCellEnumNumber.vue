@@ -1,8 +1,6 @@
-<script setup>
-import {showActionSheet, showActionSheetByArray} from "@/components/CornActionSheet/utils.js";
-import {findKey} from "underscore";
-import {findKeyByValue} from "@/utils/object.js";
-import {showInputPopup} from "@/components/CornLogFormPopup/utils.js";
+<script setup lang="ts">
+import {showActionSheetByArray} from "@/components/CornActionSheet/utils.ts";
+import {findKeyByValue} from "@/utils/object.ts";
 
 const props = defineProps({
   title: {
@@ -35,12 +33,12 @@ async function onClick() {
   if (result !== CUSTOM_OPTION) {
     model.value = findKeyByValue(props.mapper, result);
   } else {
-    let input = await showInputPopup({
-      label: props.title,
-      placeholder: props.inputPlaceholder,
-      defaultVal: model.value,
-      submitText: "应用"
-    });
+    // let input = await showInputPopup({
+    //   label: props.title,
+    //   placeholder: props.inputPlaceholder,
+    //   defaultVal: model.value,
+    //   submitText: "应用"
+    // });
 
     console.log(input);
   }

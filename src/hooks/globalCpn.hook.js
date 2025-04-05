@@ -1,4 +1,4 @@
-// useDialog.js
+// globalCpn.hook.js
 import { createApp } from 'vue'
 
 function createSingletonInstance(component) {

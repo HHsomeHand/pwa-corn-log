@@ -4,7 +4,7 @@ import PickColors from 'vue-pick-colors'
 import colorValues, {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.js";
 import {useCssVar} from "@/hooks/useCssVar.js";
 import {useConfig} from "@/hooks/useConfig.js";
-import {showActionSheet} from "@/components/CornActionSheet/utils.js";
+import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {useAppStore} from "@/store/app.store.js";
 import {storeToRefs} from "pinia";
 import {useWallpaperStore} from "@/store/wallpaper.store.js";
