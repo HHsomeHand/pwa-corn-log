@@ -1,4 +1,4 @@
-import {useGlobalCpn} from "@/hooks/globalCpn.hook.js";
+import {useGlobalCpn} from "@/hooks/globalCpn.hook.ts";
 import CornActionSheet from "@/components/CornActionSheet/CornActionSheet.vue";
 
 // 就显示一个 action sheet, 具体参数的使用, 请查看 vant 文档, 或是直接查看用法
@@ -9,12 +9,12 @@ export const showActionSheet = useGlobalCpn(CornActionSheet, {
 
 // resolve 选中的参数值
 // 如果用户不选择就无限 Pending
-export function showActionSheetByArray(array) {
+export function showActionSheetByArray(array: string[]) {
     return new Promise(resolve => {
         let actions = array.map(el => {
             return {
                 name: el,
-                callback(item) {
+                callback(item: string) {
                     resolve(el);
                 },
             } // END OF RETURN

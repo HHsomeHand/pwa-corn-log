@@ -7,7 +7,7 @@ let resolveCallback: Function | null = null;
 const popupRef = useTemplateRef("popup-ref");
 
 function onSubmit() {
-  resolveCallback?.();
+  resolveCallback?.(num.value);
 }
 
 function onClosed() {

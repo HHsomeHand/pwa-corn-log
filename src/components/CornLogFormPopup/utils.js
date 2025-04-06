@@ -1,5 +1,5 @@
 import CornLogFormPopup from "@/components/CornLogFormPopup/CornLogFormPopup.vue";
-import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.js";
+import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.ts";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 
 
@@ -28,7 +28,7 @@ export async function showInputPopup({
     }
 }
 
-// 这里这样写, 主要是为了IDE的参数提示, 如果用了TS, 直接定义DTO类型就ok了
+// 这里这样写, 主要是为了IDE的参数提示
 export function generateEntry({
     label = "标签名",
     placeholder = "提示",

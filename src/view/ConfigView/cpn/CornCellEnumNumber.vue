@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {showActionSheetByArray} from "@/components/CornActionSheet/utils.ts";
 import {findKeyByValue} from "@/utils/object.ts";
+import {showNumberPopup} from "@/popup/CornNumberPopup/utils.ts";
+import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
 
 const props = defineProps({
   title: {
@@ -18,10 +20,10 @@ const props = defineProps({
   }
 })
 
-const model = defineModel();
+const model = defineModel<string>();
 
 const displayValue = computed(() => {
-  return props.mapper[model.value] || String(model.value);
+  return props.mapper[String(model.value)] || String(model.value);
 });
 
 async function onClick() {
@@ -40,7 +42,11 @@ async function onClick() {
     //   submitText: "应用"
     // });
 
-    console.log(input);
+    const [isSubmitted, customNum] = await showNumberPopup({
+      submitText: '确认'
+    });
+
+    if (result)
   }
 
 }

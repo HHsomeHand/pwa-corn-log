@@ -1,6 +1,6 @@
 // useDatePicker.js
 
-import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.js";
+import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.ts";
 import CornTimePickerDialog from "@/dialog/CornTimePickerDialog/CornTimePickerDialog.vue";
 
 // 用户选择了就 resolve date

@@ -10,8 +10,9 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // 检查代码中是否有声明了但没有被使用的局部变量/函数
+    "noUnusedParameters": false, // 检查代码中是否有声明了但没有被使用的参数变量/函数
+    "noImplicitReturns": true, // 要求代码显示编写 return
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
