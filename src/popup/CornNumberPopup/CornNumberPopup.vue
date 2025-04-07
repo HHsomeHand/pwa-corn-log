@@ -29,7 +29,8 @@ defineExpose<NumberPopup>({
               submitText: _submitText = "",
               maxNum: _maxNum = null,
               minNum: _minNum = null,
-            }: NumberDialogOption = {}) {
+            }: NumberDialogOption = {})
+  : Promise<number> {
     popupRef.value.show();
 
     num.value = initNum;
@@ -41,7 +42,7 @@ defineExpose<NumberPopup>({
       resolveCallback = resolve
     });
   }
-} as NumberPopup);
+});
 </script>
 
 <template>

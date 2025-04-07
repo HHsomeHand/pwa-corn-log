@@ -5,7 +5,3 @@ export interface DialogOption {
 export interface CallbackOption {
     callbackFn?: Function,
 }
-
-export interface Dialog<OptionType extends DialogOption = DialogOption> {
-    (options: OptionType): Promise<unknown>;
-}

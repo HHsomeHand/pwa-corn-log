@@ -1,4 +1,4 @@
-import type {Dialog, DialogOption} from "@/model/types.ts";
+import type {DialogOption} from "@/model/types.ts";
 
 export interface NumberDialogOption extends DialogOption{
     minNum?: number | null,
@@ -6,7 +6,7 @@ export interface NumberDialogOption extends DialogOption{
     initNum?: number,
 }
 
-export interface NumberPopup extends Dialog {
+export interface NumberPopup {
     showPopup(options: NumberDialogOption): Promise<number>;
 }
 
