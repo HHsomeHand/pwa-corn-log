@@ -1,6 +1,5 @@
 // globalCpn.hook.js
 import { createApp } from 'vue'
-import type {HookResolveTuple} from "@/model/types.ts";
 
 function createSingletonInstance<T extends ComponentPublicInstance>(component: Component) {
     let instance: T | null = null
@@ -18,15 +17,16 @@ function createSingletonInstance<T extends ComponentPublicInstance>(component: C
 // 返回一个函数, 你调用这个函数, 就相当于调用组件实例名字为 showMethod 的函数
 // 具体案例参考 CornNumberPopup.vue
 export function useGlobalCpn<
-    T extends ComponentPublicInstance,
-    K extends keyof T
+    F extends (...args: any[]) => any,
+    T extends ComponentPublicInstance = never,
+    K extends keyof T = never
 >(
     component: Component,
     { showMethod = 'showDialog'} = {}
 ) {
     const getInstance = createSingletonInstance<T>(component)
 
-    return (...args: unknown[]) => {
+    return (...args: Parameters<F>) => {
         return new Promise((resolve) => {
             const instance = getInstance()
 
@@ -39,7 +39,7 @@ export function useGlobalCpn<
             } else {
                 console.error(`useGlobalCpn: Method "${showMethod}" not found on component instance.`);
             }
-        })
+        }) as ReturnType<F>;
     }
 }
 

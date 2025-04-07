@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CornPopup from "@/popup/CornPopup/CornPopup.vue";
-import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
+import type {NumberDialogOption, NumberPopup} from "@/popup/CornNumberPopup/types.ts";
 
 let resolveCallback: Function | null = null;
 
@@ -20,16 +20,16 @@ const num = ref(0);
 const maxNum = ref<Number | null>(null);
 const minNum = ref<Number | null>(null);
 
-defineExpose({
+defineExpose<NumberPopup>({
   // 返回 promise
   // 用户关闭为 null
   // 用户点击提交, 为提交后的值
   showPopup({
-      initNum = 0,
-      submitText: _submitText = "",
-      maxNum: _maxNum = null,
-      minNum: _minNum = null,
-  }: NumberDialogOption = {}) {
+              initNum = 0,
+              submitText: _submitText = "",
+              maxNum: _maxNum = null,
+              minNum: _minNum = null,
+            }: NumberDialogOption = {}) {
     popupRef.value.show();
 
     num.value = initNum;
@@ -41,7 +41,7 @@ defineExpose({
       resolveCallback = resolve
     });
   }
-})
+} as NumberPopup);
 </script>
 
 <template>
