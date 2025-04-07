@@ -21,16 +21,15 @@ const maxNum = ref<Number | null>(null);
 const minNum = ref<Number | null>(null);
 
 defineExpose({
-  showPopup: (callback: Function, {
+  // 返回 promise
+  // 用户关闭为 null
+  // 用户点击提交, 为提交后的值
+  showPopup({
       initNum = 0,
       submitText: _submitText = "",
       maxNum: _maxNum = null,
       minNum: _minNum = null,
-  }: NumberDialogOption = {}) => {
-    if (popupRef.value === null) {
-      return ;
-    }
-
+  }: NumberDialogOption = {}) {
     popupRef.value.show();
 
     num.value = initNum;
@@ -38,7 +37,9 @@ defineExpose({
     maxNum.value = _maxNum;
     minNum.value = _minNum;
 
-    resolveCallback = callback
+    return new Promise(resolve => {
+      resolveCallback = resolve
+    });
   }
 })
 </script>

@@ -15,6 +15,8 @@ function createSingletonInstance<T extends ComponentPublicInstance>(component: C
     }
 }
 
+// 返回一个函数, 你调用这个函数, 就相当于调用组件实例名字为 showMethod 的函数
+// 具体案例参考 CornNumberPopup.vue
 export function useGlobalCpn<
     T extends ComponentPublicInstance,
     K extends keyof T
@@ -43,9 +45,16 @@ export function useGlobalCpn<
 
 
 /**
- * 尽量不要传回调函数, await
- * 创建全局组件 Hook
  * 返回一个函数, 你调用这个函数, 就相当于调用组件实例名字为 showMethod 的函数
+ *
+ * 该函数已经弃用, 推荐使用 useGlobalCpn, 具体案例参考 CornNumberPopup.vue
+ *
+ * 该函数与 useGlobalCpn 唯一的区别就是加了回调函数的判断逻辑:
+ *  - 如果组件的 showMethod 不返回 null, 就调用你的回调
+ *
+ * 最佳实践规范: 尽量不要传回调函数, 直接 await
+ *
+ * 创建全局组件 Hook
  * @param {Component} component Vue 组件
  * @param {Object} options 配置项
  *  - showMethod: 默认值为 showDialog

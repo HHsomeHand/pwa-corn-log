@@ -42,11 +42,11 @@ async function onClick() {
     //   submitText: "应用"
     // });
 
-    const [isSubmitted, customNum] = await showNumberPopup({
+    const result = await showNumberPopup({
       submitText: '确认'
     });
 
-    if (result)
+    console.log(result);
   }
 
 }
