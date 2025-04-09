@@ -1,10 +1,11 @@
 /* 指南: https://vant.pro/vant/#/zh-CN/config-provider */
 :root:root {
     /* vant 默认的 font-size 太小了, 这里用豆包每个加了 3px */
-    --van-font-size-xs: 13px !important;
-    --van-font-size-sm: 15px !important;
-    --van-font-size-md: 17px !important;
-    --van-font-size-lg: 19px !important;
+    --corn-stroke-multiple: 5;
+    --van-font-size-xs: calc(13px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-sm: calc(15px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-md: calc(17px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-lg: calc(19px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
 
     --van-primary-color: #ff8917;
 
@@ -17,4 +18,8 @@
     --van-dropdown-menu-background: transparent;
 
     --van-overlay-background: rgba(0, 0, 0, 0.1);
+
+    /*--van-text-color: white;*/
+    /*--van-text-color-2: white;*/
+    /*--van-text-color-3: white;*/
 }

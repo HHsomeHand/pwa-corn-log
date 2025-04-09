@@ -1,5 +1,6 @@
 @import "./css/vant.css";
 @import "./css/wallpaper.css";
+@import './css/theme.css';
 
 /* 项目的 ACSS 层 */
 /* tailwind 的 base 层实现了 normalize.css 保证了各浏览器样式一致*/
