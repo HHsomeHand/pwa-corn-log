@@ -6,7 +6,7 @@ import {useLogStore} from "@/store/logs.store.js";
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {EVENT_SCROLL_TO} from "@/const/mittEvent.js";
-import cornMitt from "@/utils/mitt.js";
+import cornMitt from "@/mitt/mitt.ts";
 import {onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {isInvalidDate} from "@/utils/index.js";

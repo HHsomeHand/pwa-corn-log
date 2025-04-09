@@ -4,6 +4,7 @@ import {findKeyByValue} from "@/utils/object.ts";
 import {showNumberPopup} from "@/popup/CornNumberPopup/utils.ts";
 import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
 import {stringToNumber} from "@/utils/num.ts";
+import cornMitt from "@/mitt/mitt.ts";
 
 interface Props {
   title?: string;
@@ -49,6 +50,12 @@ async function onClick() {
     //   submitText: "应用"
     // });
 
+    function onNumChange(num: number) {
+      model.value = num;
+    }
+
+    cornMitt.on("popup:num:change", onNumChange);
+
     const result = await showNumberPopup({
       submitText: '确认',
       title: props.title + (props.formatStr ? ` (单位${props.formatStr})` : ""),
@@ -56,6 +63,8 @@ async function onClick() {
       minNum: props.minNum,
       maxNum: props.maxNum
     });
+
+    cornMitt.off("popup:num:change", onNumChange);
 
     if (result !== null) {
       model.value = result;

@@ -4,7 +4,7 @@
 import {EVENT_SCROLL_TO} from "@/const/mittEvent.js";
 import {useRouter} from "vue-router";
 import {ROUTE_INDEX} from "@/const/route.js";
-import cornMitt from "@/utils/mitt.js";
+import cornMitt from "@/mitt/mitt.ts";
 
 const router = useRouter();
 

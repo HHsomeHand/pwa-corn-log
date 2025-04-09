@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CornPopup from "@/popup/CornPopup/CornPopup.vue";
 import type {NumberDialogOption, NumberPopup} from "@/popup/CornNumberPopup/types.ts";
+import cornMitt from "@/mitt/mitt.ts";
 
 let resolveCallback: Function | null = null;
 
@@ -19,6 +20,10 @@ const submitText = ref("");
 const num = ref(0);
 const maxNum = ref<number | undefined>(undefined);
 const minNum = ref<number | undefined>(undefined);
+
+watch(num, () => {
+  cornMitt.emit("popup:num:change", num.value);
+})
 
 const title = ref("");
 
