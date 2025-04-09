@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.js";
-import {useConfig} from "@/hooks/useConfig.js";
-import {useCssVar} from "@/hooks/useCssVar.js";
+import {useConfig} from "@/hooks/useConfig.ts";
+import {useCssVar} from "@/hooks/useCssVar.ts";
 
 
 export const useAppStore = defineStore('appStore', () => {

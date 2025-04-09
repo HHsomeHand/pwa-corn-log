@@ -6,9 +6,13 @@ import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
 import {stringToNumber} from "@/utils/num.ts";
 
 interface Props {
-  title?: string
-  mapper?: Record<string, string>
-  inputPlaceholder?: string
+  title?: string;
+  mapper?: Record<string, string>;
+  inputPlaceholder?: string;
+  formatStr?: string;
+  minNum?: number;
+  maxNum?: number;
+  defaultValue?: number; // 当值为字符串的时候, 显示的数值
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -47,8 +51,10 @@ async function onClick() {
 
     const result = await showNumberPopup({
       submitText: '确认',
-      title: props.title + "(单位%)",
-      initNum: stringToNumber(model.value, 100),
+      title: props.title + (props.formatStr ? ` (单位${props.formatStr})` : ""),
+      initNum: stringToNumber(model.value, props.defaultValue),
+      minNum: props.minNum,
+      maxNum: props.maxNum
     });
 
     if (result !== null) {

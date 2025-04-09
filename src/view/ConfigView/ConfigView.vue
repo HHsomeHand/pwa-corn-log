@@ -2,14 +2,15 @@
 import PickColors from 'vue-pick-colors'
 
 import colorValues, {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.js";
-import {useCssVar} from "@/hooks/useCssVar.js";
-import {useConfig} from "@/hooks/useConfig.js";
+import {useCssVar} from "@/hooks/useCssVar.ts";
+import {useConfig} from "@/hooks/useConfig.ts";
 import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {useAppStore} from "@/store/app.store.js";
 import {storeToRefs} from "pinia";
-import {useWallpaperStore} from "@/store/wallpaper.store.js";
+import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
 import CornCellEnumNumber from "./cpn/CornCellEnumNumber.vue";
+import {WALLPAPER_SIZE_MAPPER, WALLPAPER_X_POS, WALLPAPER_Y_POS} from "@/const/wallpaper.js";
 
 
 function onClickLeft() {
@@ -43,7 +44,9 @@ const {
   isBlur,
   cornBackdropPx,
   cornCommentColor,
-  wallpaperSize
+  wallpaperSize,
+  wallpaperPosX,
+  wallpaperPosY,
 } = storeToRefs(wallpaperStore);
 
 let initFileList = [];
@@ -88,7 +91,7 @@ function onClick() {
     <van-cell-group title="背景图片">
       <van-cell title="当前背景图片">
         <template #value>
-          <van-uploader v-model="fileList" reupload max-count="1" />
+          <van-uploader v-model="fileList" reupload max-count="1"/>
         </template>
       </van-cell>
 
@@ -98,7 +101,7 @@ function onClick() {
 
     </van-cell-group>
 
-    <van-cell-group title="背景图片・毛玻璃特效">
+    <van-cell-group title="背景图片・毛玻璃特效 (背景色需透明) ">
       <van-cell title="是否启用">
         <template #right-icon>
           <van-checkbox v-model="isBlur"/>
@@ -107,7 +110,7 @@ function onClick() {
 
       <van-cell title="模糊半径">
         <template #right-icon>
-          <van-stepper v-model="cornBackdropPx" />
+          <van-stepper v-model="cornBackdropPx"/>
         </template>
       </van-cell>
     </van-cell-group>
@@ -115,8 +118,28 @@ function onClick() {
     <van-cell-group title="背景图片・高级设置">
       <corn-cell-enum-number
           title="背景图片大小"
-          :mapper="wallpaperStore.WALLPAPER_SIZE_MAPPER"
+          :mapper="WALLPAPER_SIZE_MAPPER"
           v-model="wallpaperSize"
+          format-str="%"
+          :default-value="100"
+      />
+
+      <corn-cell-enum-number
+          title="背景图片X轴位置"
+          :mapper="WALLPAPER_X_POS"
+          v-model="wallpaperPosX"
+          :min-num="-Infinity"
+          format-str="vw"
+          :default-value="-10"
+      />
+
+      <corn-cell-enum-number
+          title="背景图片Y轴位置"
+          :mapper="WALLPAPER_Y_POS"
+          v-model="wallpaperPosY"
+          :min-num="-Infinity"
+          format-str="vh"
+          :default-value="-10"
       />
     </van-cell-group>
 

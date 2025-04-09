@@ -1,6 +1,6 @@
-import {useConfig} from "@/hooks/useConfig.js";
+import {useConfig} from "@/hooks/useConfig.ts";
 
-export  function useStyleElement(key, defaultValue, cssContent) {
+export  function useStyleElement(key: string, defaultValue: boolean, cssContent: string) {
     const isApplied = useConfig(key, defaultValue);
 
     // 创建 <style> 元素

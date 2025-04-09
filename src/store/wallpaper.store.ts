@@ -1,18 +1,13 @@
 import {defineStore} from "pinia";
-import {useCssVarFormat} from "@/hooks/useCssVarFormat.js";
-import {useCssVar} from "@/hooks/useCssVar.js";
-import {useConfig} from "@/hooks/useConfig.js";
-import {useStyleElement} from "@/hooks/useStyleElement.js";
+import {useCssVarFormat} from "@/hooks/useCssVarFormat.ts";
+import {useCssVar} from "@/hooks/useCssVar.ts";
+import {useConfig} from "@/hooks/useConfig.ts";
+import {useStyleElement} from "@/hooks/useStyleElement.ts";
 
 
 export const useWallpaperStore = defineStore('wallpaperStore', () => {
-    const wallpaperPosX= useCssVarFormat('--wallpaper-pos-x', 'center', 'px');
-    const wallpaperPosY= useCssVarFormat('--wallpaper-pos-y', 'center', 'px');
-
-    const WALLPAPER_SIZE_MAPPER = Object.freeze({
-        contain: '包含',
-        cover: '覆盖',
-    });
+    const wallpaperPosX= useCssVarFormat('--wallpaper-pos-x', 'center', 'vw');
+    const wallpaperPosY= useCssVarFormat('--wallpaper-pos-y', 'center', 'vh');
 
     const wallpaperSize= useCssVarFormat('--wallpaper-size', 'cover', '%');
 
@@ -56,6 +51,8 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
         cornBackdropPx, // 模糊半径
         isBlur, // 是否启用毛玻璃特效
         cornCommentColor, // 备注的背景色
+        wallpaperPosX,
+        wallpaperPosY,
     };
 
     function setDefault() {
@@ -65,7 +62,6 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
     }
     return {
         ...entries,
-        WALLPAPER_SIZE_MAPPER,
         setDefault
     };
 })
