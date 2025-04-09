@@ -1,7 +1,16 @@
 :root {
-    --corn-text-stroke-width: 1px;
+    --corn-text-stroke-width: 0px;
+    --corn-text-stroke-color: white;
 }
 
 p, h1, h2, h3, h4, h5, h6, span, div {
-    /*-webkit-text-stroke: var(--corn-text-stroke-width) orange;*/
+    -webkit-text-stroke: var(--corn-text-stroke-width) var(--corn-text-stroke-color);
+}
+
+.van-floating-bubble {
+    --corn-text-stroke-width: 0px;
+}
+
+.corn-log__time-displayer > div {
+    --corn-text-stroke-width: 0px;
 }

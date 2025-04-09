@@ -43,6 +43,24 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
 
     const cornCommentColor = useCssVar('--corn-comment-color', '#FFFFFFFF');
 
+
+    //      --van-text-color: var(--van-gray-8);
+    const vantTextColor = useCssVar('--van-text-color', 'var(--van-gray-8)');
+
+    //     --van-text-color-2: var(--van-gray-6);
+    const vantTextColor2 = useCssVar('--van-text-color-2', 'var(--van-gray-6)');
+
+    //     --van-text-color-3: var(--van-gray-5);
+    const vantTextColor3 = useCssVar('--van-text-color-3', 'var(--van-gray-5)');
+
+    // --corn-text-stroke-width: 0px;
+    const cornTextStrokeWidth = useCssVarFormat('--corn-text-stroke-width', 0, 'px');
+    // --corn-text-stroke-color: white;
+    const cornTextStrokeColor = useCssVar('--corn-text-stroke-color', '#fff');
+
+    // --corn-stroke-multiple: 5;
+    const cornStrokeMultiple = useCssVar('--corn-stroke-multiple', 5);
+
     const entries = {
         currentWallpaperBase64,
         vantBackground2Color, // 全局背景色
@@ -53,6 +71,12 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
         cornCommentColor, // 备注的背景色
         wallpaperPosX,
         wallpaperPosY,
+        vantTextColor,
+        vantTextColor2,
+        vantTextColor3,
+        cornTextStrokeWidth,
+        cornTextStrokeColor,
+        cornStrokeMultiple,
     };
 
     function setDefault() {
@@ -60,6 +84,7 @@ export const useWallpaperStore = defineStore('wallpaperStore', () => {
             entry?.setDefault?.();
         }
     }
+
     return {
         ...entries,
         setDefault
