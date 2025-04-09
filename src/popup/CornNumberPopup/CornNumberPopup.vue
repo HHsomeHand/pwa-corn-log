@@ -17,8 +17,10 @@ function onClosed() {
 const submitText = ref("");
 
 const num = ref(0);
-const maxNum = ref<Number | null>(null);
-const minNum = ref<Number | null>(null);
+const maxNum = ref<number | undefined>(undefined);
+const minNum = ref<number | undefined>(undefined);
+
+const title = ref("");
 
 defineExpose<NumberPopup>({
   // 返回 promise
@@ -27,9 +29,10 @@ defineExpose<NumberPopup>({
   showPopup({
               initNum = 0,
               submitText: _submitText = "",
-              maxNum: _maxNum = null,
-              minNum: _minNum = null,
-            }: NumberDialogOption = {})
+              maxNum: _maxNum = undefined,
+              minNum: _minNum = undefined,
+              title: _title = "测试title"
+            }: NumberDialogOption = {} as any)
   : Promise<number> {
     popupRef.value.show();
 
@@ -37,6 +40,7 @@ defineExpose<NumberPopup>({
     submitText.value = _submitText;
     maxNum.value = _maxNum;
     minNum.value = _minNum;
+    title.value = _title;
 
     return new Promise(resolve => {
       resolveCallback = resolve
@@ -52,7 +56,15 @@ defineExpose<NumberPopup>({
       @submit="onSubmit"
       :submit-text="submitText"
   >
-
+    <van-cell :title="title">
+      <template #right-icon>
+        <van-stepper
+            :min="minNum"
+            :max="maxNum"
+            v-model="num"
+        />
+      </template>
+    </van-cell>
   </corn-popup>
 
 </template>

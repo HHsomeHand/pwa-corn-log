@@ -3,24 +3,21 @@ import {showActionSheetByArray} from "@/components/CornActionSheet/utils.ts";
 import {findKeyByValue} from "@/utils/object.ts";
 import {showNumberPopup} from "@/popup/CornNumberPopup/utils.ts";
 import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
+import {stringToNumber} from "@/utils/num.ts";
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  // english -> chinese
-  mapper: {
-    type: Object,
-    default: () => {}
-  },
-  inputPlaceholder: {
-    type: String,
-    default: "",
-  }
+interface Props {
+  title?: string
+  mapper?: Record<string, string>
+  inputPlaceholder?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  mapper: () => ({}),
+  inputPlaceholder: ''
 })
 
-const model = defineModel<string>();
+const model = defineModel<string | number>({ required: true });
 
 const displayValue = computed(() => {
   return props.mapper[String(model.value)] || String(model.value);
@@ -33,7 +30,13 @@ async function onClick() {
 
   // 如 props.mapper 为 { contain: '包含' }, 只用把 key 获取了就 ok
   if (result !== CUSTOM_OPTION) {
-    model.value = findKeyByValue(props.mapper, result);
+    const value = findKeyByValue(props.mapper, result);
+
+    if (value === undefined) {
+      console.error("CornCellEnumNumber: 传入的 mapper 有问题");
+    } else {
+      model.value = value;
+    }
   } else {
     // let input = await showInputPopup({
     //   label: props.title,
@@ -43,10 +46,14 @@ async function onClick() {
     // });
 
     const result = await showNumberPopup({
-      submitText: '确认'
+      submitText: '确认',
+      title: props.title + "(单位%)",
+      initNum: stringToNumber(model.value, 100),
     });
 
-    console.log(result);
+    if (result !== null) {
+      model.value = result;
+    }
   }
 
 }
