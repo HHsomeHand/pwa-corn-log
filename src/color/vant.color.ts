@@ -20,14 +20,14 @@ const vantColors = [
 
 
 // 遍历并获取每个颜色的 HEX 值
-const colorValues = {};
+const colorValues: Record<string, string> = {};
 vantColors.forEach(colorVar => {
     const hexValue = rootStyles.getPropertyValue(colorVar).trim();
     colorValues[colorVar] = hexValue;
 });
 
-export function vantVarName2ColorHex(varName) {
-    if (!Object.values(VANT_COLOR_VARS).includes(varName)) {
+export function vantVarName2ColorHex(varName: string) {
+    if (!Object.values(VANT_COLOR_VARS).includes(varName as any)) {
         console.error("vantVar2Hex: 请传递正确的vant变量名")
     }
 

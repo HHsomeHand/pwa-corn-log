@@ -1,11 +1,11 @@
 <script setup>
 import PickColors from 'vue-pick-colors'
 
-import colorValues, {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.js";
+import colorValues, {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.ts";
 import {useCssVar} from "@/hooks/useCssVar.ts";
 import {useConfig} from "@/hooks/useConfig.ts";
 import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
-import {useAppStore} from "@/store/app.store.js";
+import {useAppStore} from "@/store/app.store.ts";
 import {storeToRefs} from "pinia";
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";

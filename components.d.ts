@@ -26,6 +26,7 @@ declare module 'vue' {
     CornTimeDisplayer: typeof import('./src/components/CornTimeDisplayer.vue')['default']
     CornTimePickerDialog: typeof import('./src/dialog/CornTimePickerDialog/CornTimePickerDialog.vue')['default']
     IndexView: typeof import('./src/view/IndexView/IndexView.vue')['default']
+    MedicineView: typeof import('./src/view/MedicineView/MedicineView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchView: typeof import('./src/view/SearchView/SearchView.vue')['default']

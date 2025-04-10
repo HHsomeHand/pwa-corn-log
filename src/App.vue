@@ -1,7 +1,7 @@
 <script setup>
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
-import {useAppStore} from "@/store/app.store.js";
+import {useAppStore} from "@/store/app.store.ts";
 import {useCssVar} from "@/hooks/useCssVar.ts";
 import {useStyleElement} from "@/hooks/useStyleElement.ts";
 
