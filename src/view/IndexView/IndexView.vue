@@ -25,7 +25,7 @@ function onClick() {
     listRef.value.toBottom();
   }
 
-  showLogFormPopup(onSubmit, {id: "add"});
+  showLogFormPopup(onSubmit, {id: new Date().getTime() + ""});
 }
 
 const listRef = ref(null);

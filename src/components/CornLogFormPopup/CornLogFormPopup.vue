@@ -12,7 +12,9 @@ const themeVars = reactive({
   overlayBackground: 'rgba(0, 0, 0, 0.1)',
 });
 
-let isClean = false;
+// 下面用 id 代替了 clean
+// let isEnableClean = false;
+// let isClean = false;
 
 let resolveCallback = null;
 
@@ -22,7 +24,7 @@ const this_entries = entries;
 function onSubmit() {
   showPopup.value = false;
 
-  isClean = true;
+  // isClean = true;
 
   resolveCallback?.(getResult());
 }
@@ -41,16 +43,16 @@ function getResult() {
 }
 
 function onClosed() {
-  if (isClean) {
-    const _entries = entries.value;
-
-    for (const key in _entries) {
-      let content = _entries[key].content;
-
-      _entries[key].content = getDefaultValue(content);
-    }
-    isClean = false;
-  }
+  // if (isClean && isEnableClean) {
+  //   const _entries = entries.value;
+  //
+  //   for (const key in _entries) {
+  //     let content = _entries[key].content;
+  //
+  //     _entries[key].content = getDefaultValue(content);
+  //   }
+  //   isClean = false;
+  // }
 
   resolveCallback?.(null);
 }
@@ -66,8 +68,9 @@ function generateEntries(entries) {
     entry.content = ref(entry.defaultVal);
 
     if (entry.isReturnSubmit) {
-      watch(entry.content, () => {
-        if (entry.content.value.includes("\n")) {
+      watch(entry.content, (newValue) => {
+        if (newValue.includes("\n")) {
+          entry.content.value = newValue.replaceAll("\n", "");
           onSubmit();
         } // END if (entry.content.value.includes("\n"))
       }) // END watch(entry.content, () => {
@@ -81,22 +84,34 @@ let this_id = 0;
 
 const submitText = ref("记录!");
 
+const fieldRefs = ref([]);
+
+watch(fieldRefs, () => {
+  nextTick(() => {
+    fieldRefs.value[0]?.focus?.();
+  })
+}, {deep: true});
+
 defineExpose({
   showPopup: (callback, {
-    entries = {
+    entries: _entries = {
       ...DEFAULT_ENTRIES
     },
     id = null,
-    submitText: _submitText = "记录!",
+    submitText: _submitText = "记录!"
   } = {}) => {
     // 如果 id 为 null, 就刷新
     if (!id || id !== this_id) {
-      this_entries.value = generateEntries(entries);
+      fieldRefs.value = [];
+
+      entries.value = generateEntries(_entries);
+
       this_id = id;
     }
     submitText.value = _submitText;
     showPopup.value = true
     resolveCallback = callback
+    // isEnableClean = _isEnableClean;
   }
 })
 </script>
@@ -124,6 +139,7 @@ defineExpose({
                   type="textarea"
                   :placeholder="entry.placeholder"
                   class="!pr-12"
+                  :ref="el => fieldRefs.push(el)"
               />
 
               <corn-date-select-button
