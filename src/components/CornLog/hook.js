@@ -1,6 +1,7 @@
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
+import {isSameDate} from "@/utils/index.js";
 
 
 export function useCornLog(logsCacheRef, store) {
@@ -18,13 +19,15 @@ export function useCornLog(logsCacheRef, store) {
             return;
         }
 
+        updatedData.date = new Date(updatedData.date);
+
         let tmpLog = {
             ...logsCache[index],
             ...updatedData,
             id, // 确保id不被覆盖
         };
 
-        if (!tmpLog.originalDate) {
+        if (!tmpLog.originalDate && !isSameDate(updatedData.date, logsCache[index].date)) {
             tmpLog.originalDate = new Date(logsCache[index].date);
         }
 

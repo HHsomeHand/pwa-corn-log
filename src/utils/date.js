@@ -52,6 +52,13 @@ export function isSameDay(d1, d2) {
     );
 }
 
+export function isSameDate(date1, date2) {
+    if (!(date1 instanceof Date) || !(date2 instanceof Date)) {
+        throw new Error("必须为 Date 对象");
+    }
+    return date1.getTime() === date2.getTime();
+}
+
 export function isInvalidDate(date) {
     return isNaN(date.getTime());
 }
