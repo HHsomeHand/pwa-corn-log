@@ -8,11 +8,14 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { VantResolver } from '@vant/auto-import-resolver';
 import tailwindcss from '@tailwindcss/vite'
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: { transformAssetUrls }
+    }),
     vueDevTools(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -36,6 +39,13 @@ export default defineConfig({
       resolvers: [VantResolver()],
     }),
     tailwindcss(),
+    // @quasar/plugin-vite options list:
+    // https://github.com/quasarframework/quasar/blob/dev/vite-plugin/index.d.ts
+    quasar({
+      sassVariables: fileURLToPath(
+          new URL('./src/quasar-variables.sass', import.meta.url)
+      )
+    })
   ],
   resolve: {
     alias: {

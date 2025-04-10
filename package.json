@@ -10,12 +10,14 @@
     "ts-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@quasar/extras": "^1.16.17",
     "@vueuse/components": "^13.0.0",
     "@vueuse/core": "^13.0.0",
     "dayjs": "^1.11.13",
     "idb": "^8.0.2",
     "mitt": "^3.0.1",
     "pinia": "^3.0.1",
+    "quasar": "^2.18.1",
     "tailwindcss": "^4.0.14",
     "underscore": "^1.13.7",
     "vant": "^4.9.18",
@@ -25,6 +27,7 @@
     "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {
+    "@quasar/vite-plugin": "^1.9.0",
     "@tailwindcss/postcss": "^4.1.1",
     "@tailwindcss/vite": "^4.1.1",
     "@types/node": "^22.14.0",
@@ -32,6 +35,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "postcss": "^8.5.3",
+    "sass-embedded": "1.80.2",
     "typescript": "^5.8.2",
     "unplugin-auto-import": "^19.1.1",
     "unplugin-vue-components": "^28.4.1",

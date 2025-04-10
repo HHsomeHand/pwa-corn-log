@@ -14,6 +14,13 @@
     }
 }
 
+@layer utilities {
+    .flex {
+        display: flex;
+        flex-wrap: nowrap !important; /* 只覆盖 .flex */
+    }
+}
+
 @layer components {
     .popup-btn {
         @apply !mx-2;
