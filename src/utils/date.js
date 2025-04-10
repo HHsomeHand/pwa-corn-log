@@ -56,9 +56,13 @@ export function isSameDate(date1, date2) {
     if (!(date1 instanceof Date) || !(date2 instanceof Date)) {
         throw new Error("必须为 Date 对象");
     }
-    return date1.getTime() === date2.getTime();
+    return date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate() &&
+        date1.getHours() === date2.getHours() &&
+        date1.getMinutes() === date2.getMinutes() &&
+        date1.getSeconds() === date2.getSeconds();
 }
-
 export function isInvalidDate(date) {
     return isNaN(date.getTime());
 }

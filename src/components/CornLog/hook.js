@@ -27,6 +27,8 @@ export function useCornLog(logsCacheRef, store) {
             id, // 确保id不被覆盖
         };
 
+        console.log(updatedData.date, logsCache[index].date);
+
         if (!tmpLog.originalDate && !isSameDate(updatedData.date, logsCache[index].date)) {
             tmpLog.originalDate = new Date(logsCache[index].date);
         }
