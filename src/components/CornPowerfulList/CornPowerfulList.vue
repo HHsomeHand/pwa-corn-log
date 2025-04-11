@@ -26,22 +26,35 @@ const props = defineProps({
     type: String,
     default: undefined
   }
-})
+});
+
+console.log(props.storeName, new Date().getTime());
 
 const logsCache = defineModel();
 
-const store = useLogStoreFactory(props.storeName)();
+let store = useLogStoreFactory(props.storeName)();
 
-const scrollerRef = ref(null)
+const scrollerRef = useTemplateRef("scrollerRef")
 
 const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
 
 // 让体内元素可以滚动
-onMounted(async () => {
+onMounted( async () => {
+  await nextTick(); // 确保 DOM 已完全更新, 不可以去除, 去了 scrollerRef 就为 null 了
+  if (!scrollerRef.value) {
+    console.error('scrollerRef is still null after nextTick');
+    return;
+  }
+
   const scrollerEl = getDomElement(scrollerRef.value);
 
   while (!canScroll(scrollerEl) && !isEnd.value) {
     await update();
+    await nextTick();
+    if (!scrollerRef.value) {
+      console.error('scrollerRef is still null after nextTick');
+      return;
+    }
   }
 
   await nextTick(() => {

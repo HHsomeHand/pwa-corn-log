@@ -4,6 +4,7 @@ import {storeToRefs} from "pinia";
 import {useAppStore} from "@/store/app.store.ts";
 import {useCssVar} from "@/hooks/useCssVar.ts";
 import {useStyleElement} from "@/hooks/useStyleElement.ts";
+import {useRoute} from "vue-router";
 
 // 保证主题色加载正确
 useAppStore();
@@ -20,6 +21,10 @@ onMounted(() => {
     appRef.value.style.backgroundImage = `url(${currentWallpaperBase64.value})`
   }, { immediate: true })
 });
+
+// const route = useRoute();
+// // 基于路由名称和时间戳生成唯一的 key
+// const routeKey = computed(() => `${route.name}-${Date.now()}`);
 </script>
 
 <template>
@@ -28,6 +33,7 @@ onMounted(() => {
 
     </div>
 
+<!--    <router-view :key="routeKey"></router-view>-->
     <router-view></router-view>
 
     <van-tabbar class="!w-screen" route placeholder>

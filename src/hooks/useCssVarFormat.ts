@@ -40,13 +40,12 @@ export function useCssVarFormat(
     watch(cssVarFormat, () => {
         if (typeof cssVarFormat.value === "number") {
             cssVar.value = cssVarFormat.value + format;
-
         } else if (cssVarFormat.value === null) {
             cssVar.value = 0;
         } else if (typeof cssVarFormat.value === "string") {
             cssVar.value = cssVarFormat.value;
         }
-    });
+    }, {immediate: true});
 
     cssVarFormat.setDefault = () => {
         cssVarFormat.value = defaultValue;

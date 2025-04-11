@@ -84,7 +84,8 @@ const viewDivRef = useTemplateRef("viewDivRef");
 const logsCache = ref([])
 
 defineExpose({
-  listRef
+  listRef,
+  logsCache
 })
 
 const appStore = useAppStore();

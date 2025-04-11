@@ -20,7 +20,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true,
+        enabled: false, // 禁用开发模式下的 workbox, 这会和 hmr 冲突, 而且没用
       },
       workbox: {
         globPatterns: ['**/*.{mjs,js,css,html,png,jpg,gif,svg}'], // 需要缓存的静态资源文件类型, 默认为 **/*.{js,css,html}

@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router/index.js'
+import router, {setupRouterWithStore} from './router/index.js'
 import { Quasar } from 'quasar'
 import quasarLang from 'quasar/lang/zh-CN'
 
@@ -29,12 +29,16 @@ const pinia = createPinia()
 
 const app = createApp(App)
 
-app.use(router)
 app.use(pinia)
+
+setupRouterWithStore();
+
+app.use(router)
 app.use(VueVirtualScroller)
 app.use(Quasar, {
     plugins: {}, // import Quasar plugins and add here
     lang: quasarLang,
 })
+
 
 app.mount('#app')

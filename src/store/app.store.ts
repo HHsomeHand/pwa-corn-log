@@ -1,14 +1,14 @@
 import {defineStore} from "pinia";
 import {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.ts";
-import {useConfig} from "@/hooks/useConfig.ts";
 import type {ConfigRef} from "@/hooks/useConfig.ts";
+import {useConfig} from "@/hooks/useConfig.ts";
 import {useCssVar} from "@/hooks/useCssVar.ts";
 import IndexView from "@/view/IndexView/IndexView.vue";
-import {changeIndexRoute} from "@/router/index.js";
 import {ROUTE_INDEX, ROUTE_INDEX_NAME} from "@/const/route.js";
 import DrugView from "@/view/DrugView/DrugView.vue";
 import type {AppModeEntry} from "@/model/app.type.ts";
 import {pickFields} from "@/utils/object.ts";
+import {useRouter} from "vue-router";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -63,7 +63,6 @@ export const useAppStore = defineStore('appStore', () => {
 
     const customAppMode = useConfig('customAppMode', {...APP_MODE});
 
-    // 不要直接修改, 使用 changeAppMode 来修改
     const currentModeKey: ConfigRef<keyof AppMode> = useConfig('currentMode', 'LOG');
 
     const currentMode = computed(() => {
@@ -90,16 +89,18 @@ export const useAppStore = defineStore('appStore', () => {
         currentModeKey.value = key;
         primaryColor.value = mode.customPrimaryColor || mode.defaultPrimaryColor as any;
 
-        changeIndexRoute({
-            path: ROUTE_INDEX,
-            name: ROUTE_INDEX_NAME,
-            component: APP_ROUTE_COMPONENT[key].component as any,
-        })
+        setTimeout(() => { // setTimeout 保证用户配置存储成功
+            window.location.reload(); // 刷新整个页面
+        }, 100);
     }
 
-    watch(currentModeKey, () => {
-        changeAppMode(currentModeKey.value);
-    }, {immediate: true})
+    const currentRoute = computed(() => {
+        return {
+            path: ROUTE_INDEX,
+            name: ROUTE_INDEX_NAME,
+            component: APP_ROUTE_COMPONENT[currentModeKey.value].component,
+        }
+    })
 
     return {
         APP_MODE,
@@ -107,6 +108,8 @@ export const useAppStore = defineStore('appStore', () => {
         primaryColor,
         currentMode,
         appModeEntryMap,
-        currentTitle
+        currentTitle,
+        currentModeKey: computed(() => currentModeKey), // 请通过 changeAppMode 来修改
+        currentRoute,
     }
 });

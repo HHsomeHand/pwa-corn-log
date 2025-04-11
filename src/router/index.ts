@@ -1,29 +1,21 @@
-import {
-    createWebHistory,
-    createRouter
-} from 'vue-router'
-
-import type { RouteRecordRaw } from 'vue-router';
-
-import IndexView from '@/view/IndexView/IndexView.vue'
+import type {RouteRecordRaw} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router'
 import CalendarView from "@/view/CalendarView/CalendarView.vue";
 import {
     ROUTE_CALENDAR,
     ROUTE_CALENDAR_NAME,
-    ROUTE_CONFIG, ROUTE_CONFIG_NAME,
-    ROUTE_INDEX,
+    ROUTE_CONFIG,
+    ROUTE_CONFIG_NAME,
     ROUTE_INDEX_NAME,
-    ROUTE_SEARCH, ROUTE_SEARCH_NAME
+    ROUTE_SEARCH,
+    ROUTE_SEARCH_NAME
 } from "@/const/route.ts";
 import SearchView from "@/view/SearchView/SearchView.vue";
 import ConfigView from "@/view/ConfigView/ConfigView.vue";
+import {useAppStore} from "@/store/app.store.ts";
 
-const routes: RouteRecordRaw[] = [
-    {
-        path: ROUTE_INDEX,
-        name: ROUTE_INDEX_NAME,
-        component: IndexView
-    },
+
+const basicRoutes: RouteRecordRaw[] = [
     {
         path: ROUTE_CALENDAR,
         name: ROUTE_CALENDAR_NAME,
@@ -43,7 +35,9 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes,
+    routes: [
+        ...basicRoutes,
+    ],
 })
 
 export function changeIndexRoute(indexRoute: RouteRecordRaw) {
@@ -60,6 +54,16 @@ export function changeIndexRoute(indexRoute: RouteRecordRaw) {
 
     // 添加所有路由
     router.addRoute(newIndexRoute);
+}
+
+// 确保在 mount 前调用
+export function setupRouterWithStore() {
+    const appStore = useAppStore();
+
+    watch(appStore.currentModeKey, () => {
+        console.log(appStore.currentRoute);
+        changeIndexRoute(appStore.currentRoute);
+    }, {immediate: true});
 }
 
 export default router
