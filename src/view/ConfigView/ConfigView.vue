@@ -21,7 +21,7 @@ const colors = ref([CUSTOM_ORANGE_HEX, ...Object.values(colorValues)]);
 
 const appStore = useAppStore();
 
-const {currentMode, primaryColor} = storeToRefs(appStore);
+const {currentTitle, primaryColor} = storeToRefs(appStore);
 
 function onModeCellClick() {
   let actions = Object.entries(appStore.APP_MODE).map(([key, mode]) => {
@@ -89,7 +89,7 @@ function onClick() {
 
 
     <van-cell-group title="模式">
-      <van-cell title="当前模式" :value="currentMode.title" @click="onModeCellClick" is-link/>
+      <van-cell title="当前模式" :value="currentTitle" @click="onModeCellClick" is-link/>
 
       <corn-cell-color-picker title="当前主题色" v-model="primaryColor" :colors="colors"/>
     </van-cell-group>

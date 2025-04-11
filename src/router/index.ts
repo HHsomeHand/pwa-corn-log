@@ -61,7 +61,6 @@ export function setupRouterWithStore() {
     const appStore = useAppStore();
 
     watch(appStore.currentModeKey, () => {
-        console.log(appStore.currentRoute);
         changeIndexRoute(appStore.currentRoute);
     }, {immediate: true});
 }

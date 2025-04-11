@@ -28,8 +28,6 @@ const props = defineProps({
   }
 });
 
-console.log(props.storeName, new Date().getTime());
-
 const logsCache = defineModel();
 
 let store = useLogStoreFactory(props.storeName)();

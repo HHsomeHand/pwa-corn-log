@@ -46,7 +46,27 @@ export const useAppStore = defineStore('appStore', () => {
         },
     };
 
-    // 这里这样编写, 是为了兼容老代码
+    // 这里这样编写, 是为了兼容老代码, 以前没用使用 TS, 导致结构分散
+    /**
+     *     const APP_MODE: AppMode = Object.freeze({
+     *         LOG: {
+     *             title: "日志",
+     *             defaultPrimaryColor: CUSTOM_ORANGE_HEX,
+     *         },
+     *         LOVE: {
+     *             title: "善举",
+     *             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
+     *         },
+     *         DRUG: {
+     *             title: "药律",
+     *             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.BLUE),
+     *         },
+     *         TREATMENT: {
+     *             title: "戒律",
+     *             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.GREEN),
+     *         }
+     *     });
+     */
     const APP_MODE = Object.freeze(
         Object.entries(appModeEntryMap).reduce((result, entry) => {
             result[entry[0]] = pickFields(entry[1], ["title", "defaultPrimaryColor"]);
@@ -54,6 +74,22 @@ export const useAppStore = defineStore('appStore', () => {
         }, {} as any)
     );
 
+    /**
+     *     const APP_ROUTE_COMPONENT: AppMode = {
+     *         LOG: {
+     *             component: IndexView,
+     *         },
+     *         LOVE: {
+     *             component: IndexView,
+     *         },
+     *         DRUG: {
+     *             component: MedicineView,
+     *         },
+     *         TREATMENT: {
+     *             component: IndexView,
+     *         }
+     *     }
+     */
     const APP_ROUTE_COMPONENT =  (
         Object.entries(appModeEntryMap).reduce((result, entry) => {
             result[entry[0]] = pickFields(entry[1], ["component"]);
@@ -61,14 +97,14 @@ export const useAppStore = defineStore('appStore', () => {
         }, {} as any)
     )
 
-    const customAppMode = useConfig('customAppMode', {...APP_MODE});
+    // customAppMode 和 APP_MODE 的差异: APP_MODE 是常量, 用于恢复默认值, 而 customAppMode是变量
+    // customAppMode 会记录用户修改的颜色
+    const customAppMode = useConfig<AppMode>('customAppMode', {...APP_MODE});
 
     const currentModeKey: ConfigRef<keyof AppMode> = useConfig('currentMode', 'LOG');
 
     const currentMode = computed(() => {
-        return {
-            ...APP_MODE[currentModeKey.value],
-        }
+        return customAppMode.value[currentModeKey.value];
     })
 
     const currentTitle = computed(() => {
@@ -106,7 +142,6 @@ export const useAppStore = defineStore('appStore', () => {
         APP_MODE,
         changeAppMode,
         primaryColor,
-        currentMode,
         appModeEntryMap,
         currentTitle,
         currentModeKey: computed(() => currentModeKey), // 请通过 changeAppMode 来修改
