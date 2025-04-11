@@ -72,6 +72,10 @@ export const useAppStore = defineStore('appStore', () => {
         }
     })
 
+    const currentTitle = computed(() => {
+        return currentMode.value.title;
+    })
+
     const PRIMARY_COLOR_VAR_NAME = '--van-primary-color';
 
     const primaryColor = useCssVar(PRIMARY_COLOR_VAR_NAME, CUSTOM_ORANGE_HEX);
@@ -102,6 +106,7 @@ export const useAppStore = defineStore('appStore', () => {
         changeAppMode,
         primaryColor,
         currentMode,
-        appModeEntryMap
+        appModeEntryMap,
+        currentTitle
     }
 });

@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     App: typeof import('./src/App.vue')['default']
+    BaseIndexView: typeof import('./src/view/BaseIndexView/BaseIndexView.vue')['default']
     CalendarView: typeof import('./src/view/CalendarView/CalendarView.vue')['default']
     ConfigView: typeof import('./src/view/ConfigView/ConfigView.vue')['default']
     CornActionSheet: typeof import('./src/components/CornActionSheet/CornActionSheet.vue')['default']
@@ -27,6 +28,7 @@ declare module 'vue' {
     CornTimePickerDialog: typeof import('./src/dialog/CornTimePickerDialog/CornTimePickerDialog.vue')['default']
     DrugView: typeof import('./src/view/DrugView/DrugView.vue')['default']
     IndexView: typeof import('./src/view/IndexView/IndexView.vue')['default']
+    'IndexView.backup': typeof import('./src/view/IndexView/IndexView.backup.vue')['default']
     MedicineView: typeof import('./src/view/DrugView/MedicineView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
