@@ -50,7 +50,7 @@ function onDelete() {
           :value="item.log"
       >
         <template #title>
-          <div class="corn-log__container flex flex-col gap-2">
+          <div class="corn-log__container my-flex flex-col gap-2">
               <div
                   v-if="item.originalDate"
                   class="corn-log__time-displayer"

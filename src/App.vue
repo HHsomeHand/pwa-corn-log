@@ -23,7 +23,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="appRef" class="app-component flex flex-col max-w-md mx-auto fixed bottom-0 top-0 left-0 right-0">
+  <div ref="appRef" class="app-component my-flex flex-col max-w-md mx-auto fixed bottom-0 top-0 left-0 right-0">
     <div class="nav-teleport shrink-0">
 
     </div>

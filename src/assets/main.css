@@ -15,9 +15,16 @@
 }
 
 @layer utilities {
-    .flex {
+    /*.flex {*/
+    /*    display: flex;*/
+    /*    flex-wrap: nowrap !important; !* 只覆盖 .flex *!*/
+    /*}*/
+
+    /* tailwind 的 flex 和 quasar 冲突 */
+    /* quasar 的 flex 带 flex-wrap: wrap, 这会导致布局混乱 */
+    /* 以后使用 tailwind, 一定要用前缀, 不然后期混入其他组件库, 会导致样式冲突 */
+    .my-flex {
         display: flex;
-        flex-wrap: nowrap !important; /* 只覆盖 .flex */
     }
 }
 

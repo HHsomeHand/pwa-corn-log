@@ -85,7 +85,7 @@ function onClick() {
     />
   </teleport>
 
-  <div class="config-view corn-view flex flex-col">
+  <div class="config-view corn-view my-flex flex-col">
 
 
     <van-cell-group title="模式">

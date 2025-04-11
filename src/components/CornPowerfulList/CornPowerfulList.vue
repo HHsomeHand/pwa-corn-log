@@ -217,7 +217,7 @@ defineExpose({
 <template>
   <van-config-provider :theme-vars="themeVars" theme-vars-scope="global" />
 
-  <div class="h-full flex flex-col">
+  <div class="h-full my-flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
 
       <template v-for="(item, index) in logsCache">

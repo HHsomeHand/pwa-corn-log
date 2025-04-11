@@ -37,7 +37,7 @@ let { onCellClick } = useCornLog(logs, store);
 
 <template>
   <teleport to=".nav-teleport">
-    <div class="nav-bar flex justify-between items-center px-2">
+    <div class="nav-bar my-flex justify-between items-center px-2">
       <van-dropdown-menu>
         <van-dropdown-item v-model="searchType" :options="searchOption" />
       </van-dropdown-menu>
