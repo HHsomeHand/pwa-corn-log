@@ -104,7 +104,11 @@ const logsCache = ref([])
   </teleport>
 
   <div class="index-view corn-view" ref="indexViewRef">
-    <corn-powerful-list v-model="logsCache" ref="listRef"/>
+    <corn-powerful-list v-model="logsCache" ref="listRef">
+      <template #bottom>
+        this is bottom
+      </template>
+    </corn-powerful-list>
     <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="indexViewRef"/>
   </div>
 </template>

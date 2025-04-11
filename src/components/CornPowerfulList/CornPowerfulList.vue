@@ -1,6 +1,6 @@
 <script setup>
 import { vScroll } from '@vueuse/components'
-import {useLogStore} from "@/store/logs.store.js";
+import {useLogStore, useLogStoreFactory} from "@/store/logs.store.js";
 import {
   canScroll, copyToClipboard,
   fmtDate,
@@ -21,9 +21,16 @@ import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 
+const props = defineProps({
+  storeName: {
+    type: String,
+    default: undefined
+  }
+})
+
 const logsCache = defineModel();
 
-const store = useLogStore()
+const store = useLogStoreFactory(props.storeName)();
 
 const scrollerRef = ref(null)
 
@@ -219,7 +226,6 @@ defineExpose({
 
   <div class="h-full my-flex flex-col">
     <ul ref="scrollerRef" class="overflow-auto" v-scroll="onScroll">
-
       <template v-for="(item, index) in logsCache">
         <li v-if="
             index > 0 && // 防止 index 为 0, 访问下标为 -1 的元素
@@ -245,10 +251,9 @@ defineExpose({
         </li>
       </template>
 
+      <slot name="bottom"></slot>
     </ul>
   </div>
-
-
 </template>
 
 <style scoped>
