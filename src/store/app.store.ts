@@ -6,9 +6,11 @@ import {useCssVar} from "@/hooks/useCssVar.ts";
 import IndexView from "@/view/IndexView/IndexView.vue";
 import {changeIndexRoute} from "@/router/index.js";
 import {ROUTE_INDEX, ROUTE_INDEX_NAME} from "@/const/route.js";
-import MedicineView from "@/view/MedicineView/MedicineView.vue";
+import DrugView from "@/view/DrugView/DrugView.vue";
+import type {AppModeEntry} from "@/model/app.type.ts";
+import {pickFields} from "@/utils/object.ts";
 
-interface AppMode {
+export interface AppMode {
     LOG: Record<string, unknown>,
     LOVE: Record<string, unknown>,
     DRUG: Record<string, unknown>,
@@ -17,39 +19,47 @@ interface AppMode {
 
 export const useAppStore = defineStore('appStore', () => {
 
-    const APP_MODE: AppMode = Object.freeze({
+    const appModeEntryMap: {[key: string]: AppModeEntry} = {
         LOG: {
-            title: "日志",
+            storeName: 'logs',
+            title: '日志',
             defaultPrimaryColor: CUSTOM_ORANGE_HEX,
-        },
-        LOVE: {
-            title: "善举",
-            defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
+            component: IndexView,
         },
         DRUG: {
-            title: "药律",
+            storeName: 'drugs',
+            title: '药律',
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.BLUE),
-        },
-        TREATMENT: {
-            title: "戒律",
-            defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.GREEN),
-        }
-    });
-
-    const APP_ROUTE_COMPONENT: AppMode = {
-        LOG: {
-            component: IndexView,
+            component: DrugView,
         },
         LOVE: {
+            storeName: 'loves',
+            title: '善举',
+            defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
             component: IndexView,
-        },
-        DRUG: {
-            component: MedicineView,
         },
         TREATMENT: {
+            storeName: 'treatments',
+            title: '戒律',
+            defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.GREEN),
             component: IndexView,
-        }
-    }
+        },
+    };
+
+    // 这里这样编写, 是为了兼容老代码
+    const APP_MODE = Object.freeze(
+        Object.entries(appModeEntryMap).reduce((result, entry) => {
+            result[entry[0]] = pickFields(entry[1], ["title", "defaultPrimaryColor"]);
+            return result;
+        }, {} as any)
+    );
+
+    const APP_ROUTE_COMPONENT =  (
+        Object.entries(appModeEntryMap).reduce((result, entry) => {
+            result[entry[0]] = pickFields(entry[1], ["component"]);
+            return result;
+        }, {} as any)
+    )
 
     const customAppMode = useConfig('customAppMode', {...APP_MODE});
 
@@ -91,6 +101,7 @@ export const useAppStore = defineStore('appStore', () => {
         APP_MODE,
         changeAppMode,
         primaryColor,
-        currentMode
+        currentMode,
+        appModeEntryMap
     }
 });

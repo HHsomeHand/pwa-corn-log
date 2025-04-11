@@ -2,13 +2,13 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { openDB } from 'idb';
 
-export const useLogStore = defineStore('logStore', () => {
+export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore', () => {
     const logsCache = ref({});
 
     // 打开 IndexedDB，创建带日期索引的表
     // 表结构: {id, date, log, comment}
     const getDB = async () => {
-        return openDB('LogDB', 1, {
+        return openDB(`LogDB_${storeName}`, 1, {
             upgrade(db) {
                 const store = db.createObjectStore('logs', { keyPath: 'id', autoIncrement: true });
                 store.createIndex('by_date', 'date'); // 创建日期索引
@@ -198,3 +198,5 @@ export const useLogStore = defineStore('logStore', () => {
         generateTestData,
     };
 });
+
+export const useLogStore = useLogStoreFactory();
