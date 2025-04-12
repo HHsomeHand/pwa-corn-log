@@ -30,7 +30,6 @@ declare module 'vue' {
     DrugView: typeof import('./src/view/DrugView/DrugView.vue')['default']
     IndexView: typeof import('./src/view/IndexView/IndexView.vue')['default']
     'IndexView.backup': typeof import('./src/view/IndexView/IndexView.backup.vue')['default']
-    MedicineView: typeof import('./src/view/DrugView/MedicineView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchView: typeof import('./src/view/SearchView/SearchView.vue')['default']
