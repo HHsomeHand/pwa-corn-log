@@ -25,13 +25,17 @@ const timeGap = computed(() => {
     return (num > 0 ? ` ${num} ${fmt}` : "")
   }
 
+  function _fmtStrEqual(num, fmt) {
+    return (num >= 0 ? ` ${num} ${fmt}` : "")
+  }
+
   return '距离上次服药约' +
       // (days > 0 ? ` ${days} 天` : "") +
       _fmtStr(days, '天') +
       // (hours > 0 ? ` ${hours} 小时` : "") +
       _fmtStr(hours, '小时') +
       // (minutes > 0 ? ` ${minutes} 分钟` : "")
-      _fmtStr(minutes, '分钟')
+      _fmtStrEqual(minutes, '分钟')
 })
 </script>
 
