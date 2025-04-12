@@ -18,6 +18,7 @@ declare module 'vue' {
     CornCheckboxPopup: typeof import('./src/popup/CornCheckboxPopup/CornCheckboxPopup.vue')['default']
     CornDatePickerDialog: typeof import('./src/dialog/CornDatePickerDialog/CornDatePickerDialog.vue')['default']
     CornDateSelectButton: typeof import('./src/components/CornLogFormPopup/cpn/CornDateSelectButton.vue')['default']
+    CornFab: typeof import('./src/components/CornFab/CornFab.vue')['default']
     CornFloatingBubble: typeof import('./src/components/CornFloatingBubble.vue')['default']
     CornLog: typeof import('./src/components/CornLog/CornLog.vue')['default']
     CornLogFormPopup: typeof import('./src/components/CornLogFormPopup/CornLogFormPopup.vue')['default']
