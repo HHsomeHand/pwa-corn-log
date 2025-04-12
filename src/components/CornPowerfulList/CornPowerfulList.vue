@@ -21,9 +21,11 @@ import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 import {LogStoreKey} from "@/injectionKeys.js";
-import type {LogEntry} from "@/model/logs.type.ts";
+import type {ListLogEntry, LogEntry} from "@/model/logs.type.ts";
+import type {ModelRef} from "vue";
+import cornMitt from "@/mitt/mitt.ts";
 
-const logsCache = defineModel();
+const logsCache = defineModel<ListLogEntry[]>({required: true});
 
 let store = inject(LogStoreKey);
 
@@ -146,21 +148,15 @@ async function scrollToDate(date) {
 async function addEntry(logData: LogEntry) {
   let logEntry = await store.addLog(logData);
   logsCache.value.push(logEntry);
+
+  cornMitt.emit("list:add", logData)
 }
 
-let updateOption =  {
-  logsCache: logsCache.value,
-  store
-};
 
-let {onCellClick: _onCellClick, updateEntry: _updateEntry } = useCornLog(logsCache, store);
+let {onCellClick: _onCellClick, updateEntry } = useCornLog(logsCache, store);
 
 function onCellClick(item) {
-  return _onCellClick(item, updateOption);
-}
-
-function updateEntry(...args) {
-  return _updateEntry(...args, updateOption);
+  return _onCellClick(item);
 }
 
 const themeVars = reactive({
@@ -217,6 +213,7 @@ function onSeparatorClick(index) {
 function onDelete(item, index) {
   store.deleteLog(item.id);
   logsCache.value.splice(index, 1);
+  cornMitt.emit("list:delete", item);
 }
 
 defineExpose({

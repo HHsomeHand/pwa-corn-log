@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // 默认展开 fab
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils";
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {LogStoreKey} from "@/injectionKeys.ts";
+import cornMitt from "@/mitt/mitt.ts";
 
 const isExpandFab = ref(true);
 
@@ -16,6 +17,10 @@ async function updateDistinctLogs() {
 }
 
 updateDistinctLogs();
+
+cornMitt.on("list:update", updateDistinctLogs);
+cornMitt.on("list:delete", updateDistinctLogs);
+cornMitt.on("list:add", updateDistinctLogs);
 
 function quickLog(log) {
   emits('quickLog', log);

@@ -3,6 +3,7 @@ import {COMMENT_ENTRY, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 import {isSameDate} from "@/utils/index.js";
 import type {LogEntry} from "@/model/logs.type.js";
+import cornMitt from "@/mitt/mitt.ts";
 
 
 export function useCornLog(logsCacheRef, store) {
@@ -33,6 +34,8 @@ export function useCornLog(logsCacheRef, store) {
         }
 
         logsCache[index] = tmpLog;
+
+        cornMitt.emit("list:update", updatedData);
     }
 
     function onCellClick(item) {

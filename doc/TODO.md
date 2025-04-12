@@ -1,5 +1,5 @@
 TODO:
-- 抽取 Fab 为 CornFab
+- ~~抽取 Fab 为 CornFab~~
 - 修改 CornPowerfulList.vue, 添加事件总线, 修改条目的时候, 触发事件, 方便Fab更新
 - 实现善举: 其实就是统计
 - 实现戒律: 也有一键记录破戒
