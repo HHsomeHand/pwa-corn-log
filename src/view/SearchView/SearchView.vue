@@ -2,7 +2,7 @@
 
 import {useLogStore} from "@/store/logs.store.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
-import {useCornLog} from "@/components/CornLog/hook.js";
+import {useCornLog} from "@/components/CornLog/hook.ts";
 
 const SEARCH_TYPE = Object.freeze({
   LOG: 'log',

@@ -1,4 +1,4 @@
-// globalCpn.hook.js
+// globalCpn.hook.ts
 import { createApp } from 'vue'
 
 function createSingletonInstance<T extends ComponentPublicInstance>(component: Component) {

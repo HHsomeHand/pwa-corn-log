@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { vScroll } from '@vueuse/components'
 import {useLogStore, useLogStoreFactory} from "@/store/logs.store.js";
 import {
@@ -16,11 +16,12 @@ import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
-import {useCornLog} from "@/components/CornLog/hook.js";
+import {useCornLog} from "@/components/CornLog/hook.ts";
 import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 import {LogStoreKey} from "@/injectionKeys.js";
+import type {LogEntry} from "@/model/logs.type.ts";
 
 const logsCache = defineModel();
 
@@ -142,7 +143,7 @@ async function scrollToDate(date) {
   }
 }
 
-async function addEntry(logData) {
+async function addEntry(logData: LogEntry) {
   let logEntry = await store.addLog(logData);
   logsCache.value.push(logEntry);
 }

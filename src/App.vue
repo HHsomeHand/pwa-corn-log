@@ -27,11 +27,8 @@ onMounted(() => {
 // const route = useRoute();
 // // 基于路由名称和时间戳生成唯一的 key
 // const routeKey = computed(() => `${route.name}-${Date.now()}`);
-console.log(appStore.currentMode.storeName);
 
 const store = useLogStoreFactory(appStore.currentMode.storeName)();
-
-console.log(store);
 
 provide(LogStoreKey, store);
 </script>
