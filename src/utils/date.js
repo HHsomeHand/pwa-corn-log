@@ -66,3 +66,19 @@ export function isSameDate(date1, date2) {
 export function isInvalidDate(date) {
     return isNaN(date.getTime());
 }
+
+// 检查某个日期距离现在还有多少时间
+export function getTimeDiff(targetDate, nowDate = new Date()) {
+    const target = dayjs(targetDate);
+    const now = dayjs(nowDate); // 假设 target 是 '2025-05-01'
+
+    const days = now.diff(target, 'day');
+    const hours = now.diff(target, 'hour');
+    const minutes = now.diff(target, 'minute');
+
+    return {
+        days,
+        hours,
+        minutes
+    };
+}
