@@ -9,10 +9,6 @@ import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {useAppStore} from "@/store/app.store.js";
 
 const props = defineProps({
-  storeName: {
-    type: String,
-    default: undefined
-  },
   actions: {
     type: Array,
     default: () => []
@@ -107,7 +103,7 @@ const appStore = useAppStore();
   </teleport>
 
   <div class="index-view corn-view relative" ref="viewDivRef">
-    <corn-powerful-list v-model="logsCache"  ref="listRef" :store-name="storeName">
+    <corn-powerful-list v-model="logsCache"  ref="listRef">
       <template #bottom>
         <slot name="list-bottom"></slot>
       </template>

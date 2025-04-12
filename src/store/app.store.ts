@@ -69,7 +69,7 @@ export const useAppStore = defineStore('appStore', () => {
      */
     const APP_MODE = Object.freeze(
         Object.entries(appModeEntryMap).reduce((result, entry) => {
-            result[entry[0]] = pickFields(entry[1], ["title", "defaultPrimaryColor"]);
+            result[entry[0]] = pickFields(entry[1], ["title", "defaultPrimaryColor", "storeName"]);
             return result;
         }, {} as any)
     );
@@ -142,6 +142,7 @@ export const useAppStore = defineStore('appStore', () => {
         APP_MODE,
         changeAppMode,
         primaryColor,
+        currentMode,
         appModeEntryMap,
         currentTitle,
         currentModeKey: computed(() => currentModeKey), // 请通过 changeAppMode 来修改

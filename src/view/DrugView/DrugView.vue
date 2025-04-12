@@ -14,6 +14,8 @@ function onClick() {
   async function onSubmit(logData) {
     await listRef.value?.addEntry?.(logData);
     listRef.value?.toBottom?.();
+
+
   }
 
   showLogFormPopup(onSubmit, {id: new Date().getTime() + ""});
@@ -30,7 +32,7 @@ const isExpandFab = ref(true);
 </script>
 
 <template>
-  <base-index-view store-name="drug" ref="base-index-view-ref">
+  <base-index-view ref="base-index-view-ref">
     <template #list-bottom>
       <time-gap-divider
           v-if="logsCache?.length > 1"

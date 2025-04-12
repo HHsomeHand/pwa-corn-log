@@ -20,17 +20,11 @@ import {useCornLog} from "@/components/CornLog/hook.js";
 import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
-
-const props = defineProps({
-  storeName: {
-    type: String,
-    default: undefined
-  }
-});
+import {LogStoreKey} from "@/injectionKeys.js";
 
 const logsCache = defineModel();
 
-let store = useLogStoreFactory(props.storeName)();
+let store = inject(LogStoreKey);
 
 const scrollerRef = useTemplateRef("scrollerRef")
 

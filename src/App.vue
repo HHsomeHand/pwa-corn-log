@@ -5,9 +5,11 @@ import {useAppStore} from "@/store/app.store.ts";
 import {useCssVar} from "@/hooks/useCssVar.ts";
 import {useStyleElement} from "@/hooks/useStyleElement.ts";
 import {useRoute} from "vue-router";
+import {useLogStoreFactory} from "@/store/logs.store.js";
+import {LogStoreKey} from "@/injectionKeys.js";
 
 // 保证主题色加载正确
-useAppStore();
+const appStore = useAppStore();
 
 let appRef = ref(null);
 
@@ -25,6 +27,13 @@ onMounted(() => {
 // const route = useRoute();
 // // 基于路由名称和时间戳生成唯一的 key
 // const routeKey = computed(() => `${route.name}-${Date.now()}`);
+console.log(appStore.currentMode.storeName);
+
+const store = useLogStoreFactory(appStore.currentMode.storeName)();
+
+console.log(store);
+
+provide(LogStoreKey, store);
 </script>
 
 <template>

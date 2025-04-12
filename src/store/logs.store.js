@@ -184,6 +184,25 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         return true; // 表示删除成功
     };
 
+    // 获取所有不同的 log 条目（去重后的 log 字段内容）
+    const getDistinctLogs = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readonly');
+        const store = tx.store;
+        const distinctLogs = new Set(); // 使用 Set 去重
+        let cursor = await store.openCursor();
+
+        while (cursor) {
+            const log = cursor.value.log;
+            if (log) {
+                distinctLogs.add(log); // 添加到 Set，自动去重
+            }
+            cursor = await cursor.continue();
+        }
+
+        return Array.from(distinctLogs); // 转换为数组返回
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -196,6 +215,7 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         updateLog,
         deleteLog,
         generateTestData,
+        getDistinctLogs,
     };
 });
 
