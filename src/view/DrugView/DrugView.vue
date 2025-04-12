@@ -24,6 +24,9 @@ const lastLogEntry = computed(() => {
 
   return logsCache.value?.[lastIndex];
 })
+
+// 默认展开 fab
+const isExpandFab = ref(true);
 </script>
 
 <template>
@@ -36,11 +39,21 @@ const lastLogEntry = computed(() => {
     </template>
 
     <template #default>
-      <corn-floating-bubble @click="onClick" :size="65" :gap-y="12"/>
+      <div class="fab-container absolute bottom-3 right-3">
+        <q-fab v-model="isExpandFab" color="primary" push icon="keyboard_arrow_right" direction="up">
+          <q-fab-action color="primary" @click="onClick" icon="add" />
+          <q-fab-action color="primary" @click="onClick" icon="alarm" />
+        </q-fab>
+      </div>
+
     </template>
   </base-index-view>
 </template>
 
 <style scoped>
+@import "tailwindcss";
 
+.fab-container :deep(.q-fab__actions a) {
+  @apply w-13 h-13 p-3
+}
 </style>
