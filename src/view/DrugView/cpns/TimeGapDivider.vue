@@ -21,8 +21,6 @@ const timeGap = computed(() => {
       currentDate.value
   );
 
-  console.log(days, hours, minutes)
-
   function _fmtStr(num, fmt) {
     return (num > 0 ? ` ${num} ${fmt}` : "")
   }
