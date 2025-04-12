@@ -86,12 +86,6 @@ const submitText = ref("记录!");
 
 const fieldRefs = ref([]);
 
-watch(fieldRefs, () => {
-  nextTick(() => {
-    fieldRefs.value[0]?.focus?.();
-  })
-}, {deep: true});
-
 defineExpose({
   showPopup: (callback, {
     entries: _entries = {
@@ -112,6 +106,16 @@ defineExpose({
     showPopup.value = true
     resolveCallback = callback
     // isEnableClean = _isEnableClean;
+
+    // 设置自动聚焦
+    const stop =watch(fieldRefs, () => {
+      nextTick(() => {
+        fieldRefs.value[0]?.focus?.();
+        if (fieldRefs.value[0]) {
+          stop();
+        }
+      })
+    }, {deep: true});
   }
 })
 </script>
