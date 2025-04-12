@@ -33,6 +33,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchView: typeof import('./src/view/SearchView/SearchView.vue')['default']
+    TimeGapDivider: typeof import('./src/view/DrugView/cpns/TimeGapDivider.vue')['default']
     VanActionSheet: typeof import('vant/es')['ActionSheet']
     VanButton: typeof import('vant/es')['Button']
     VanCalendar: typeof import('vant/es')['Calendar']

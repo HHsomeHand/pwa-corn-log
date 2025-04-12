@@ -2,6 +2,7 @@
 import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {fmtDate, getTimeDiff} from "../../utils/index.js";
+import TimeGapDivider from "@/view/DrugView/cpns/TimeGapDivider.vue";
 
 const baseIndexViewRef = useTemplateRef("base-index-view-ref");
 
@@ -18,43 +19,20 @@ function onClick() {
   showLogFormPopup(onSubmit, {id: new Date().getTime() + ""});
 }
 
-const currentDate = ref(new Date());
-
-// 更新时间
-setInterval(() => {
-  currentDate.value = new Date();
-}, 60 * 1000);
-
-const timeGap = computed(() => {
+const lastLogEntry = computed(() => {
   const lastIndex = logsCache.value?.length - 1;
 
-  const { days, hours, minutes } = getTimeDiff(
-      logsCache.value?.[lastIndex]?.date,
-      currentDate.value
-  );
-
-  console.log(days, hours, minutes)
-
-  function _fmtStr(num, fmt) {
-    return (num > 0 ? ` ${num} ${fmt}` : "")
-  }
-
-  return '距离上次服药约' +
-      // (days > 0 ? ` ${days} 天` : "") +
-      _fmtStr(days, '天') +
-      // (hours > 0 ? ` ${hours} 小时` : "") +
-      _fmtStr(hours, '小时') +
-      // (minutes > 0 ? ` ${minutes} 分钟` : "")
-      _fmtStr(minutes, '分钟')
+  return logsCache.value?.[lastIndex];
 })
 </script>
 
 <template>
   <base-index-view store-name="drug" ref="base-index-view-ref">
     <template #list-bottom>
-      <div v-if="logsCache?.length > 1">
-        <van-divider>{{timeGap}}</van-divider>
-      </div>
+      <time-gap-divider
+          v-if="logsCache?.length > 1"
+          :target-date="lastLogEntry?.date"
+      />
     </template>
 
     <template #default>
