@@ -1,29 +1,16 @@
 <script lang="ts" setup>
-import { vScroll } from '@vueuse/components'
-import {useLogStore, useLogStoreFactory} from "@/store/logs.store.js";
-import {
-  canScroll, copyToClipboard,
-  fmtDate,
-  getDomElement,
-  getTotalHeightUntilSeparator,
-  isSameDay, removeEmptyLines,
-  stripTime,
-  vh2px
-} from "@/utils/index.js";
+import {vScroll} from '@vueuse/components'
+import {canScroll, copyToClipboard, fmtDate, getDomElement, removeEmptyLines, stripTime} from "@/utils/index.js";
 import {useUpdateLogs} from "@/hooks/updateLogs.hook.js";
 import {closeToast, showLoadingToast, showToast} from "vant";
-import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
-import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.ts";
-import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
-import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
 import {LogStoreKey} from "@/injectionKeys.js";
 import type {ListLogEntry, LogEntry} from "@/model/logs.type.ts";
-import type {ModelRef} from "vue";
 import cornMitt from "@/mitt/mitt.ts";
+import {useCpnStore} from "@/store/CpnStore/cpn.store.ts";
+import {POWERFUL_LIST_ID} from "@/store/CpnStore/cpn.keys.ts";
 
 const logsCache = defineModel<ListLogEntry[]>({required: true});
 
@@ -32,6 +19,8 @@ let store = inject(LogStoreKey);
 const scrollerRef = useTemplateRef("scrollerRef")
 
 const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
+
+const cpnStore = useCpnStore();
 
 // 让体内元素可以滚动
 onMounted( async () => {
@@ -55,6 +44,14 @@ onMounted( async () => {
   await nextTick(() => {
     scrollerEl.scrollTop = scrollerEl.scrollHeight; // 滚动到底部
   })
+
+  const instance = getCurrentInstance()
+
+  cpnStore.registerComponent(POWERFUL_LIST_ID, instance?.exposed);
+});
+
+onUnmounted(() => {
+  cpnStore.unregisterComponent(POWERFUL_LIST_ID);
 });
 
 function toBottom() {
