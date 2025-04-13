@@ -1,9 +1,6 @@
 <script setup>
-import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
-import {fmtDate, getTimeDiff} from "../../utils/index.js";
 import TimeGapDivider from "@/view/DrugView/cpns/TimeGapDivider.vue";
-import {LogStoreKey} from "@/injectionKeys.js";
 import CornFab from "@/components/CornFab/CornFab.vue";
 
 const baseIndexViewRef = useTemplateRef("base-index-view-ref");
