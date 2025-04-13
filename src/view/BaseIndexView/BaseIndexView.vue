@@ -102,7 +102,7 @@ const appStore = useAppStore();
     </van-nav-bar>
   </teleport>
 
-  <div class="index-view corn-view relative" ref="viewDivRef">
+  <div class="index-view corn-view relative overflow-hidden" ref="viewDivRef">
     <corn-powerful-list v-model="logsCache"  ref="listRef">
       <template #bottom>
         <slot name="list-bottom"></slot>
