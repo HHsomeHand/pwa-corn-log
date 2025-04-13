@@ -1,4 +1,6 @@
 <script setup>
+import {throttle} from "underscore";
+
 const props = defineProps({
   gapX: {
     type: Number,
@@ -6,15 +8,11 @@ const props = defineProps({
   },
   gapY: {
     type: Number,
-    default: 24
+    default: 12
   },
   size: {
     type: Number,
-    default: 48
-  },
-  container: {
-    type: Object,
-    default: () => document.body
+    default: 65
   },
   posX: {
     type: String,
@@ -62,20 +60,27 @@ let restrictOffsetToContainer = null;
 
 let lastValidOffset = ref({ x: -1, y: -1 }); // 保存上一次有效位置
 
-watch(() => props.container, () => {
-  if (!props.container) return;
+const containerRef = useTemplateRef("fab-container");
 
+onMounted(() => {
   const bubbleEl = document.querySelector(`.${randomClassName}`);
-  const containerEl = props.container instanceof HTMLElement
-      ? props.container
-      : props.container.$el;
+  const containerEl = containerRef.value.parentElement;
 
-  // 获取父元素边界
-  const rect = containerEl.getBoundingClientRect();
-  const minX = rect.left + props.gapX; // 左边界
-  const maxX = rect.right - props.size - props.gapX; // 右边界
-  const minY = rect.top + props.gapY; // 上边界
-  const maxY = rect.bottom - props.size - props.gapY; // 下边界
+  let minX;
+  let maxX;
+  let minY;
+  let maxY;
+
+  const calcLimit = throttle(() => {
+    // 获取父元素边界
+    const rect = containerEl.getBoundingClientRect();
+    minX = rect.left + props.gapX; // 左边界
+    maxX = rect.right - props.size - props.gapX; // 右边界
+    minY = rect.top + props.gapY; // 上边界
+    maxY = rect.bottom - props.size - props.gapY; // 下边界
+  }, 500);
+
+  calcLimit();
 
   if (props.posX === "left") {
     offset.value.x = minX;
@@ -91,6 +96,8 @@ watch(() => props.container, () => {
 
   // 计算父元素边界并限制 offset
   restrictOffsetToContainer = ({ x, y }) => {
+    calcLimit();
+
     // 限制 x 和 y 在父元素范围内
     const restrictedX = Math.max(minX, Math.min(maxX, x));
     const restrictedY = Math.max(minY, Math.min(maxY, y));
@@ -100,7 +107,7 @@ watch(() => props.container, () => {
 
   // 初始化时保存有效位置
   lastValidOffset.value = { ...offset.value };
-}, {immediate: true});
+});
 
 
 // 当 offset 变化时，检查并限制位置
@@ -135,19 +142,21 @@ watch(offset, (newVal) => {
 </script>
 
 <template>
-  <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
-    <van-floating-bubble
-        v-model:offset="offset"
-        class="corn-fab"
-        :class="randomClassName"
-        axis="xy"
-        icon="plus"
-        magnetic="x"
-        :gap="Math.min(gapX, gapY)"
-        @offset-change="onOffsetChange"
-        @click="onClick"
-    />
-  </van-config-provider>
+  <div ref="fab-container">
+    <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
+      <van-floating-bubble
+          v-model:offset="offset"
+          class="corn-fab"
+          :class="randomClassName"
+          axis="xy"
+          icon="plus"
+          magnetic="x"
+          :gap="Math.min(gapX, gapY)"
+          @offset-change="onOffsetChange"
+          @click="onClick"
+      />
+    </van-config-provider>
+  </div>
 </template>
 
 <style scoped>
