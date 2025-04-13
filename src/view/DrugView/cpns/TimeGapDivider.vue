@@ -5,6 +5,10 @@ const props = defineProps({
   targetDate: {
     type: Object,
     default: () => new Date(),
+  },
+  hint: {
+    type: String,
+    default: ""
   }
 })
 
@@ -29,7 +33,7 @@ const timeGap = computed(() => {
     return (num >= 0 ? ` ${num} ${fmt}` : "")
   }
 
-  return '距离上次服药约' +
+  return props.hint +
       // (days > 0 ? ` ${days} 天` : "") +
       _fmtStr(days, '天') +
       // (hours > 0 ? ` ${hours} 小时` : "") +
