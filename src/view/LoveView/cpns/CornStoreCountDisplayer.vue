@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {LogStoreKey} from "@/injectionKeys.ts";
 import cornMitt from "@/mitt/mitt.ts";
+import {useListUpdate} from "@/hooks/useListUpdate.ts";
 
 let store = inject(LogStoreKey);
 
@@ -10,12 +11,7 @@ async function updateCount() {
   count.value = await store.getLogsCount();
 }
 
-updateCount();
-
-cornMitt.on("list:update", updateCount);
-cornMitt.on("list:delete", updateCount);
-cornMitt.on("list:add", updateCount);
-
+useListUpdate(updateCount);
 </script>
 
 <template>

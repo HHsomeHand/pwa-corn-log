@@ -41,6 +41,7 @@ const lastLogEntry = computed(() => {
           v-if="logsCache?.length > 1"
           :target-date="lastLogEntry?.date"
       />
+      <slot name="list-bottom"></slot>
     </template>
 
     <template #default>

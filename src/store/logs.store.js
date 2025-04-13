@@ -203,6 +203,33 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         return Array.from(distinctLogs); // 转换为数组返回
     };
 
+    /*
+        这个函数可以返回一个数组, 这个数组有24个元素, 每个元素代表一个时间段,
+        其实就是24个小时, 如第一个元素就是0-1点的总日志数量,
+        第二个就是1-2点的总日志数量, 以此类推
+    */
+    const getAllLogsByHour = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readonly');
+        const store = tx.store;
+
+        // 初始化24小时的计数数组
+        const hourlyCounts = Array(24).fill(0);
+
+        // 遍历所有日志
+        let cursor = await store.openCursor();
+
+        while (cursor) {
+            const log = cursor.value;
+            const logDate = new Date(log.date);
+            const hour = logDate.getHours(); // 获取小时 (0-23)
+            hourlyCounts[hour]++;
+            cursor = await cursor.continue();
+        }
+
+        return hourlyCounts;
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -216,6 +243,7 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         deleteLog,
         generateTestData,
         getDistinctLogs,
+        getAllLogsByHour
     };
 });
 
