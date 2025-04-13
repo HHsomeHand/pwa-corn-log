@@ -30,6 +30,8 @@ function quickLog(log) {
 
 function onAddClick() {
   emits('addClick');
+
+  isExpandFab.value = true;
 }
 
 function fmtFabIcon(str: string) {
