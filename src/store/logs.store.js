@@ -230,6 +230,48 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         return hourlyCounts;
     };
 
+    /*
+        根据log来区分频率如:
+        [{log: "烟", hourArr: [2, 3 .... 4, 5]}, {log: "赌", hourArr: [4, 6, 7.. 8]}]
+    */
+    const getLogsFrequencyByHour = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readonly');
+        const store = tx.store;
+
+        // 使用 Map 来存储每个 log 的小时统计
+        const logHourMap = new Map();
+
+        // 遍历所有日志
+        let cursor = await store.openCursor();
+
+        while (cursor) {
+            const log = cursor.value;
+            const logText = log.log;
+            const logDate = new Date(log.date);
+            const hour = logDate.getHours(); // 获取小时 (0-23)
+
+            if (logText) {
+                if (!logHourMap.has(logText)) {
+                    // 初始化该 log 的小时数组
+                    logHourMap.set(logText, Array(24).fill(0));
+                }
+                // 增加对应小时的计数
+                const hourArr = logHourMap.get(logText);
+                hourArr[hour]++;
+            }
+
+            cursor = await cursor.continue();
+        }
+
+        // 转换为所需格式的数组
+        const result = Array.from(logHourMap.entries()).map(([log, hourArr]) => ({
+            log,
+            hourArr
+        }));
+
+        return result;
+    };
     return {
         logsCache,
         getLogsCount,
@@ -243,7 +285,8 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore'
         deleteLog,
         generateTestData,
         getDistinctLogs,
-        getAllLogsByHour
+        getAllLogsByHour,
+        getLogsFrequencyByHour
     };
 });
 
