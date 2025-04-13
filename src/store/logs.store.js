@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { openDB } from 'idb';
 
-export const useLogStoreFactory = (storeName = 'logs') => defineStore('logStore', () => {
+export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_${storeName}`, () => {
     const logsCache = ref({});
 
     // 打开 IndexedDB，创建带日期索引的表
