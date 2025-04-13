@@ -8,7 +8,7 @@ import quasarLang from 'quasar/lang/zh-CN'
 
 
 import VueVirtualScroller from 'vue-virtual-scroller'
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 // https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/README.md
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
@@ -26,6 +26,7 @@ import 'vant/lib/index.css';
 import { createPinia } from 'pinia'
 
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate);
 
 const app = createApp(App)
 

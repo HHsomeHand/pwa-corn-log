@@ -7,6 +7,7 @@ import {useStyleElement} from "@/hooks/useStyleElement.ts";
 import {useRoute} from "vue-router";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {LogStoreKey} from "@/injectionKeys.js";
+import LockView from "@/view/LockView/LockView.vue";
 
 // 保证主题色加载正确
 const appStore = useAppStore();
@@ -48,6 +49,8 @@ provide(LogStoreKey, store);
       <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
       <van-tabbar-item to="/config" icon="setting-o">设置</van-tabbar-item>
     </van-tabbar>
+
+    <lock-view/>
   </div>
 </template>
 
