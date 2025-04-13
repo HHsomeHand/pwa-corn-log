@@ -75,8 +75,6 @@ const clearQueryParams = () => {
   });
 }
 
-const viewDivRef = useTemplateRef("viewDivRef");
-
 const logsCache = ref([])
 
 defineExpose({
@@ -102,13 +100,13 @@ const appStore = useAppStore();
     </van-nav-bar>
   </teleport>
 
-  <div class="index-view corn-view relative overflow-hidden" ref="viewDivRef">
+  <div class="index-view corn-view relative overflow-hidden">
     <corn-powerful-list v-model="logsCache"  ref="listRef">
       <template #bottom>
         <slot name="list-bottom"></slot>
       </template>
     </corn-powerful-list>
-    <slot :view-div-ref="viewDivRef"></slot>
+    <slot></slot>
   </div>
 </template>
 

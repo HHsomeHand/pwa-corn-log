@@ -4,17 +4,18 @@ import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
 // @ts-ignore
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue";
+import type {LogEntry} from "@/model/logs.type.ts";
 
 const baseIndexRef = useTemplateRef('baseIndexRef')
 
-const listRef = ref<InstanceType<typeof CornPowerfulList>>(null);
+const listRef = ref<InstanceType<typeof CornPowerfulList> | null>(null);
 
 onMounted(() => {
-  listRef.value = baseIndexRef.value.listRef;
+  listRef.value = baseIndexRef.value?.listRef ?? null;
 })
 
 function onClick() {
-  async function onSubmit(logData: Record<string, any>) {
+  async function onSubmit(logData: LogEntry) {
     await listRef.value?.addEntry?.(logData);
     listRef.value?.toBottom?.();
   }
@@ -26,8 +27,14 @@ function onClick() {
 
 <template>
   <base-index-view ref="baseIndexRef">
-    <template #default="{viewDivRef}">
-      <corn-floating-bubble @click="onClick" :size="65" :gap-y="12" :container="viewDivRef"/>
+    <template #default>
+      <corn-floating-bubble @click="onClick"/>
+
+      <slot></slot>
+    </template>
+
+    <template #list-bottom>
+      <slot name="list-bottom"></slot>
     </template>
   </base-index-view>
 </template>

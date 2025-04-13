@@ -9,6 +9,7 @@ import DrugView from "@/view/DrugView/DrugView.vue";
 import type {AppModeEntry} from "@/model/app.type.ts";
 import {pickFields} from "@/utils/object.ts";
 import {useRouter} from "vue-router";
+import LoveView from "@/view/LoveView/LoveView.vue";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -36,7 +37,7 @@ export const useAppStore = defineStore('appStore', () => {
             storeName: 'loves',
             title: '善举',
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
-            component: IndexView,
+            component: LoveView,
         },
         TREATMENT: {
             storeName: 'treatments',
