@@ -13,7 +13,7 @@ const appStore = useAppStore();
 const {currentTitle, primaryColor} = storeToRefs(appStore);
 
 function onModeCellClick() {
-  let actions = Object.entries(appStore.APP_MODE).map(([key, mode]) => {
+  let actions = Object.entries(appStore.customAppMode).map(([key, mode]) => {
     return {
       name: mode.title,
       callback(item) {

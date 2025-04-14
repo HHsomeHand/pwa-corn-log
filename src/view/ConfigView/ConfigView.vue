@@ -54,6 +54,8 @@ function onDefaultClick() {
 
     <config-view-bg ref="bg-config"/>
 
+    <config-view-mode-plus />
+
     <config-view-bg-blur />
 
     <config-view-bg-plus />

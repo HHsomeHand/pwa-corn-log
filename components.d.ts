@@ -17,6 +17,7 @@ declare module 'vue' {
     ConfigViewBgPlus: typeof import('./src/view/ConfigView/cpn/ConfigViewBgPlus.vue')['default']
     ConfigViewLock: typeof import('./src/view/ConfigView/cpn/ConfigViewLock.vue')['default']
     ConfigViewMode: typeof import('./src/view/ConfigView/cpn/ConfigViewMode.vue')['default']
+    ConfigViewModePlus: typeof import('./src/view/ConfigView/cpn/ConfigViewModePlus.vue')['default']
     ConfigViewText: typeof import('./src/view/ConfigView/cpn/ConfigViewText.vue')['default']
     CornActionSheet: typeof import('./src/components/CornActionSheet/CornActionSheet.vue')['default']
     CornCellColorPicker: typeof import('./src/view/ConfigView/cpn/CornCellColorPicker.vue')['default']

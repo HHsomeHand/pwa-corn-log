@@ -20,31 +20,39 @@ export interface AppMode {
 }
 
 export const useAppStore = defineStore('appStore', () => {
+    const appComponentMap = {
+        LOG: IndexView,
+        DRUG: DrugView,
+        LOVE: LoveView,
+        TREATMENT: TreatmentView,
+    }
 
-    const appModeEntryMap: {[key: string]: AppModeEntry} = {
+    type ModeMap = {[key: string]: AppModeEntry};
+
+    const appModeEntryMap: ModeMap = {
         LOG: {
             storeName: 'logs',
             title: '日志',
             defaultPrimaryColor: CUSTOM_ORANGE_HEX,
-            component: IndexView,
+            componentKey: 'LOG',
         },
         DRUG: {
             storeName: 'drugs',
             title: '药律',
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.BLUE),
-            component: DrugView,
+            componentKey: 'DRUG'
         },
         LOVE: {
             storeName: 'loves',
             title: '善举',
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
-            component: LoveView,
+            componentKey: 'LOVE'
         },
         TREATMENT: {
             storeName: 'treatments',
             title: '戒律',
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.GREEN),
-            component: TreatmentView,
+            componentKey: 'TREATMENT'
         },
     };
 
@@ -69,11 +77,8 @@ export const useAppStore = defineStore('appStore', () => {
      *         }
      *     });
      */
-    const APP_MODE = Object.freeze(
-        Object.entries(appModeEntryMap).reduce((result, entry) => {
-            result[entry[0]] = pickFields(entry[1], ["title", "defaultPrimaryColor", "storeName"]);
-            return result;
-        }, {} as any)
+    const APP_MODE: ModeMap = Object.freeze(
+        JSON.parse(JSON.stringify(appModeEntryMap))
     );
 
     /**
@@ -92,12 +97,12 @@ export const useAppStore = defineStore('appStore', () => {
      *         }
      *     }
      */
-    const APP_ROUTE_COMPONENT =  (
-        Object.entries(appModeEntryMap).reduce((result, entry) => {
-            result[entry[0]] = pickFields(entry[1], ["component"]);
-            return result;
-        }, {} as any)
-    )
+    // const APP_ROUTE_COMPONENT =  (
+    //     Object.entries(appModeEntryMap).reduce((result, entry) => {
+    //         result[entry[0]] = pickFields(entry[1], ["component"]);
+    //         return result;
+    //     }, {} as any)
+    // )
 
     // customAppMode 和 APP_MODE 的差异: APP_MODE 是常量, 用于恢复默认值, 而 customAppMode是变量
     // customAppMode 会记录用户修改的颜色
@@ -105,7 +110,15 @@ export const useAppStore = defineStore('appStore', () => {
 
     const currentModeKey: ConfigRef<keyof AppMode> = useConfig('currentMode', 'LOG');
 
-    const currentMode = computed(() => {
+    function addMode() {
+        customAppMode.value;
+    }
+
+    function removeMode() {
+
+    }
+
+    const currentMode = computed<AppModeEntry>(() => {
         return customAppMode.value[currentModeKey.value];
     })
 
@@ -128,7 +141,7 @@ export const useAppStore = defineStore('appStore', () => {
         primaryColor.value = mode.customPrimaryColor || mode.defaultPrimaryColor as any;
 
         setTimeout(() => { // setTimeout 保证用户配置存储成功
-            window.location.reload(); // 刷新整个页面
+            ReloadPage();
         }, 100);
     }
 
@@ -136,12 +149,17 @@ export const useAppStore = defineStore('appStore', () => {
         return {
             path: ROUTE_INDEX,
             name: ROUTE_INDEX_NAME,
-            component: APP_ROUTE_COMPONENT[currentModeKey.value].component,
+            component: appComponentMap[currentMode.value.componentKey],
         }
     })
 
+    function ReloadPage() {
+        window.location.reload(); // 刷新整个页面
+    }
+
     return {
         APP_MODE,
+        customAppMode,
         changeAppMode,
         primaryColor,
         currentMode,
