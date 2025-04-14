@@ -10,10 +10,23 @@ export const showLogFormPopup = useGlobalCpnCallback(CornLogFormPopup, {
     showMethod: "showPopup"
 });
 
+interface PopupFormEntry {
+    label ?: string,
+    placeholder ?: string,
+    type ?: ENTRY_TYPE.STR | ENTRY_TYPE.DATE, // STR -> 输入框, Date -> 选择按钮
+    defaultVal ?: "", // 用于清空 popup 表单, 或设置初始值
+    isReturnSubmit ?: boolean, // 是否在该条目, 回车时触发提交
+}
+
+type InputPopupOption = PopupFormEntry & {isPending: boolean, submitText?: string};
+
+export async function showInputPopup(options: {isPending: true}): Promise<string>;
+export async function showInputPopup(options: {isPending: false}): Promise<string | null>;
+
 export async function showInputPopup({
      label, placeholder, defaultVal, submitText,
      isPending = true
-}) {
+} = {} as InputPopupOption): Promise<string | null> {
     const result = await showLogFormPopup(null, {
         entries: {
             value: generateEntry({
@@ -24,14 +37,15 @@ export async function showInputPopup({
             }),
         },
         submitText,
-    });
+    }) as {value: string} | null;
 
     if (result === null && isPending) {
         return new Promise(() => {});
     } else {
-        return result.value;
+        return result?.value ?? null;
     }
 }
+
 
 // 这里这样写, 主要是为了IDE的参数提示
 export function generateEntry({
@@ -40,7 +54,7 @@ export function generateEntry({
     type = ENTRY_TYPE.STR, // STR -> 输入框, Date -> 选择按钮
     defaultVal = "", // 用于清空 popup 表单, 或设置初始值
     isReturnSubmit = false, // 是否在该条目, 回车时触发提交
-} = {}) {
+}  = {} as PopupFormEntry) {
     return {
         label,
         placeholder,

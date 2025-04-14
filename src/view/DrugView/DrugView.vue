@@ -1,5 +1,5 @@
 <script setup>
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.ts";
 import TimeGapDivider from "@/view/DrugView/cpns/TimeGapDivider.vue";
 import CornFab from "@/components/CornFab/CornFab.vue";
 

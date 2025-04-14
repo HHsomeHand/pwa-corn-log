@@ -1,5 +1,5 @@
-import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
-import {generateEntry} from "@/components/CornLogFormPopup/utils.js";
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts";
+import {generateEntry} from "@/components/CornLogFormPopup/utils.ts";
 
 export const LOG_ENTRY = Object.freeze(
     generateEntry({

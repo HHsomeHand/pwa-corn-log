@@ -12,7 +12,7 @@ import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
 import CornCellEnumNumber from "./cpn/CornCellEnumNumber.vue";
 import {WALLPAPER_SIZE_MAPPER, WALLPAPER_X_POS, WALLPAPER_Y_POS} from "@/const/wallpaper.js";
 import {useLockStore} from "@/store/lock.store.js";
-import {showInputPopup} from "@/components/CornLogFormPopup/utils.js";
+import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 
 
 function onClickLeft() {

@@ -4,7 +4,7 @@ import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue
 import {useLogStore} from "@/store/logs.store.js";
 
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {EVENT_SCROLL_TO} from "@/const/mittEvent.js";
 import cornMitt from "@/mitt/mitt.ts";
 import {onMounted} from "vue";

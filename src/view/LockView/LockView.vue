@@ -4,7 +4,7 @@
 import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
-import {showInputPopup} from "@/components/CornLogFormPopup/utils";
+import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
 
 const appStore = useAppStore();
