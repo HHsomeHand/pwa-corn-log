@@ -68,7 +68,8 @@ async function getPassword() {
 </script>
 
 <template>
-  <div v-show="isShowLockView" class="
+  <transition name="van-fade">
+    <div v-show="isShowLockView" class="
     lock-view
     flex flex-col items-center justify-around
     fixed top-0 bottom-0 left-0 right-0 z-[9999]
@@ -76,25 +77,26 @@ async function getPassword() {
     py-23
     px-8
   ">
-    <van-button
-        v-for="(info, index) in mapper"
-        class="lock-view__btn"
-        plain
-        type="primary"
-        @click="onBtnClick(index)"
-    >
-      {{info.btnTitle}}
-    </van-button>
+      <van-button
+          v-for="(info, index) in mapper"
+          class="lock-view__btn"
+          plain
+          type="primary"
+          @click="onBtnClick(index)"
+      >
+        {{info.btnTitle}}
+      </van-button>
 
-    <van-button
-        @click="onUnlockBtnClick"
-        class="lock-view__btn"
-        plain
-        type="primary"
-    >
-      解锁
-    </van-button>
-  </div>
+      <van-button
+          @click="onUnlockBtnClick"
+          class="lock-view__btn"
+          plain
+          type="primary"
+      >
+        解锁
+      </van-button>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
