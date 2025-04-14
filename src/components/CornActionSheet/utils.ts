@@ -23,3 +23,21 @@ export function showActionSheetByArray(array: string[]) {
         showActionSheet(actions)
     })
 }
+
+// [{showText: '选项title', value: ''}] 返回 value
+// resolve 选中的参数值
+// 如果用户不选择就无限 Pending
+export function showActionSheetByArrayEx(array: {showText: string, value: any}[]) {
+    return new Promise(resolve => {
+        let actions = array.map(el => {
+            return {
+                name: el.showText,
+                callback(item: string) {
+                    resolve(el.value);
+                },
+            } // END OF RETURN
+        });
+
+        showActionSheet(actions)
+    })
+}

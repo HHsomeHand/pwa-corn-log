@@ -19,6 +19,8 @@ export interface AppMode {
     TREATMENT: Record<string, unknown>,
 }
 
+export const basicModeNames = ['LOG', 'LOVE', 'DRUG', 'TREATMENT'];
+
 export const useAppStore = defineStore('appStore', () => {
     const appComponentMap = {
         LOG: IndexView,
@@ -106,16 +108,41 @@ export const useAppStore = defineStore('appStore', () => {
 
     // customAppMode 和 APP_MODE 的差异: APP_MODE 是常量, 用于恢复默认值, 而 customAppMode是变量
     // customAppMode 会记录用户修改的颜色
-    const customAppMode = useConfig<AppMode>('customAppMode', {...APP_MODE});
+    const customAppMode: ConfigRef<ModeMap> = useConfig<AppMode>('customAppMode', {...APP_MODE});
 
     const currentModeKey: ConfigRef<keyof AppMode> = useConfig('currentMode', 'LOG');
 
-    function addMode() {
-        customAppMode.value;
+
+
+    function addMode(modeName: string, componentKey) {
+        if (basicModeNames.includes(modeName)) {
+            return false;
+        }
+
+        customAppMode.value[modeName] = {
+            storeName: modeName,
+            title: modeName,
+            defaultPrimaryColor: CUSTOM_ORANGE_HEX,
+            componentKey: componentKey,
+        };
+
+        return true;
     }
 
-    function removeMode() {
+    function removeMode(modeKey: string) {
+        if (basicModeNames.includes(modeKey)) {
+            return false;
+        }
 
+        // TODO: 删除 indexDB!
+
+        delete customAppMode.value[modeKey];
+
+        if (currentModeKey.value === modeKey) {
+            changeAppMode('LOG');
+        }
+
+        return true;
     }
 
     const currentMode = computed<AppModeEntry>(() => {
@@ -167,5 +194,7 @@ export const useAppStore = defineStore('appStore', () => {
         currentTitle,
         currentModeKey: computed(() => currentModeKey), // 请通过 changeAppMode 来修改
         currentRoute,
+        addMode,
+        removeMode
     }
 });

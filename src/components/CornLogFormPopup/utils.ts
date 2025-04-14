@@ -20,8 +20,8 @@ interface PopupFormEntry {
 
 type InputPopupOption = PopupFormEntry & {isPending: boolean, submitText?: string};
 
-export async function showInputPopup(options: {isPending: true}): Promise<string>;
-export async function showInputPopup(options: {isPending: false}): Promise<string | null>;
+export async function showInputPopup(options: InputPopupOption & {isPending: true}): Promise<string>;
+export async function showInputPopup(options: InputPopupOption & {isPending: false}): Promise<string | null>;
 
 export async function showInputPopup({
      label, placeholder, defaultVal, submitText,
