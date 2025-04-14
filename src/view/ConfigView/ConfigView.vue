@@ -89,8 +89,8 @@ function toggleLock() {
 async function getPassword() {
   const inputPassword = await showInputPopup({
     label: '密码',
-    submitText: '提交',
-    placeholder: '4321'
+    submitText: '设置',
+    placeholder: '忘记密码时, 输入: 4321'
   });
 
   lockStore.password = inputPassword;

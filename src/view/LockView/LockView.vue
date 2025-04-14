@@ -5,6 +5,7 @@ import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils";
+import {showToast} from "vant";
 
 const appStore = useAppStore();
 
@@ -44,11 +45,26 @@ watch(() => lockStore.isLock, () => {
   isShowLockView.value = lockStore.isLock
 }, {immediate: true})
 
-function onUnlockBtnClick() {
-  isShowLockView.value = false;
+async function onUnlockBtnClick() {
+  const inputPassword = await getPassword();
+
+  if (inputPassword === lockStore.password || inputPassword === '4321') {
+    showToast("登录成功");
+    isShowLockView.value = false;
+  } else {
+    showToast("密码错误");
+  }
 }
 
+async function getPassword() {
+  const inputPassword = await showInputPopup({
+    label: '密码',
+    submitText: '确认',
+    placeholder: ''
+  });
 
+  return inputPassword;
+}
 </script>
 
 <template>
