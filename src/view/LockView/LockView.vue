@@ -37,14 +37,19 @@ function onBtnClick(index) {
 
 const lockStore = useLockStore();
 
+const isShowLockView = ref(false);
+
+watch(lockStore.isLock, () => {
+  isShowLockView.value = lockStore.isLock
+}, {immediate: true})
+
 function onUnlockBtnClick() {
-  lockStore.isLock = false;
-  console.log(lockStore.isLock);
+  isShowLockView.value = false;
 }
 </script>
 
 <template>
-  <div v-show="lockStore.isLock" class="
+  <div v-show="isShowLockView" class="
     lock-view
     flex flex-col items-center justify-around
     fixed top-0 bottom-0 left-0 right-0 z-[9999]
