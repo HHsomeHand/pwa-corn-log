@@ -4,6 +4,7 @@
 import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
+import {showInputPopup} from "@/components/CornLogFormPopup/utils";
 
 const appStore = useAppStore();
 
@@ -39,13 +40,15 @@ const lockStore = useLockStore();
 
 const isShowLockView = ref(false);
 
-watch(lockStore.isLock, () => {
+watch(() => lockStore.isLock, () => {
   isShowLockView.value = lockStore.isLock
 }, {immediate: true})
 
 function onUnlockBtnClick() {
   isShowLockView.value = false;
 }
+
+
 </script>
 
 <template>

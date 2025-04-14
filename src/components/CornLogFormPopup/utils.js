@@ -16,7 +16,12 @@ export async function showInputPopup({
 }) {
     const result = await showLogFormPopup(null, {
         entries: {
-            value: generateEntry({label, placeholder, defaultVal}),
+            value: generateEntry({
+                label,
+                placeholder,
+                defaultVal,
+                isReturnSubmit: true,
+            }),
         },
         submitText,
     });

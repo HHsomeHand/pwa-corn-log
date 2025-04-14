@@ -15,5 +15,5 @@ export const useLockStore = defineStore(
     {
         // 配置持久化
         persist: true, // 默认使用 localStorage 持久化所有状态
-    }
+    } as any
 );

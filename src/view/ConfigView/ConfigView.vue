@@ -11,6 +11,8 @@ import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
 import CornCellEnumNumber from "./cpn/CornCellEnumNumber.vue";
 import {WALLPAPER_SIZE_MAPPER, WALLPAPER_X_POS, WALLPAPER_Y_POS} from "@/const/wallpaper.js";
+import {useLockStore} from "@/store/lock.store.js";
+import {showInputPopup} from "@/components/CornLogFormPopup/utils.js";
 
 
 function onClickLeft() {
@@ -69,9 +71,29 @@ watch(fileList, () => {
   currentWallpaperBase64.value = fileList.value[0]?.content || 'none';
 })
 
-function onClick() {
+function onDefaultClick() {
   wallpaperStore.setDefault();
   fileList.value = [];
+}
+
+const lockStore = useLockStore();
+
+const lockStatusText = computed(() => {
+  return lockStore.isLock ? "启用" : "停用";
+})
+
+function toggleLock() {
+  lockStore.isLock = !lockStore.isLock;
+}
+
+async function getPassword() {
+  const inputPassword = await showInputPopup({
+    label: '密码',
+    submitText: '提交',
+    placeholder: '4321'
+  });
+
+  lockStore.password = inputPassword;
 }
 </script>
 
@@ -92,6 +114,13 @@ function onClick() {
       <van-cell title="当前模式" :value="currentTitle" @click="onModeCellClick" is-link/>
 
       <corn-cell-color-picker title="当前主题色" v-model="primaryColor" :colors="colors"/>
+    </van-cell-group>
+
+    <van-cell-group title="隐私模式">
+      <van-cell title="启用状态" :value="lockStatusText" clickable @click="toggleLock"/>
+
+      <van-cell title="密码" :value="lockStore.password" clickable @click="getPassword"/>
+
     </van-cell-group>
 
     <van-cell-group title="背景图片">
@@ -170,7 +199,7 @@ function onClick() {
         </template>
       </van-cell>
     </van-cell-group>
-    <van-button class="!m-2 shrink-0" plain type="primary" @click="onClick">设为默认值</van-button>
+    <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
   </div>
 </template>
 
