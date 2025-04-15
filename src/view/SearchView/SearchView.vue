@@ -3,6 +3,7 @@
 import {useLogStore} from "@/store/logs.store.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.ts";
+import {LogStoreKey} from "@/injectionKeys.js";
 
 const SEARCH_TYPE = Object.freeze({
   LOG: 'log',
@@ -18,7 +19,7 @@ const searchOption = [
 
 const searchContent = ref("");
 
-const store = useLogStore();
+const store = inject(LogStoreKey);
 
 const logs = ref([]);
 
