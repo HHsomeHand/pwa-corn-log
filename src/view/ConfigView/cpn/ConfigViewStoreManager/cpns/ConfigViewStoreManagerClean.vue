@@ -2,16 +2,32 @@
 
 import {showToast} from "vant";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
+import {useAppStore} from "@/store/app.store.ts";
+import {useLogStoreFactory} from "@/store/logs.store";
+import {LogStoreKey} from "@/injectionKeys.ts";
+
+const appStore = useAppStore();
 
 async function clearCurr() {
   if (await getConfirm()) {
-    console.log("开始删除");
+    // let store = inject(LogStoreKey);
+
+    const store = useLogStoreFactory(appStore.currentMode.storeName)();
+
+    await store.clearLogs();
   }
 }
 
 async function clearAll() {
   if (await getConfirm()) {
-    console.log("开始删除");
+    const storeNames = Object.entries(appStore.customAppMode)
+        .map(([key, value]) => value.storeName);
+
+    for (const storeName of storeNames) {
+      const store = useLogStoreFactory(storeName)();
+
+      await store.clearLogs();
+    } // END for (const storeName of storeNames) {
   }
 }
 

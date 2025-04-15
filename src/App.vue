@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
 import {useAppStore} from "@/store/app.store.ts";
@@ -10,7 +10,7 @@ import LockView from "@/view/LockView/LockView.vue";
 // 保证主题色加载正确
 const appStore = useAppStore();
 
-let appRef = ref(null);
+let appRef = useTemplateRef("appRef");
 
 const wallpaperStore = useWallpaperStore();
 
@@ -18,6 +18,8 @@ const {currentWallpaperBase64} = storeToRefs(wallpaperStore);
 
 onMounted(() => {
   watch(currentWallpaperBase64, () => {
+    if (appRef.value === null) return;
+
     // 不要在下面的style块中使用v-bind, 不稳定, 有时候无法正确设置图片
     appRef.value.style.backgroundImage = `url(${currentWallpaperBase64.value})`
   }, { immediate: true })

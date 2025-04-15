@@ -358,6 +358,15 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
         }
     };
 
+    const clearLogs = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readwrite');
+        const store = tx.objectStore('logs');
+        await store.clear();
+        await tx.done;
+        return true; // 表示清空成功
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -375,7 +384,8 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
         getLogsFrequencyByHour,
         getLatestLog,
         exportToJson,
-        importFromJson
+        importFromJson,
+        clearLogs
     };
 });
 
