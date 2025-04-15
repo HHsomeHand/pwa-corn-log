@@ -1,5 +1,5 @@
 // stores/counter.js
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 
 export const useLockStore = defineStore(
     'lock',

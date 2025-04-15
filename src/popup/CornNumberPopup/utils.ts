@@ -1,7 +1,6 @@
-import {useGlobalCpn, useGlobalCpnCallback} from "@/hooks/globalCpn.hook.ts";
+import {useGlobalCpn} from "@/hooks/globalCpn.hook.ts";
 import CornNumberPopup from "@/popup/CornNumberPopup/CornNumberPopup.vue";
-import type {NumberDialogOption, ShowPopupFunction} from "@/popup/CornNumberPopup/types.ts";
-import type {CallbackOption} from "@/model/types.ts";
+import type {ShowPopupFunction} from "@/popup/CornNumberPopup/types.ts";
 
 export const showNumberPopup = useGlobalCpn<ShowPopupFunction>(CornNumberPopup, {
     showMethod: "showPopup"

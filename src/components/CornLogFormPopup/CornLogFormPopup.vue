@@ -1,6 +1,5 @@
 <script setup>
-import {generateEntry, getDefaultValue} from "@/components/CornLogFormPopup/utils.ts";
-import {COMMENT_ENTRY, DEFAULT_ENTRIES, LOG_ENTRY} from "@/components/CornLogFormPopup/const.js";
+import {DEFAULT_ENTRIES} from "@/components/CornLogFormPopup/const.js";
 import CornDateSelectButton from "@/components/CornLogFormPopup/cpn/CornDateSelectButton.vue";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts";
 

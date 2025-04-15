@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {LogStoreKey} from "@/injectionKeys.ts";
-import cornMitt from "@/mitt/mitt.ts";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 import {showToast} from "vant";
 
@@ -68,6 +67,7 @@ function onCellClick(log: string, item: HourEntry) {
             :title="item.timeRange"
             :value="item.count"
             @click="onCellClick(data.log, item)"
+            clickable
         />
       </van-cell-group>
     </template>

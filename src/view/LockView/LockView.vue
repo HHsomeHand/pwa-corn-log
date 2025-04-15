@@ -6,7 +6,6 @@ import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
-import type {LogEntry} from "@/model/logs.type.ts";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 import {useTimeGap} from "@/hooks/useTimeGap.ts";
 

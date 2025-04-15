@@ -48,6 +48,7 @@ function onDelete() {
     <van-swipe-cell>
       <van-cell
           :value="item.log"
+          clickable
       >
         <template #title>
           <div class="corn-log__container my-flex flex-col gap-2">

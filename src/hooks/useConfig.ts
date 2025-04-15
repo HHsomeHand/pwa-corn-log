@@ -1,5 +1,4 @@
-
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 
 function _getValue<T>(key:string , defaultValue: T): string | T {
   const stored = localStorage.getItem(key);

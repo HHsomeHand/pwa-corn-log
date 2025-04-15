@@ -1,4 +1,4 @@
-import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts";
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts"; // 不可以清理
 import {generateEntry} from "@/components/CornLogFormPopup/utils.ts";
 
 export const LOG_ENTRY = Object.freeze(

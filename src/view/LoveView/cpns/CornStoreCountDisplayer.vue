@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {LogStoreKey} from "@/injectionKeys.ts";
-import cornMitt from "@/mitt/mitt.ts";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 
 let store = inject(LogStoreKey);

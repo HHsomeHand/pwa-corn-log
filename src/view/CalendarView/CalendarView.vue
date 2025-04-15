@@ -1,10 +1,8 @@
 <script setup>
 
 
-import {EVENT_SCROLL_TO} from "@/const/mittEvent.js";
 import {useRouter} from "vue-router";
 import {ROUTE_INDEX} from "@/const/route.ts";
-import cornMitt from "@/mitt/mitt.ts";
 
 const router = useRouter();
 

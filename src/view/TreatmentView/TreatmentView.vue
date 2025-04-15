@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import DrugView from "@/view/DrugView/DrugView.vue";
-
-
 </script>
 
 <template>

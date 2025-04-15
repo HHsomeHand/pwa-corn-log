@@ -1,6 +1,6 @@
 <script setup>
 
-import {convertToDate, convertToTime, getDateInfo, getTimeInfo} from "@/utils/index.js";
+import {convertToTime, getTimeInfo} from "@/utils/index.js";
 
 const showDialog = ref(false);
 

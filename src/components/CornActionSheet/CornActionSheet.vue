@@ -1,5 +1,4 @@
 <script setup>
-import {DEFAULT_ENTRIES} from "@/components/CornLogFormPopup/const.js";
 
 const showActionSheet = ref(false);
 const actions = ref([]);

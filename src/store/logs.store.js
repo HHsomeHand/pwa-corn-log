@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { openDB } from 'idb';
+import {defineStore} from 'pinia';
+import {ref} from 'vue';
+import {openDB} from 'idb';
 
 export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_${storeName}`, () => {
     const logsCache = ref({});
@@ -281,6 +281,87 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
         return cursor ? cursor.value : null; // 返回最新日志或 null
     };
 
+    // 导出数据库为 JSON 字符串
+    const exportToJson = async () => {
+        try {
+            const db = await getDB();
+            const tx = db.transaction('logs', 'readonly');
+            const store = tx.objectStore('logs');
+            const allLogs = await store.getAll();
+
+            if (!allLogs || allLogs.length === 0) {
+                throw new Error('No logs found to export');
+            }
+
+            // 将日期字段转换为 ISO 字符串以确保 JSON 兼容性
+            const exportData = allLogs.map(log => ({
+                ...log,
+                date: new Date(log.date).toISOString()
+            }));
+
+            const jsonString = JSON.stringify(exportData, null, 2);
+            return jsonString;
+        } catch (error) {
+            console.error('Export failed:', error);
+            throw new Error(`Failed to export logs: ${error.message}`);
+        }
+    };
+
+    // 从 JSON 字符串导入数据库
+    const importFromJson = async (jsonString) => {
+        try {
+            if (!jsonString || typeof jsonString !== 'string') {
+                throw new Error('Invalid JSON string provided');
+            }
+
+            let importData;
+            try {
+                importData = JSON.parse(jsonString);
+            } catch (parseError) {
+                throw new Error('Invalid JSON format');
+            }
+
+            if (!Array.isArray(importData)) {
+                throw new Error('JSON data must be an array');
+            }
+
+            const db = await getDB();
+            const tx = db.transaction('logs', 'readwrite');
+            const store = tx.objectStore('logs');
+
+            // 清空现有数据（可选，根据需求决定是否保留）
+            await store.clear();
+
+            // 导入数据
+            for (const log of importData) {
+                if (!log.date || !log.log) {
+                    console.warn('Skipping invalid log entry:', log);
+                    continue;
+                }
+
+                const newLog = {
+                    date: new Date(log.date), // 确保日期被正确解析
+                    log: log.log || '',
+                    comment: log.comment || '',
+                    id: log.id // 如果 JSON 中有 id，则保留；否则由 autoIncrement 生成
+                };
+
+                // 检查日期是否有效
+                if (isNaN(newLog.date.getTime())) {
+                    throw new Error(`Invalid date in log entry: ${JSON.stringify(log)}`);
+                }
+
+                await store.put(newLog); // 使用 put 以支持覆盖或新增
+            }
+
+            await tx.done;
+            return { success: true, count: importData.length };
+        } catch (error) {
+            console.error('Import failed:', error);
+            throw new Error(`Failed to import logs: ${error.message}`);
+        }
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -296,7 +377,9 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
         getDistinctLogs,
         getAllLogsByHour,
         getLogsFrequencyByHour,
-        getLatestLog
+        getLatestLog,
+        exportToJson,
+        importFromJson
     };
 });
 

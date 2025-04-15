@@ -1,5 +1,4 @@
 <script setup>
-import {getTimeDiff} from "@/utils/index.js";
 import {useTimeGap} from "@/hooks/useTimeGap.js";
 
 const props = defineProps({

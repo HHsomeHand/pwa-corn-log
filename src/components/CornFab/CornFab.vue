@@ -1,6 +1,5 @@
 <script setup lang="ts">
 // 默认展开 fab
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
 import {LogStoreKey} from "@/injectionKeys.ts";
 import cornMitt from "@/mitt/mitt.ts";
 

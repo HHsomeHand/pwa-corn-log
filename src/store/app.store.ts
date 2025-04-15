@@ -7,8 +7,6 @@ import IndexView from "@/view/IndexView/IndexView.vue";
 import {ROUTE_INDEX, ROUTE_INDEX_NAME} from "@/const/route.js";
 import DrugView from "@/view/DrugView/DrugView.vue";
 import type {AppModeEntry} from "@/model/app.type.ts";
-import {pickFields} from "@/utils/object.ts";
-import {useRouter} from "vue-router";
 import LoveView from "@/view/LoveView/LoveView.vue";
 import TreatmentView from "@/view/TreatmentView/TreatmentView.vue";
 

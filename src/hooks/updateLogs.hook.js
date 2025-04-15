@@ -1,4 +1,4 @@
-import {fmtDate, generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
+import {generatorEnd, getDomElement, getTomorrowDate, stripTime, vh2px} from "@/utils/index.js";
 import {useQueueAsync} from "@/utils/async.js";
 
 // 需要指定 scrollerRef 容器, 进行滚动监听

@@ -1,9 +1,9 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import router, {setupRouterWithStore} from './router/index.js'
-import { Quasar } from 'quasar'
+import {Quasar} from 'quasar'
 import quasarLang from 'quasar/lang/zh-CN'
 
 
@@ -23,7 +23,7 @@ import 'quasar/src/css/index.sass'
 import 'vant/lib/index.css';
 
 
-import { createPinia } from 'pinia'
+import {createPinia} from 'pinia'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate);

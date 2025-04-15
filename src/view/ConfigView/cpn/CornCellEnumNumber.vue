@@ -2,7 +2,6 @@
 import {showActionSheetByArray} from "@/components/CornActionSheet/utils.ts";
 import {findKeyByValue} from "@/utils/object.ts";
 import {showNumberPopup} from "@/popup/CornNumberPopup/utils.ts";
-import type {NumberDialogOption} from "@/popup/CornNumberPopup/types.ts";
 import {stringToNumber} from "@/utils/num.ts";
 import cornMitt from "@/mitt/mitt.ts";
 

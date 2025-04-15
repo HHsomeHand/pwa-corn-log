@@ -6,7 +6,6 @@ import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
 
 
-
 const wallpaperStore = useWallpaperStore();
 
 const {

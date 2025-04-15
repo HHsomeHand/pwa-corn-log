@@ -1,7 +1,6 @@
+import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts";
 import CornLogFormPopup from "@/components/CornLogFormPopup/CornLogFormPopup.vue";
 import {useGlobalCpnCallback} from "@/hooks/globalCpn.hook.ts";
-import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.js";
-
 
 // showLogFormPopup(callback, {entries, id, submitText})
 // 用户提交了 resolve {log, comment} (entries 的 key 名)

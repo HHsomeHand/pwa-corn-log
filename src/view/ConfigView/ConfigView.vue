@@ -1,18 +1,5 @@
-<script setup>
-import PickColors from 'vue-pick-colors'
-
-import colorValues, {CUSTOM_ORANGE_HEX, VANT_COLOR_VARS, vantVarName2ColorHex} from "@/color/vant.color.ts";
-import {useCssVar} from "@/hooks/useCssVar.ts";
-import {useConfig} from "@/hooks/useConfig.ts";
-import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
-import {useAppStore} from "@/store/app.store.ts";
-import {storeToRefs} from "pinia";
+<script lang="ts" setup>
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
-import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
-import CornCellEnumNumber from "./cpn/CornCellEnumNumber.vue";
-import {WALLPAPER_SIZE_MAPPER, WALLPAPER_X_POS, WALLPAPER_Y_POS} from "@/const/wallpaper.js";
-import {useLockStore} from "@/store/lock.store.js";
-import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import ConfigViewMode from "@/view/ConfigView/cpn/ConfigViewMode.vue";
 import ConfigViewBgBlur from "@/view/ConfigView/cpn/ConfigViewBgBlur.vue";
 import ConfigViewBgPlus from "@/view/ConfigView/cpn/ConfigViewBgPlus.vue";
@@ -61,6 +48,8 @@ function onDefaultClick() {
     <config-view-bg-plus />
 
     <config-view-text />
+
+    <config-view-import />
 
     <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
   </div>

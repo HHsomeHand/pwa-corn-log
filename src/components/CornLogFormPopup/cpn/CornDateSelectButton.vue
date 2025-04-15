@@ -1,6 +1,5 @@
 <script setup>
-import {fmtDate, stripTime} from "../../../utils/index.js";
-import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.ts";
+import {fmtDate} from "../../../utils/index.js";
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
 import {showTimePickerDialog} from "@/dialog/CornTimePickerDialog/utils.js";
 

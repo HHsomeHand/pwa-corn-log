@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import {defineStore} from 'pinia';
+import {ref} from 'vue';
 
 export const useCpnStore = defineStore('cpnStore', () => {
     // 使用 Map 来存储组件引用，key 为组件唯一标识，value 为组件的 ref

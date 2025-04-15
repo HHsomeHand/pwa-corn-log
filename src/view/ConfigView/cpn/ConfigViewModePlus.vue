@@ -1,10 +1,9 @@
 <script setup lang="ts">
 
 import {basicModeNames, useAppStore} from "@/store/app.store.ts";
-import {showActionSheetByArray, showActionSheetByArrayEx} from "@/components/CornActionSheet/utils.ts";
+import {showActionSheetByArrayEx} from "@/components/CornActionSheet/utils.ts";
 import {showToast} from "vant";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
-import {storeToRefs} from "pinia";
 
 const appStore = useAppStore();
 

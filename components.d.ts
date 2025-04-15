@@ -15,6 +15,7 @@ declare module 'vue' {
     ConfigVIewBg: typeof import('./src/view/ConfigView/cpn/ConfigVIewBg.vue')['default']
     ConfigViewBgBlur: typeof import('./src/view/ConfigView/cpn/ConfigViewBgBlur.vue')['default']
     ConfigViewBgPlus: typeof import('./src/view/ConfigView/cpn/ConfigViewBgPlus.vue')['default']
+    ConfigViewImport: typeof import('./src/view/ConfigView/cpn/ConfigViewImport.vue')['default']
     ConfigViewLock: typeof import('./src/view/ConfigView/cpn/ConfigViewLock.vue')['default']
     ConfigViewMode: typeof import('./src/view/ConfigView/cpn/ConfigViewMode.vue')['default']
     ConfigViewModePlus: typeof import('./src/view/ConfigView/cpn/ConfigViewModePlus.vue')['default']
