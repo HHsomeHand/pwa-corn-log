@@ -3,9 +3,10 @@
 
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
-import {useAppStore} from "@/store/app.store.ts";
+import {basicModeNames, useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store";
 import {copyToClipboard, downloadString} from "@/utils";
+import {showActionSheetByArrayEx} from "@/components/CornActionSheet/utils.ts";
 
 const appStore = useAppStore();
 
@@ -13,6 +14,7 @@ interface StoreInfo {
   storeName: string;
   title: string;
   storeJson: string;
+  componentKey: 'LOG' | 'LOVE' | 'DRUG' | 'TREATMENT',
 }
 
 async function getStoreJson(storeName: string) {
@@ -24,16 +26,49 @@ async function getStoreJson(storeName: string) {
 async function getStoreInfos(): Promise<StoreInfo[]> {
   const storeInfoPromises: Promise<StoreInfo>[] =
       Object.entries(appStore.customAppMode)
-      .map(([key, value]) => ({storeName: value.storeName, title: value.title}))
+      .map(([key, value]) => ({storeName: value.storeName, title: value.title, componentKey: value.componentKey}))
       .map(async (info) => ({...info, storeJson: await getStoreJson(info.storeName)}));
 
   return await Promise.all(storeInfoPromises);
 }
 
+async function importJSON() {
+  const importMode: string = await showActionSheetByArrayEx([
+    {showText: "从输入", value: 'input'},
+    {showText: "从文件", value: 'file'},
+  ]);
 
+  let importJson: string = "";
 
-function importJSON() {
+  if (importMode === 'input') {
+    importJson = await showInputPopup({
+      label: '导入数据',
+      placeholder: '',
+      submitText: '导入',
+    });
+  } else {
+    // TODO: 实现文件导入
+  }
 
+  let importData: StoreInfo[] = [];
+
+  try {
+    importData = JSON.parse(importJson);
+
+    const basicStoreName = Object.entries(appStore.appModeEntryMap).map(([key, value]) => value.storeName);
+
+    for (let info of importData) {
+      if (!basicStoreName.includes(info.storeName)) {
+        appStore.addMode(info.storeName, info.componentKey);
+      }
+
+      const logStore = useLogStoreFactory(info.storeName)();
+
+      await logStore.importFromJson(info.storeJson);
+    }
+  } catch (parseError) {
+    showToast("错误的 JSON 格式");
+  }
 }
 
 const showDialog = ref(false);
@@ -57,7 +92,7 @@ function copyJson() {
 }
 
 function downloadJson() {
-  downloadString(json.value, 'store.backup.txt');
+  downloadString(json.value, 'store.backup.json');
 }
 
 async function clearCurr() {

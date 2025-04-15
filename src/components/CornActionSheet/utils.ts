@@ -28,7 +28,7 @@ export function showActionSheetByArray(array: string[]) {
 // resolve 选中的参数值
 // 如果用户不选择就无限 Pending
 export function showActionSheetByArrayEx(array: {showText: string, value: any}[]) {
-    return new Promise(resolve => {
+    return new Promise<string>(resolve => {
         let actions = array.map(el => {
             return {
                 name: el.showText,

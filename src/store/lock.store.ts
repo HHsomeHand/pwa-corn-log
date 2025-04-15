@@ -4,7 +4,7 @@ import {defineStore} from 'pinia';
 export const useLockStore = defineStore(
     'lock',
     () => {
-        const isLock = ref(true);
+        const isLock = ref(false);
         const password = ref("");
 
         return {
