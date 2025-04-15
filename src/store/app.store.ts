@@ -106,7 +106,7 @@ export const useAppStore = defineStore('appStore', () => {
 
     // customAppMode 和 APP_MODE 的差异: APP_MODE 是常量, 用于恢复默认值, 而 customAppMode是变量
     // customAppMode 会记录用户修改的颜色
-    const customAppMode: ConfigRef<ModeMap> = useConfig<AppMode>('customAppMode', {...APP_MODE});
+    const customAppMode = useConfig('customAppMode', {...APP_MODE});
 
     const currentModeKey: ConfigRef<keyof AppMode> = useConfig('currentMode', 'LOG');
 

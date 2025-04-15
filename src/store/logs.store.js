@@ -289,10 +289,6 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
             const store = tx.objectStore('logs');
             const allLogs = await store.getAll();
 
-            if (!allLogs || allLogs.length === 0) {
-                throw new Error('No logs found to export');
-            }
-
             // 将日期字段转换为 ISO 字符串以确保 JSON 兼容性
             const exportData = allLogs.map(log => ({
                 ...log,

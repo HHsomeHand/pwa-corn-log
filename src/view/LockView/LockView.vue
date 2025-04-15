@@ -76,7 +76,7 @@ async function onUnlockBtnClick() {
 }
 
 async function getPassword() {
-  const inputPassword = await showInputPopup({
+  const inputPassword: string = await showInputPopup({
     label: '密码',
     submitText: '确认',
     placeholder: '',
