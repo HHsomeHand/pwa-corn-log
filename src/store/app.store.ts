@@ -9,6 +9,7 @@ import DrugView from "@/view/DrugView/DrugView.vue";
 import type {AppModeEntry} from "@/model/app.type.ts";
 import LoveView from "@/view/LoveView/LoveView.vue";
 import TreatmentView from "@/view/TreatmentView/TreatmentView.vue";
+import {useLogStoreFactory} from "@/store/logs.store";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -132,7 +133,9 @@ export const useAppStore = defineStore('appStore', () => {
             return false;
         }
 
-        // TODO: 删除 indexDB!
+        const logStore = useLogStoreFactory(modeKey)();
+
+        logStore.clearLogs();
 
         delete customAppMode.value[modeKey];
 
