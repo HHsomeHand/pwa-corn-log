@@ -5,7 +5,7 @@ import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
 import {basicModeNames, useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store";
-import {copyToClipboard, downloadString} from "@/utils";
+import {copyToClipboard, downloadString, getStringFromFile} from "@/utils";
 import {showActionSheetByArrayEx} from "@/components/CornActionSheet/utils.ts";
 
 const appStore = useAppStore();
@@ -47,7 +47,7 @@ async function importJSON() {
       submitText: '导入',
     });
   } else {
-    // TODO: 实现文件导入
+    importJson = await getStringFromFile();
   }
 
   let importData: StoreInfo[] = [];
