@@ -9,6 +9,7 @@ import {useLogStoreFactory} from "@/store/logs.store.js";
 import {LogStoreKey} from "@/injectionKeys.js";
 import LockView from "@/view/LockView/LockView.vue";
 
+
 // 保证主题色加载正确
 const appStore = useAppStore();
 

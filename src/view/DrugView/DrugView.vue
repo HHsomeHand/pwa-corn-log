@@ -9,6 +9,7 @@ const props = defineProps({
     default: '距离上次服药约'
   }
 })
+
 const baseIndexViewRef = useTemplateRef("base-index-view-ref");
 
 const logsCache = computed(() => baseIndexViewRef.value?.logsCache ?? []);

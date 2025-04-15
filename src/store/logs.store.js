@@ -272,6 +272,15 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
 
         return result;
     };
+
+    const getLatestLog = async () => {
+        const db = await getDB();
+        const tx = db.transaction('logs', 'readonly');
+        const index = tx.store.index('by_date'); // 使用日期索引
+        const cursor = await index.openCursor(null, 'prev'); // 从末尾开始，按日期降序
+        return cursor ? cursor.value : null; // 返回最新日志或 null
+    };
+
     return {
         logsCache,
         getLogsCount,
@@ -286,7 +295,8 @@ export const useLogStoreFactory = (storeName = 'logs') => defineStore(`logStore_
         generateTestData,
         getDistinctLogs,
         getAllLogsByHour,
-        getLogsFrequencyByHour
+        getLogsFrequencyByHour,
+        getLatestLog
     };
 });
 

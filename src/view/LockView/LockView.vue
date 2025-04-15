@@ -6,14 +6,32 @@ import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
+import type {LogEntry} from "@/model/logs.type.ts";
+import {useListUpdate} from "@/hooks/useListUpdate.ts";
+import {useTimeGap} from "@/hooks/useTimeGap.ts";
 
 const appStore = useAppStore();
+
+const drugStoreName = appStore.appModeEntryMap['DRUG'].storeName;
+
+const drugStore = useLogStoreFactory(drugStoreName)();
+
+const latestDrugDate = ref<Date | null>(null);
+
+async function update() {
+  latestDrugDate.value = await drugStore.getLatestDate();
+}
+
+const {timeGap} = useTimeGap('间隔约', latestDrugDate, '( ', ' )');
+
+useListUpdate(update);
 
 let mapper = [
   {
     appStoreKey: 'DRUG',
     btnTitle: '药',
     logMsg: '服药',
+    timeGap
   },
   {
     appStoreKey: 'LOVE',
@@ -84,7 +102,7 @@ async function getPassword() {
           type="primary"
           @click="onBtnClick(index)"
       >
-        {{info.btnTitle}}
+        {{info.btnTitle}} {{info?.timeGap ?? ""}}
       </van-button>
 
       <van-button
