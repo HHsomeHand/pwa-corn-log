@@ -3,7 +3,6 @@ import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import ConfigViewMode from "@/view/ConfigView/cpn/ConfigViewMode.vue";
 import ConfigViewBgBlur from "@/view/ConfigView/cpn/ConfigViewBgBlur.vue";
 import ConfigViewBgPlus from "@/view/ConfigView/cpn/ConfigViewBgPlus.vue";
-import ConfigViewBg from "@/view/ConfigView/cpn/ConfigViewBg.vue";
 import ConfigViewText from "@/view/ConfigView/cpn/ConfigViewText.vue";
 
 
@@ -49,7 +48,7 @@ function onDefaultClick() {
 
     <config-view-text />
 
-    <config-view-import />
+    <config-view-store-manager />
 
     <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
   </div>
