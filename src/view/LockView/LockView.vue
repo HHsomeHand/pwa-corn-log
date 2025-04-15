@@ -52,6 +52,8 @@ function onBtnClick(index) {
   const logStore = useLogStoreFactory(appStore.appModeEntryMap[appStoreKey].storeName)();
 
   logStore.addLog({log: logStoreInfo.logMsg});
+
+  update();
 }
 
 const lockStore = useLockStore();
@@ -77,7 +79,7 @@ async function getPassword() {
   const inputPassword = await showInputPopup({
     label: '密码',
     submitText: '确认',
-    placeholder: ''
+    placeholder: '',
   });
 
   return inputPassword;

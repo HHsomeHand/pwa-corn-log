@@ -13,19 +13,28 @@ interface PopupFormEntry {
     label ?: string,
     placeholder ?: string,
     type ?: ENTRY_TYPE.STR | ENTRY_TYPE.DATE, // STR -> 输入框, Date -> 选择按钮
-    defaultVal ?: "", // 用于清空 popup 表单, 或设置初始值
+    defaultVal ?: string, // 用于清空 popup 表单, 或设置初始值
     isReturnSubmit ?: boolean, // 是否在该条目, 回车时触发提交
 }
 
-type InputPopupOption = PopupFormEntry & {isPending: boolean, submitText?: string};
+type InputPopupOption = PopupFormEntry & {isPending?: boolean, submitText?: string};
 
-export async function showInputPopup(options: InputPopupOption & {isPending: true}): Promise<string>;
-export async function showInputPopup(options: InputPopupOption & {isPending: false}): Promise<string | null>;
+export async function showInputPopup(options: InputPopupOption & {isPending?: true})
+    : Promise<string>;
 
-export async function showInputPopup({
-     label, placeholder, defaultVal, submitText,
-     isPending = true
-} = {} as InputPopupOption): Promise<string | null> {
+export async function showInputPopup(options: InputPopupOption & {isPending: false})
+    : Promise<string | null>;
+
+export async function showInputPopup(options = {} as InputPopupOption)
+    : Promise<string | null> {
+    let {
+        label,
+        placeholder,
+        defaultVal,
+        submitText,
+        isPending = true
+    } = options;
+
     const result = await showLogFormPopup(null, {
         entries: {
             value: generateEntry({
