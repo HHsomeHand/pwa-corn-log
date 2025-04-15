@@ -23,6 +23,15 @@ async function getStoreJson(storeName: string) {
   return store.exportToJson();
 }
 
+async function getCurrStoreInfo(): Promise<StoreInfo[]> {
+  const currMode = appStore.currentMode;
+
+  return [{
+    ...currMode,
+    storeJson: await getStoreJson(currMode.storeName)
+  }]
+}
+
 async function getStoreInfos(): Promise<StoreInfo[]> {
   const storeInfoPromises: Promise<StoreInfo>[] =
       Object.entries(appStore.customAppMode)
@@ -32,7 +41,7 @@ async function getStoreInfos(): Promise<StoreInfo[]> {
   return await Promise.all(storeInfoPromises);
 }
 
-async function importJSON() {
+async function importJson() {
   const importMode: string = await showActionSheetByArrayEx([
     {showText: "从输入", value: 'input'},
     {showText: "从文件", value: 'file'},
@@ -75,8 +84,8 @@ const showDialog = ref(false);
 
 const json = ref("");
 
-async function exportJSON() {
-  const result: StoreInfo[] = await getStoreInfos();
+async function exportJson(fnGetInfos: () => Promise<StoreInfo[]>) {
+  const result: StoreInfo[] = await fnGetInfos();
 
   showDialog.value = true;
 
@@ -129,9 +138,11 @@ async function getConfirm(): Promise<boolean> {
 
 <template>
   <van-cell-group title="数据备份">
-    <van-cell title="导入" clickable @click="importJSON" is-link/>
+    <van-cell title="导入" clickable @click="importJson" is-link/>
 
-    <van-cell title="导出" clickable @click="exportJSON" is-link/>
+    <van-cell title="导出当前" clickable @click="exportJson(getCurrStoreInfo)" is-link/>
+
+    <van-cell title="导出全部" clickable @click="exportJson(getStoreInfos)" is-link/>
 
     <van-cell title="清空当前" clickable @click="clearCurr" is-link/>
 
