@@ -9,7 +9,8 @@ const {
     isAlwaysShowComment,
     cornLogEmptyCommentMinHeight,
     cornLogMarginBottom,
-    cornListDateGap
+    cornListDateGap,
+    cornLogTimeFontSize
 } = storeToRefs(styleStore);
 </script>
 
@@ -24,6 +25,8 @@ const {
     <corn-num-stepper-cell title="日志条目底部外边距" v-model="cornLogMarginBottom" :min="0" />
 
     <corn-num-stepper-cell title="日期间距" v-model="cornListDateGap" :min="-Infinity" />
+
+    <corn-num-stepper-cell title="时间文字大小" v-model="cornLogTimeFontSize" />
   </van-cell-group>
 
 </template>

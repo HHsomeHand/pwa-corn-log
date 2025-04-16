@@ -69,12 +69,12 @@ const {
                 v-if="item.originalDate"
                 class="inline origin-date-container corn-log__time-displayer"
             >
-              {{ date2str(item.originalDate) }}
+              {{ date2str(item.originalDate) }} <pre> </pre>
               <CornTimeDisplayer :date="item.originalDate"/>
             </div>
 
             <div class="corn-log__time-displayer">
-              {{ date2str(item.date) }}
+              {{ date2str(item.date) }} <pre> </pre>
               <CornTimeDisplayer :date="item.date"/>
             </div>
           </div>
@@ -109,6 +109,7 @@ const {
 .corn-log__time-displayer {
   @apply flex items-center;
   gap: 5px;
+  white-space: nowrap;
 }
 
 /* 删除线 */
