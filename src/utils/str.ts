@@ -6,9 +6,9 @@ export function removeEmptyLines(text: string) {
         .join('\n'); // 重新拼接为字符串
 }
 
-export function copyToClipboard(text: string) {
+export function copyToClipboard(text: string, toastMsg = '文本已成功复制到剪切板！') {
     navigator.clipboard.writeText(text).then(() => {
-        showToast('文本已成功复制到剪切板！');
+        showToast(toastMsg);
     }).catch(err => {
         showToast('复制失败');
     });

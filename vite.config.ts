@@ -9,6 +9,7 @@ import Components from 'unplugin-vue-components/vite';
 import { VantResolver } from '@vant/auto-import-resolver';
 import tailwindcss from '@tailwindcss/vite'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -45,7 +46,8 @@ export default defineConfig({
       sassVariables: fileURLToPath(
           new URL('./src/quasar-variables.sass', import.meta.url)
       )
-    })
+    }),
+    vueJsx()
   ],
   resolve: {
     alias: {

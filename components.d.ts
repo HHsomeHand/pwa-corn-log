@@ -40,6 +40,7 @@ declare module 'vue' {
     CornNumberPopup: typeof import('./src/popup/CornNumberPopup/CornNumberPopup.vue')['default']
     CornPopup: typeof import('./src/popup/CornPopup/CornPopup.vue')['default']
     CornPowerfulList: typeof import('./src/components/CornPowerfulList/CornPowerfulList.vue')['default']
+    CornSpace: typeof import('./src/components/CornSpace.vue')['default']
     CornStatisticsDisplayer: typeof import('./src/view/TreatmentView/cpns/CornStatisticsDisplayer.vue')['default']
     CornStoreCountDisplayer: typeof import('./src/view/LoveView/cpns/CornStoreCountDisplayer.vue')['default']
     CornTimeDisplayer: typeof import('./src/components/CornTimeDisplayer.vue')['default']

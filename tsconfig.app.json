@@ -18,7 +18,10 @@
     "noUncheckedSideEffectImports": true,
     "strictNullChecks": true, // 开启对可能null值的成员访问的语法检查
     "allowJs": true, // 允许处理 JS 文件
-    "checkJs": true // 启用 JS 文件的类型检查
+    "checkJs": true, // 启用 JS 文件的类型检查
+
+    "jsx": "preserve",
+    "jsxImportSource": "vue"
   },
   "include": [
     "src/**/*.ts",
