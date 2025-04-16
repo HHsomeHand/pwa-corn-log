@@ -65,6 +65,8 @@ let { onCellClick } = useCornLog(logs, store);
   </teleport>
 
   <div class="search-view view">
+    <corn-space :height="10" />
+
     <ul>
       <li v-for="(item, index) in logs" @click="onCellClick(item)">
         <corn-log :item="item"/>
