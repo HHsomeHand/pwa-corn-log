@@ -12,6 +12,7 @@ declare module 'vue' {
     BaseIndexView: typeof import('./src/view/BaseIndexView/BaseIndexView.vue')['default']
     CalendarView: typeof import('./src/view/CalendarView/CalendarView.vue')['default']
     ConfigView: typeof import('./src/view/ConfigView/ConfigView.vue')['default']
+    ConfigViewAbout: typeof import('./src/view/ConfigView/cpn/ConfigViewAbout.vue')['default']
     ConfigVIewBg: typeof import('./src/view/ConfigView/cpn/ConfigVIewBg.vue')['default']
     ConfigViewBgBlur: typeof import('./src/view/ConfigView/cpn/ConfigViewBgBlur.vue')['default']
     ConfigViewBgPlus: typeof import('./src/view/ConfigView/cpn/ConfigViewBgPlus.vue')['default']

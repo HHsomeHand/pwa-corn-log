@@ -9,8 +9,6 @@ import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {LogStoreKey} from "@/injectionKeys.js";
 import type {ListLogEntry, LogEntry} from "@/model/logs.type.ts";
 import cornMitt from "@/mitt/mitt.ts";
-import {useCpnStore} from "@/store/CpnStore/cpn.store.ts";
-import {POWERFUL_LIST_ID} from "@/store/CpnStore/cpn.keys.ts";
 
 const logsCache = defineModel<ListLogEntry[]>({required: true});
 
@@ -19,8 +17,6 @@ let store = inject(LogStoreKey);
 const scrollerRef = useTemplateRef("scrollerRef")
 
 const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
-
-const cpnStore = useCpnStore();
 
 // 让体内元素可以滚动
 onMounted( async () => {
@@ -46,12 +42,6 @@ onMounted( async () => {
   })
 
   const instance = getCurrentInstance()
-
-  cpnStore.registerComponent(POWERFUL_LIST_ID, instance?.exposed);
-});
-
-onUnmounted(() => {
-  cpnStore.unregisterComponent(POWERFUL_LIST_ID);
 });
 
 function toBottom() {

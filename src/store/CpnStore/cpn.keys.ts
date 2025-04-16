@@ -1,1 +1,0 @@
-export const POWERFUL_LIST_ID = "powerful-list";
