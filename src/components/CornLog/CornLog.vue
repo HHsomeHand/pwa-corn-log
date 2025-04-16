@@ -89,7 +89,7 @@ const {
       </van-cell>
 
       <template #right>
-        <van-button @click="onDelete" square text="删除" type="danger" class="delete-button"/>
+        <van-button @click="onDelete" square text="删除" type="danger" class="delete-button !h-full"/>
       </template>
     </van-swipe-cell>
 
