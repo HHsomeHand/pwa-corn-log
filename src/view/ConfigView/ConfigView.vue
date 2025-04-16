@@ -4,7 +4,8 @@ import ConfigViewMode from "@/view/ConfigView/cpn/ConfigViewMode.vue";
 import ConfigViewBgBlur from "@/view/ConfigView/cpn/ConfigViewBgBlur.vue";
 import ConfigViewBgPlus from "@/view/ConfigView/cpn/ConfigViewBgPlus.vue";
 import ConfigViewText from "@/view/ConfigView/cpn/ConfigViewText.vue";
-
+import ConfigViewFontSize from "@/view/ConfigView/cpn/ConfigViewFontSize.vue";
+import {useStyleStore} from "@/store/style.store.ts";
 
 function onClickLeft() {
   history.back();
@@ -15,8 +16,11 @@ const wallpaperStore = useWallpaperStore();
 
 const bgConfigRef = useTemplateRef("bg-config");
 
+const styleStore = useStyleStore();
+
 function onDefaultClick() {
   wallpaperStore.setDefault();
+  styleStore.setDefault();
 
   bgConfigRef.value?.emptyPhoto();
 }
@@ -53,6 +57,8 @@ function onDefaultClick() {
     <config-view-log-style />
 
     <config-view-about />
+
+    <config-view-font-size />
 
     <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
   </div>

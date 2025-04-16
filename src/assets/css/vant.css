@@ -2,10 +2,16 @@
 :root:root {
     /* vant 默认的 font-size 太小了, 这里用豆包每个加了 3px */
     --corn-stroke-multiple: 5;
-    --van-font-size-xs: calc(13px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
-    --van-font-size-sm: calc(15px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
-    --van-font-size-md: calc(17px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
-    --van-font-size-lg: calc(19px + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+
+    --corn-font-size-xs: 13px;
+    --corn-font-size-sm: 15px;
+    --corn-font-size-md: 17px;
+    --corn-font-size-lg: 19px;
+
+    --van-font-size-xs: calc(var(--corn-font-size-xs) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-sm: calc(var(--corn-font-size-sm) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-md: calc(var(--corn-font-size-md) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-lg: calc(var(--corn-font-size-lg) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
 
     --van-primary-color: #ff8917;
 

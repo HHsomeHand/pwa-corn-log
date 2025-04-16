@@ -1,0 +1,27 @@
+<script setup lang="ts">
+import {useStyleStore} from "@/store/style.store.ts";
+import {storeToRefs} from "pinia";
+import CornNumStepperCell from "@/components/CornNumStepperCell.vue";
+
+const styleStore = useStyleStore();
+
+const {
+  cornFontSizeXs,
+  cornFontSizeSm,
+  cornFontSizeMd,
+  cornFontSizeLg,
+} = storeToRefs(styleStore);
+</script>
+
+<template>
+  <van-cell-group title="字体设置 · 像素单位 ">
+    <corn-num-stepper-cell title="最小字体" v-model="cornFontSizeXs" />
+    <corn-num-stepper-cell title="小字体" v-model="cornFontSizeSm" />
+    <corn-num-stepper-cell title="中号字体" v-model="cornFontSizeMd" />
+    <corn-num-stepper-cell title="最大字体" v-model="cornFontSizeLg" />
+  </van-cell-group>
+</template>
+
+<style scoped>
+
+</style>
