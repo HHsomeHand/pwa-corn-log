@@ -28,7 +28,7 @@ export const useStyleStore = defineStore(
 
         const cornListDateGap = useCssVarFormat('--corn-list-date-gap', 0, 'px');
 
-        const cornLogTimeFontSize = useCssVarFormat('--corn-log-time-font-size', 12, 'px');
+        const cornLogTimeFontSize = useCssVarFormat('--corn-log-time-font-size', 25, 'px');
 
         // --corn-log-time-date-min-width
         const cornLogTimeDateMinWidth = useCssVarFormat('--corn-log-time-date-min-width', 50, 'px');
