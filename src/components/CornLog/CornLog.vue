@@ -67,13 +67,12 @@ const {
           <div class="corn-log__container my-flex flex-col gap-2">
             <div
                 v-if="item.originalDate"
-                class="corn-log__time-displayer"
+                class="inline origin-date-container corn-log__time-displayer"
             >
-              <p class="inline origin-date-container">
-                {{ date2str(item.originalDate) }}
-                <CornTimeDisplayer :date="item.originalDate"/>
-              </p>
+              {{ date2str(item.originalDate) }}
+              <CornTimeDisplayer :date="item.originalDate"/>
             </div>
+
             <div class="corn-log__time-displayer">
               {{ date2str(item.date) }}
               <CornTimeDisplayer :date="item.date"/>
@@ -89,7 +88,7 @@ const {
     </van-swipe-cell>
 
     <van-notice-bar
-        class="min-h-[var(--corn-log-empty-comment-min-height)]"
+        class="min-h-[var(--corn-log-empty-comment-min-height)] rounded-b-lg overflow-hidden"
         wrapable
         v-if="item.comment || isAlwaysShowComment"
         :scrollable="false"
@@ -105,6 +104,11 @@ const {
 <style scoped>
 .corn-log {
   --van-notice-bar-text-color: var(--van-primary-color);
+}
+
+.corn-log__time-displayer {
+  @apply flex items-center;
+  gap: 5px;
 }
 
 /* 删除线 */
