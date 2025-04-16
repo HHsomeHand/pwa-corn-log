@@ -30,7 +30,9 @@ export const useStyleStore = defineStore(
 
         const cornLogTimeFontSize = useCssVarFormat('--corn-log-time-font-size', 12, 'px');
 
-        console.log(cornLogTimeFontSize.value);
+        // --corn-log-time-date-min-width
+        const cornLogTimeDateMinWidth = useCssVarFormat('--corn-log-time-date-min-width', 50, 'px');
+
         const entries = {
             cornLogSpaceHeight,
             cornFontSizeXs,
@@ -41,7 +43,8 @@ export const useStyleStore = defineStore(
             cornLogEmptyCommentMinHeight,
             cornLogMarginBottom,
             cornListDateGap,
-            cornLogTimeFontSize
+            cornLogTimeFontSize,
+            cornLogTimeDateMinWidth
         }
 
         function setDefault() {

@@ -10,7 +10,8 @@ const {
     cornLogEmptyCommentMinHeight,
     cornLogMarginBottom,
     cornListDateGap,
-    cornLogTimeFontSize
+    cornLogTimeFontSize,
+    cornLogTimeDateMinWidth
 } = storeToRefs(styleStore);
 </script>
 
@@ -27,6 +28,11 @@ const {
     <corn-num-stepper-cell title="日期间距" v-model="cornListDateGap" :min="-Infinity" />
 
     <corn-num-stepper-cell title="时间文字大小" v-model="cornLogTimeFontSize" />
+
+    <corn-num-stepper-cell title="时间文字大小" v-model="cornLogTimeFontSize" />
+
+    <corn-num-stepper-cell title="日志条目日期最小宽度" v-model="cornLogTimeDateMinWidth" />
+
   </van-cell-group>
 
 </template>

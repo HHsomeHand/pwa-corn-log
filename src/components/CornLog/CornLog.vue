@@ -69,12 +69,18 @@ const {
                 v-if="item.originalDate"
                 class="inline origin-date-container corn-log__time-displayer"
             >
-              {{ date2str(item.originalDate) }} <pre> </pre>
+              <span class="corn-log__date-displayer">
+                {{ date2str(item.originalDate) }}
+              </span>
+
               <CornTimeDisplayer :date="item.originalDate"/>
             </div>
 
             <div class="corn-log__time-displayer">
-              {{ date2str(item.date) }} <pre> </pre>
+              <span class="corn-log__date-displayer">
+                {{ date2str(item.date) }}
+              </span>
+
               <CornTimeDisplayer :date="item.date"/>
             </div>
           </div>
@@ -104,6 +110,10 @@ const {
 <style scoped>
 .corn-log {
   --van-notice-bar-text-color: var(--van-primary-color);
+}
+
+.corn-log__date-displayer {
+  min-width: var(--corn-log-time-date-min-width);
 }
 
 .corn-log__time-displayer {
