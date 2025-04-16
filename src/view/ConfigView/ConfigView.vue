@@ -50,6 +50,8 @@ function onDefaultClick() {
 
     <config-view-store-manager />
 
+    <config-view-log-style />
+
     <config-view-about />
 
     <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>

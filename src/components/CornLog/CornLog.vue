@@ -2,6 +2,8 @@
 
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {fmtDate, isSameDay} from "@/utils/index.js";
+import {useStyleStore} from "@/store/style.store.js";
+import {storeToRefs} from "pinia";
 
 const props = defineProps({
   item: {
@@ -41,6 +43,11 @@ const emits = defineEmits(["delete"]);
 function onDelete() {
   emits("delete", props.item);
 }
+
+const styleStore = useStyleStore();
+
+const {cornLogSpaceHeight} = storeToRefs(styleStore);
+
 </script>
 
 <template>
@@ -66,6 +73,7 @@ function onDelete() {
               <CornTimeDisplayer :date="item.date" />
             </div>
           </div>
+          <corn-space :height="cornLogSpaceHeight" />
         </template>
       </van-cell>
       <template #right>
