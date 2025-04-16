@@ -24,6 +24,10 @@ export const useStyleStore = defineStore(
 
         const cornLogEmptyCommentMinHeight = useCssVarFormat('--corn-log-empty-comment-min-height', 1.5, 'em');
 
+        const cornLogMarginBottom = useCssVarFormat('--corn-log-margin-bottom', 0, 'px');
+
+        const cornListDateGap = useCssVarFormat('--corn-list-date-gap', 0, 'px');
+
         const entries = {
             cornLogSpaceHeight,
             cornFontSizeXs,
@@ -31,7 +35,9 @@ export const useStyleStore = defineStore(
             cornFontSizeMd,
             cornFontSizeLg,
             isAlwaysShowComment,
-            cornLogEmptyCommentMinHeight
+            cornLogEmptyCommentMinHeight,
+            cornLogMarginBottom,
+            cornListDateGap
         }
 
         function setDefault() {

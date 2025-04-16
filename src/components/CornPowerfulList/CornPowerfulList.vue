@@ -9,6 +9,8 @@ import {showCheckboxPopup} from "@/popup/CornCheckboxPopup/utils.js";
 import {LogStoreKey} from "@/injectionKeys.js";
 import type {ListLogEntry, LogEntry} from "@/model/logs.type.ts";
 import cornMitt from "@/mitt/mitt.ts";
+import {useStyleStore} from "@/store/style.store.ts";
+import {storeToRefs} from "pinia";
 
 const logsCache = defineModel<ListLogEntry[]>({required: true});
 
@@ -203,6 +205,12 @@ function onDelete(item, index) {
   cornMitt.emit("list:delete", item);
 }
 
+const styleStore = useStyleStore();
+
+const {
+  cornListDateGap
+} = storeToRefs(styleStore);
+
 defineExpose({
   toBottom,
   scrollToDate,
@@ -226,6 +234,7 @@ defineExpose({
             data-type="separator"
             @click="onSeparatorClick(index)"
         >
+          <corn-space :height="cornListDateGap" />
           <van-divider>{{fmtDate(getDisplayDate(item))}}</van-divider>
         </li>
 

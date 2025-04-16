@@ -71,6 +71,8 @@ function onCellClick(log: string, item: HourEntry) {
         />
       </van-cell-group>
     </template>
+
+    <corn-space :height="20" />
   </template>
 </template>
 
