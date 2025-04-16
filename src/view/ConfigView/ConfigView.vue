@@ -6,6 +6,12 @@ import ConfigViewBgPlus from "@/view/ConfigView/cpn/ConfigViewBgPlus.vue";
 import ConfigViewText from "@/view/ConfigView/cpn/ConfigViewText.vue";
 import ConfigViewFontSize from "@/view/ConfigView/cpn/ConfigViewFontSize.vue";
 import {useStyleStore} from "@/store/style.store.ts";
+import ConfigViewLock from "@/view/ConfigView/cpn/ConfigViewLock.vue";
+import ConfigViewBg from "@/view/ConfigView/cpn/ConfigViewBg.vue";
+import ConfigViewModePlus from "@/view/ConfigView/cpn/ConfigViewModePlus.vue";
+import ConfigViewStoreManager from "@/view/ConfigView/cpn/ConfigViewStoreManager/ConfigViewStoreManager.vue";
+import ConfigViewLogStyle from "@/view/ConfigView/cpn/ConfigViewLogStyle.vue";
+import ConfigViewAbout from "@/view/ConfigView/cpn/ConfigViewAbout.vue";
 
 function onClickLeft() {
   history.back();

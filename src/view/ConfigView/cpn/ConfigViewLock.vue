@@ -2,16 +2,11 @@
 
 import {useLockStore} from "@/store/lock.store.ts";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
+import {storeToRefs} from "pinia";
 
 const lockStore = useLockStore();
 
-const lockStatusText = computed(() => {
-  return lockStore.isLock ? "启用" : "停用";
-})
-
-function toggleLock() {
-  lockStore.isLock = !lockStore.isLock;
-}
+const {isLock} = storeToRefs(lockStore);
 
 async function getPassword() {
   const inputPassword = await showInputPopup({
@@ -26,7 +21,7 @@ async function getPassword() {
 
 <template>
   <van-cell-group title="隐私模式">
-    <van-cell title="启用状态" :value="lockStatusText" clickable @click="toggleLock"/>
+    <corn-toggle-enable-cell title="启用状态" v-model="isLock" />
 
     <van-cell title="密码" :value="lockStore.password" clickable @click="getPassword"/>
   </van-cell-group>

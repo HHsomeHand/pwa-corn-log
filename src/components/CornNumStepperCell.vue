@@ -5,6 +5,10 @@ const props = defineProps({
   title: {
     type: String,
     default: ""
+  },
+  min: {
+    type: Number,
+    default: 0
   }
 });
 
@@ -14,7 +18,7 @@ const modelValue = defineModel<any>({required: true});
 <template>
   <van-cell :title="title">
     <template #right-icon>
-      <van-stepper v-model="modelValue"/>
+      <van-stepper :min="min" v-model="modelValue"/>
     </template>
   </van-cell>
 </template>

@@ -1,6 +1,7 @@
 // stores/counter.js
 import {defineStore} from 'pinia';
 import {useCssVarFormat} from "@/hooks/useCssVarFormat.ts";
+import {useConfig} from "@/hooks/useConfig.ts";
 
 export const useStyleStore = defineStore(
     'styles',
@@ -19,6 +20,9 @@ export const useStyleStore = defineStore(
         //     --corn-font-size-lg: 19px;
         const cornFontSizeLg = useCssVarFormat('--corn-font-size-lg', 19, 'px');
 
+        const isAlwaysShowComment = useConfig('is-always-show-comment', false);
+
+        const cornLogEmptyCommentMinHeight = useCssVarFormat('--corn-log-empty-comment-min-height', 1.5, 'em');
 
         const entries = {
             cornLogSpaceHeight,
@@ -26,6 +30,8 @@ export const useStyleStore = defineStore(
             cornFontSizeSm,
             cornFontSizeMd,
             cornFontSizeLg,
+            isAlwaysShowComment,
+            cornLogEmptyCommentMinHeight
         }
 
         function setDefault() {

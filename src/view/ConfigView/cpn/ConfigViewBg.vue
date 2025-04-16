@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
+import CornCellColorPicker from "@/components/CornCellColorPicker.vue";
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
 

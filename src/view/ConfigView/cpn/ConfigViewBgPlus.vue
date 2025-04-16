@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {WALLPAPER_SIZE_MAPPER, WALLPAPER_X_POS, WALLPAPER_Y_POS} from "@/const/wallpaper";
-import CornCellEnumNumber from "@/view/ConfigView/cpn/CornCellEnumNumber.vue";
+import CornCellEnumNumber from "@/components/CornCellEnumNumber.vue";
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
 

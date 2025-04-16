@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import CornCellColorPicker from "@/view/ConfigView/cpn/CornCellColorPicker.vue";
+import CornCellColorPicker from "@/components/CornCellColorPicker.vue";
 import colorValues, {CUSTOM_ORANGE_HEX} from "@/color/vant.color.ts";
 import {useAppStore} from "@/store/app.store.ts";
 import {storeToRefs} from "pinia";

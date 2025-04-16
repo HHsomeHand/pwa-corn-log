@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 
 import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {fmtDate, isSameDay} from "@/utils/index.js";
@@ -46,7 +46,7 @@ function onDelete() {
 
 const styleStore = useStyleStore();
 
-const {cornLogSpaceHeight} = storeToRefs(styleStore);
+const {cornLogSpaceHeight, isAlwaysShowComment} = storeToRefs(styleStore);
 
 </script>
 
@@ -81,12 +81,14 @@ const {cornLogSpaceHeight} = storeToRefs(styleStore);
       </template>
     </van-swipe-cell>
     <van-notice-bar
+        class="min-h-[var(--corn-log-empty-comment-min-height)]"
         wrapable
-        v-if="item.comment"
+        v-if="item.comment || isAlwaysShowComment"
         :scrollable="false"
-        :text="item.comment"
         background="var(--van-primary-color-2)"
-    />
+    >
+      {{item.comment}}
+    </van-notice-bar>
   </div>
 </template>
 

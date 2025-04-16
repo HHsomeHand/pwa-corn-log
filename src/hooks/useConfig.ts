@@ -41,7 +41,7 @@ export function useConfig<T>(key: string, defaultValue: T) {
   }
 
   if (typeof defaultValue === 'boolean') {
-    storeValue = Boolean(defaultValue) as T;
+    storeValue = Boolean(storeValue) as T;
   }
 
   // 双重断言, 瞒天过海, 骗过 TS 编译器

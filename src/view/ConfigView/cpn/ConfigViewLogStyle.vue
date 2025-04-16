@@ -4,16 +4,20 @@ import {storeToRefs} from "pinia";
 
 const styleStore = useStyleStore();
 
-const {cornLogSpaceHeight} = storeToRefs(styleStore);
+const {
+    cornLogSpaceHeight,
+    isAlwaysShowComment,
+    cornLogEmptyCommentMinHeight
+} = storeToRefs(styleStore);
 </script>
 
 <template>
   <van-cell-group title="日志样式">
-    <van-cell title="日志条目增高">
-      <template #right-icon>
-        <van-stepper :min="0" v-model="cornLogSpaceHeight"/>
-      </template>
-    </van-cell>
+    <corn-num-stepper-cell title="日志条目增高" v-model="cornLogSpaceHeight" :min="0" />
+
+    <corn-toggle-enable-cell title="恒显示备注" v-model="isAlwaysShowComment" />
+
+    <corn-num-stepper-cell title="备注最小高度" v-model="cornLogEmptyCommentMinHeight" :min="0" />
   </van-cell-group>
 
 </template>
