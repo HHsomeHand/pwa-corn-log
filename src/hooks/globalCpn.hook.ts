@@ -1,5 +1,6 @@
 // globalCpn.hook.ts
 import {createApp} from 'vue'
+import {i18n} from "@/i18n";
 
 function createSingletonInstance<T extends ComponentPublicInstance>(component: Component) {
     let instance: T | null = null
@@ -8,7 +9,7 @@ function createSingletonInstance<T extends ComponentPublicInstance>(component: C
         if (!instance) {
             const div = document.createElement('div')
             document.body.appendChild(div)
-            instance = createApp(component).mount(div) as T;
+            instance = createApp(component).use(i18n).mount(div) as T;
         }
         return instance
     }

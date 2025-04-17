@@ -1,7 +1,9 @@
-import zhIndexBase from './index-base.ts'
-import zhAppStore from './app-store.ts'
+import msgIndexBase from './index-base.ts'
+import msgAppStore from './app-store.ts'
+import msgCornDateSelectButton from './corn-date-select-button.ts'
 
 export default {
-    indexBase: zhIndexBase,
-    appStore: zhAppStore,
+    indexBase: msgIndexBase,
+    appStore: msgAppStore,
+    cornDateSelectButton: msgCornDateSelectButton,
 }

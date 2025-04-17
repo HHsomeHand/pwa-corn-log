@@ -2,6 +2,7 @@
 import {fmtDate} from "../../../utils/index.js";
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
 import {showTimePickerDialog} from "@/dialog/CornTimePickerDialog/utils.js";
+import {useI18n} from "vue-i18n";
 
 const date= defineModel();
 
@@ -51,6 +52,8 @@ function onHMSClick() {
 
   showTimePickerDialog(onDialogConfirm, {date: YMDDate.value});
 }
+
+const {t} = useI18n();
 </script>
 
 <template>
@@ -60,7 +63,7 @@ function onHMSClick() {
       type="primary"
       @click="onYMDClick"
   >
-    日期选择 {{fmtDate(YMDDate, "YYYY/MM/DD")}}
+    {{t('cornDateSelectButton.dateSelect')}} {{fmtDate(YMDDate, "YYYY/MM/DD")}}
   </van-button>
 
   <van-button
@@ -69,7 +72,7 @@ function onHMSClick() {
       type="primary"
       @click="onHMSClick"
   >
-    时间选择 {{fmtDate(HMSDate, "HH:mm:ss")}}
+    {{t('cornDateSelectButton.timeSelect')}} {{fmtDate(HMSDate, "HH:mm:ss")}}
   </van-button>
 </template>
 

@@ -32,11 +32,11 @@ pinia.use(piniaPluginPersistedstate);
 
 const app = createApp(App)
 
+app.use(i18n);
+
 app.use(pinia);
 
 setupRouterWithStore();
-
-app.use(i18n);
 
 app.use(router)
 app.use(VueVirtualScroller)
