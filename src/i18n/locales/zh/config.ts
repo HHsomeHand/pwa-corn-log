@@ -1,6 +1,19 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    modePlus: {
+        cellGroupTitle: '模式 · 高级设置',
+        addModeBtnText: '添加模式',
+        deleteModeBtnText: '删除模式',
+        selectTemplateTip: '请选择模板',
+        modeName: '模式名',
+        create: '创建',
+        createModeSuccessTip: '创建成功',
+        createModeFailTip: '创建失败, 命名冲突',
+        noModeToRemoveTip: '没有可以移除的自定义模式',
+        removeSuccessTip: '删除成功',
+        removeFailTip: '删除失败',
+    },
     mode: {
         cellGroupTitle: '模式',
         currMode: '当前模式',
