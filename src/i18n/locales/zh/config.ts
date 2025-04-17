@@ -123,5 +123,8 @@ export default {
         mdFontSize: '中号字体',
         lgFontSize: '最大字体',
     },
-
+    language: {
+        cellGroupTitle: "语言",
+        changeLanguageBtnText: "切换语言",
+    }
 }
