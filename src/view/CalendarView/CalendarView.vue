@@ -3,6 +3,7 @@
 
 import {useRouter} from "vue-router";
 import {ROUTE_INDEX} from "@/const/route.ts";
+import {useI18n} from "vue-i18n";
 
 const router = useRouter();
 
@@ -12,6 +13,8 @@ function onConfirm(date) {
     query: { timestamp: date.getTime() }
   });
 }
+
+const {t} = useI18n();
 </script>
 
 <template>
@@ -19,7 +22,7 @@ function onConfirm(date) {
     <van-calendar
         @confirm="onConfirm"
         :poppable="false"
-        title="选择时间"
+        :title="t('calc.calcTitle')"
         :min-date="new Date(0)"
         :max-date="new Date()"
         switch-mode="month"

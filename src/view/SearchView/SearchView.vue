@@ -4,6 +4,7 @@ import {useLogStore} from "@/store/logs.store.js";
 import CornLog from "@/components/CornLog/CornLog.vue";
 import {useCornLog} from "@/components/CornLog/hook.ts";
 import {LogStoreKey} from "@/injectionKeys.js";
+import {useI18n} from "vue-i18n";
 
 const SEARCH_TYPE = Object.freeze({
   LOG: 'log',
@@ -12,9 +13,13 @@ const SEARCH_TYPE = Object.freeze({
 
 const searchType = ref(SEARCH_TYPE.LOG);
 
+const {t} = useI18n();
+
 const searchOption = [
-  { text: '日志内容', value: SEARCH_TYPE.LOG},
-  { text: '备注', value: SEARCH_TYPE.COMMENT },
+  //   '日志内容'
+  { text: t('search.logTypeTitle'), value: SEARCH_TYPE.LOG},
+  //   '备注'
+  { text: t('search.commentTypeTitle'), value: SEARCH_TYPE.COMMENT },
 ];
 
 const searchContent = ref("");
@@ -47,7 +52,7 @@ let { onCellClick } = useCornLog(logs, store);
           class="nav-bar__search grow rounded-r-full overflow-hidden"
           v-model="searchContent"
           shape="round"
-          placeholder="请输入搜索内容"
+          :placeholder="t('search.searchPlaceholder')"
           background="transparent"
           @search="onSearch"
       />
@@ -59,7 +64,7 @@ let { onCellClick } = useCornLog(logs, store);
           class="shrink-0"
           @click="onSearch"
       >
-        搜索
+        {{ t('search.searchBtnText') }}
       </van-button>
     </div>
   </teleport>
@@ -73,7 +78,8 @@ let { onCellClick } = useCornLog(logs, store);
       </li>
     </ul>
 
-    <van-empty v-if="logs.length === 0" image="search" description="无搜索结果" />
+<!--    "无搜索结果"-->
+    <van-empty v-if="logs.length === 0" image="search" :description="t('search.emptyDescription')" />
   </div>
 </template>
 
