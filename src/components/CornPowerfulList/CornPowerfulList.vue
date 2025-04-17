@@ -179,6 +179,19 @@ function onSeparatorClick(index) {
     let cursor = index;
     let result = "";
 
+    /*
+      prompt:
+        排序 设计一个函数保证这样的顺序: ["date", "log", "comment"]
+        输入可能为["date"?, "log"?, "comment"?] ?表示元素可能不存在, 且顺序不一致
+        设计为JS函数
+     */
+    function sortArray(arr) {
+      const order = ['date', 'log', 'comment'];
+      return order.filter(item => arr.includes(item));
+    }
+
+    checked = sortArray(checked);
+
     while (fmtDate(logsCache.value[cursor]?.date) === _date_fmt) {
       for (let name of checked) {
         let value =  logsCache.value[cursor][name];
