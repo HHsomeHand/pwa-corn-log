@@ -5,6 +5,7 @@ import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {LogStoreKey} from "@/injectionKeys.js";
 import LockView from "@/view/LockView/LockView.vue";
+import {useI18n} from "vue-i18n";
 
 
 // 保证主题色加载正确
@@ -32,6 +33,8 @@ onMounted(() => {
 const store = useLogStoreFactory(appStore.currentMode.storeName)();
 
 provide(LogStoreKey, store);
+
+const {t} = useI18n();
 </script>
 
 <template>
@@ -44,10 +47,14 @@ provide(LogStoreKey, store);
     <router-view></router-view>
 
     <van-tabbar class="!w-screen" route placeholder>
-      <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item to="/cal" icon="calendar-o">日历</van-tabbar-item>
-      <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
-      <van-tabbar-item to="/config" icon="setting-o">设置</van-tabbar-item>
+<!--      首页-->
+      <van-tabbar-item to="/" icon="home-o">{{t('tabBar.index')}}</van-tabbar-item>
+<!--      日历-->
+      <van-tabbar-item to="/cal" icon="calendar-o">{{t('tabBar.calc')}}</van-tabbar-item>
+<!--      搜索-->
+      <van-tabbar-item to="/search" icon="search">{{t('tabBar.search')}}</van-tabbar-item>
+<!--      设置-->
+      <van-tabbar-item to="/config" icon="setting-o">{{t('tabBar.settings')}}</van-tabbar-item>
     </van-tabbar>
 
     <lock-view/>
