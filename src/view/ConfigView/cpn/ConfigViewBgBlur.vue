@@ -15,14 +15,23 @@ const {
 
 <template>
 
+<!--
   <van-cell-group title="背景图片・毛玻璃特效 (背景色需透明) ">
+-->
+  <van-cell-group :title="t('config.bgBlur.cellGroupTitle')">
+<!--
     <van-cell title="是否启用">
+-->
+    <van-cell :title="t('config.bgBlur.isEnable')">
       <template #right-icon>
         <van-checkbox v-model="isBlur"/>
       </template>
     </van-cell>
 
+<!--
     <van-cell title="模糊半径">
+-->
+    <van-cell :title="t('config.bgBlur.blurRadius')">
       <template #right-icon>
         <van-stepper v-model="cornBackdropPx"/>
       </template>

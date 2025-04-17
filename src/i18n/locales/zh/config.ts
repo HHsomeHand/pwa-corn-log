@@ -1,6 +1,11 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    bgBlur: {
+        cellGroupTitle: '背景图片・毛玻璃特效 (背景色需透明) ',
+        isEnable: '是否启用',
+        blurRadius: '模糊半径',
+    },
     bg: {
         cellGroupTitle: '背景图片',
         currBgImage: '当前背景图片',
