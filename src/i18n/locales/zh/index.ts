@@ -6,6 +6,7 @@ import msgCalc from './calc.ts'
 import msgSearch from './search.ts'
 import msgTime from './time.ts'
 import msgTabBar from './tab-bar.ts'
+import msgList from './list.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -15,5 +16,6 @@ export default {
     calc: msgCalc,
     search: msgSearch,
     time: msgTime,
-    tabBar: msgTabBar
+    tabBar: msgTabBar,
+    list: msgList,
 }

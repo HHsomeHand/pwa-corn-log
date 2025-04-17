@@ -11,6 +11,7 @@ import type {ListLogEntry, LogEntry} from "@/model/logs.type.ts";
 import cornMitt from "@/mitt/mitt.ts";
 import {useStyleStore} from "@/store/style.store.ts";
 import {storeToRefs} from "pinia";
+import {useI18n} from "vue-i18n";
 
 const logsCache = defineModel<ListLogEntry[]>({required: true});
 
@@ -55,13 +56,16 @@ function toBottom() {
   });
 }
 
+const {t} = useI18n();
+
 async function scrollToDate(date) {
   if (!scrollerRef.value) return;
 
   showLoadingToast({
     duration: 0,
     forbidClick: true,
-    message: '加载中',
+    // "加载中"
+    message: t('list.loadingTip'),
   });
 
   await updateToDate(date);
@@ -113,7 +117,13 @@ async function scrollToDate(date) {
     } else {
       // 这里是找到了的情况
       if (isClose) {
-        showToast(`未找到日期 ${targetDateFmt} 的日志项, 已就近查找 ${_targetDateFmt}`)
+        /*
+                showToast(`未找到日期 ${targetDateFmt} 的日志项, 已就近查找 ${_targetDateFmt}`)
+         */
+        showToast(t('list.closeToastTip', {
+          targetDateFmt,
+          closeDateFmt: _targetDateFmt,
+        })/* t */);
       }
       break;
     }
@@ -130,7 +140,10 @@ async function scrollToDate(date) {
      */
     targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
-      showToast(`未找到日期 ${targetDateFmt} 的日志项`);
+      // `未找到日期 ${targetDateFmt} 的日志项`
+      showToast(t('list.notFountToastTip', {
+        targetDateFmt,
+      }) /* t */ );
   }
 }
 
@@ -175,7 +188,8 @@ function onSeparatorClick(index) {
         if (name === 'date') {
           value = fmtDate(value, "YYYY-MM-DD HH:mm:ss");
         } else if (name === 'comment') {
-          result += " 备注: "
+          // " 备注: "
+          result += t('list.copyComment');
         }
         result += value + " ";
       }
@@ -188,13 +202,16 @@ function onSeparatorClick(index) {
   }, {
     entries: [{
       name: 'date',
-      text: '日期'
+      // '日期'
+      text: t('list.date')
     }, {
       name: 'log',
-      text: '日志'
+      // '日志'
+      text: t('list.log')
     }, {
       name: 'comment',
-      text: '备注'
+      // '备注'
+      text: t('list.comment')
     }]
   });
 }
@@ -239,7 +256,7 @@ defineExpose({
         </li>
 
         <li v-if="item.type==='end'">
-          <van-divider>这里是日志的尽头</van-divider>
+          <van-divider> {{ t("list.endTip") }} </van-divider>
         </li>
         <li
             v-else
