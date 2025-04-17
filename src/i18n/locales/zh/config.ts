@@ -1,6 +1,11 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    lock: {
+        cellGroupTitle: '隐私模式',
+        enableStatus: '启用状态',
+        password: '密码',
+    },
     fontSize: {
         cellGroupTitle: '字体设置 · 像素单位',
         xsFontSize: '最小字体',

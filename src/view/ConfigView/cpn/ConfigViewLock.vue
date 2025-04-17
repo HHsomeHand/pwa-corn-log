@@ -3,6 +3,7 @@
 import {useLockStore} from "@/store/lock.store.ts";
 import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {storeToRefs} from "pinia";
+import {useI18n} from "vue-i18n";
 
 const lockStore = useLockStore();
 
@@ -17,13 +18,15 @@ async function getPassword() {
 
   lockStore.password = inputPassword;
 }
+
+const {t} = useI18n();
 </script>
 
 <template>
-  <van-cell-group title="隐私模式">
-    <corn-toggle-enable-cell title="启用状态" v-model="isLock" />
+  <van-cell-group :title="t('config.lock.cellGroupTitle')">
+    <corn-toggle-enable-cell :title="t('config.lock.enableStatus')" v-model="isLock" />
 
-    <van-cell title="密码" :value="lockStore.password" clickable @click="getPassword"/>
+    <van-cell :title="t('config.lock.password')" :value="lockStore.password" clickable @click="getPassword"/>
   </van-cell-group>
 </template>
 
