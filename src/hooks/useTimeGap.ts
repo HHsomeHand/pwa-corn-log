@@ -1,4 +1,5 @@
 import {getTimeDiff} from "@/utils";
+import {useI18n} from "vue-i18n";
 
 
 export function useTimeGap(
@@ -7,6 +8,7 @@ export function useTimeGap(
     prefix = "",
     suffix = ""
 ) {
+    const {t} = useI18n();
 
     const currentDate = ref(new Date());
 
@@ -36,11 +38,11 @@ export function useTimeGap(
         return prefix +
             hint +
             // (days > 0 ? ` ${days} 天` : "") +
-            _fmtStr(days, '天') +
+            _fmtStr(days, t('time.day')) +
             // (hours > 0 ? ` ${hours} 小时` : "") +
-            _fmtStr(hours, '小时') +
+            _fmtStr(hours, t('time.hour')) +
             // (minutes > 0 ? ` ${minutes} 分钟` : "")
-            _fmtStrEqual(minutes, '分钟') +
+            _fmtStrEqual(minutes, t('time.minute')) +
             suffix
     });
 

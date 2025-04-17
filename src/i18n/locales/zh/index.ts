@@ -4,6 +4,7 @@ import msgCornDateSelectButton from './corn-date-select-button.ts'
 import msgCornLog from './corn-log.ts'
 import msgCalc from './calc.ts'
 import msgSearch from './search.ts'
+import msgTime from './time.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -12,4 +13,5 @@ export default {
     cornLog: msgCornLog,
     calc: msgCalc,
     search: msgSearch,
+    time: msgTime,
 }
