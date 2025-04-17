@@ -1,5 +1,6 @@
 import {useGlobalCpn} from "@/hooks/globalCpn.hook.ts";
 import CornActionSheet from "@/components/CornActionSheet/CornActionSheet.vue";
+import type {ActionSheetEntry} from "@/components/CornActionSheet/CornActionSheet.type.ts";
 
 // 就显示一个 action sheet, 具体参数的使用, 请查看 vant 文档, 或是直接查看用法
 // 这个函数虽然返回 promise, 但是其实就算状态为 full 也不会返回任何值
@@ -27,7 +28,7 @@ export function showActionSheetByArray(array: string[]) {
 // [{showText: '选项title', value: ''}] 返回 value
 // resolve 选中的参数值
 // 如果用户不选择就无限 Pending
-export function showActionSheetByArrayEx(array: {showText: string, value: any}[]) {
+export function showActionSheetByArrayEx(array: ActionSheetEntry[]) {
     return new Promise<string>(resolve => {
         let actions = array.map(el => {
             return {

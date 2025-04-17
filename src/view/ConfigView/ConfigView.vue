@@ -76,6 +76,8 @@ const {t} = useI18n();
 
     <config-view-font-size />
 
+    <config-view-language />
+
     <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
   </div>
 </template>

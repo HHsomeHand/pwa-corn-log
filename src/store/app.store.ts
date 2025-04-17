@@ -195,7 +195,7 @@ export const useAppStore = defineStore('appStore', () => {
     // 刷新 title
     function changeLanguage() {
         Object.entries(appModeEntryMap).map(([key, value]) => {
-            customAppMode[key].title = value.title;
+            customAppMode.value[key].title = value.title;
         });
     }
 
