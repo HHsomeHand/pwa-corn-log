@@ -1,6 +1,11 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    mode: {
+        cellGroupTitle: '模式',
+        currMode: '当前模式',
+        currThemeColor: '当前主题色'
+    },
     logStyle: {
         listStyleTitle: '日志样式 · 列表',
         logEntryTitle: '日志样式 · 日志条目',
