@@ -25,13 +25,14 @@ import 'vant/lib/index.css';
 
 import {createPinia} from 'pinia'
 import {i18n} from "@/i18n/index.js";
+import {useI18n} from "vue-i18n";
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate);
 
 const app = createApp(App)
 
-app.use(pinia)
+app.use(pinia);
 
 setupRouterWithStore();
 

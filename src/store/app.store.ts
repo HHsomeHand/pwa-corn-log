@@ -10,6 +10,8 @@ import type {AppModeEntry} from "@/model/app.type.ts";
 import LoveView from "@/view/LoveView/LoveView.vue";
 import TreatmentView from "@/view/TreatmentView/TreatmentView.vue";
 import {useLogStoreFactory} from "@/store/logs.store";
+import {useI18n} from "vue-i18n";
+import {i18n} from "@/i18n";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -33,25 +35,29 @@ export const useAppStore = defineStore('appStore', () => {
     const appModeEntryMap: ModeMap = {
         LOG: {
             storeName: 'logs',
-            title: '日志',
+            // '日志'
+            title: i18n.global.t('appStore.logTitle'),
             defaultPrimaryColor: CUSTOM_ORANGE_HEX,
             componentKey: 'LOG',
         },
         DRUG: {
             storeName: 'drugs',
-            title: '药律',
+            // "药律"
+            title: i18n.global.t('appStore.drugTitle'),
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.BLUE),
             componentKey: 'DRUG'
         },
         LOVE: {
             storeName: 'loves',
-            title: '善举',
+            // '善举'
+            title: i18n.global.t('appStore.loveTitle'),
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.RED),
             componentKey: 'LOVE'
         },
         TREATMENT: {
             storeName: 'treatments',
-            title: '戒律',
+            // '戒律'
+            title: i18n.global.t('appStore.treatmentTitle'),
             defaultPrimaryColor: vantVarName2ColorHex(VANT_COLOR_VARS.GREEN),
             componentKey: 'TREATMENT'
         },
