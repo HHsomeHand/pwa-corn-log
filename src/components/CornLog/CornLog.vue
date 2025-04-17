@@ -4,6 +4,7 @@ import CornTimeDisplayer from "@/components/CornTimeDisplayer.vue";
 import {fmtDate, isSameDay} from "@/utils/index.js";
 import {useStyleStore} from "@/store/style.store.js";
 import {storeToRefs} from "pinia";
+import {useI18n} from "vue-i18n";
 
 const props = defineProps({
   item: {
@@ -12,6 +13,8 @@ const props = defineProps({
     }
   }
 })
+
+const {t} = useI18n();
 
 // 将日期转为今天, 明天
 function date2str(date) {
@@ -30,10 +33,14 @@ function date2str(date) {
   }
 
   if (isSameDay(date, today)) {
-    result.value = "今天";
+    // '今天'
+    result.value = t('cornLog.today');
+
     checkDate()
   } else if (isSameDay(date, yesterday)) {
-    result.value = "昨天";
+    // '昨天'
+    result.value = t('cornLog.yesterday');
+
     checkDate()
   }
 
