@@ -12,6 +12,7 @@ import TreatmentView from "@/view/TreatmentView/TreatmentView.vue";
 import {useLogStoreFactory} from "@/store/logs.store";
 import {useI18n} from "vue-i18n";
 import {i18n} from "@/i18n";
+import {pickFields} from "@/utils/object.ts";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -191,6 +192,13 @@ export const useAppStore = defineStore('appStore', () => {
         window.location.reload(); // 刷新整个页面
     }
 
+    // 刷新 title
+    function changeLanguage() {
+        Object.entries(appModeEntryMap).map(([key, value]) => {
+            customAppMode[key].title = value.title;
+        });
+    }
+
     return {
         APP_MODE,
         customAppMode,
@@ -202,6 +210,7 @@ export const useAppStore = defineStore('appStore', () => {
         currentModeKey: computed(() => currentModeKey), // 请通过 changeAppMode 来修改
         currentRoute,
         addMode,
-        removeMode
+        removeMode,
+        changeLanguage
     }
 });

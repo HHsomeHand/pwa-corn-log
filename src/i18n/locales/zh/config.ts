@@ -1,15 +1,22 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
-    text: {
-        textColorGroupTitle: '文字颜色',
-        textColor1: '文字颜色1',
-        textColor2: '文字颜色2',
-        textColor3: '文字颜色3',
-        textStrokeGroupTitle: '文字包边',
-        textStrokeSize: '包边大小',
-        textStrokeColor: '文字包边颜色',
-        textStrokeMultiple: '包边乘积',
+    mode: {
+        cellGroupTitle: '模式',
+        currMode: '当前模式',
+        currThemeColor: '当前主题色'
+    },
+    lock: {
+        cellGroupTitle: '隐私模式',
+        enableStatus: '启用状态',
+        password: '密码',
+    },
+    bg: {
+        cellGroupTitle: '背景图片',
+        currBgImage: '当前背景图片',
+        globalElBgColor: '全局元素背景色',
+        wallpaperBgColor: '壁纸背景色',
+        commentBgColor: '注释背景色'
     },
     modePlus: {
         cellGroupTitle: '模式 · 高级设置',
@@ -24,10 +31,26 @@ export default {
         removeSuccessTip: '删除成功',
         removeFailTip: '删除失败',
     },
-    mode: {
-        cellGroupTitle: '模式',
-        currMode: '当前模式',
-        currThemeColor: '当前主题色'
+    bgBlur: {
+        cellGroupTitle: '背景图片・毛玻璃特效 (背景色需透明) ',
+        isEnable: '是否启用',
+        blurRadius: '模糊半径',
+    },
+    bgPlus: {
+        cellGroupTitle: '背景图片・高级设置',
+        bgSize: '背景图片大小',
+        xPos: '背景图片X轴位置',
+        yPos: '背景图片Y轴位置'
+    },
+    text: {
+        textColorGroupTitle: '文字颜色',
+        textColor1: '文字颜色1',
+        textColor2: '文字颜色2',
+        textColor3: '文字颜色3',
+        textStrokeGroupTitle: '文字包边',
+        textStrokeSize: '包边大小',
+        textStrokeColor: '文字包边颜色',
+        textStrokeMultiple: '包边乘积',
     },
     logStyle: {
         listStyleTitle: '日志样式 · 列表',
@@ -40,35 +63,34 @@ export default {
         timeFontSize: '时间文字大小',
         dateMiniWidth: '日期最小宽度',
     },
-    lock: {
-        cellGroupTitle: '隐私模式',
-        enableStatus: '启用状态',
-        password: '密码',
-    },
-    fontSize: {
-        cellGroupTitle: '字体设置 · 像素单位',
-        xsFontSize: '最小字体',
-        smFontSize: '小字体',
-        mdFontSize: '中号字体',
-        lgFontSize: '最大字体',
-    },
-    bgPlus: {
-        cellGroupTitle: '背景图片・高级设置',
-        bgSize: '背景图片大小',
-        xPos: '背景图片X轴位置',
-        yPos: '背景图片Y轴位置'
-    },
-    bgBlur: {
-        cellGroupTitle: '背景图片・毛玻璃特效 (背景色需透明) ',
-        isEnable: '是否启用',
-        blurRadius: '模糊半径',
-    },
-    bg: {
-        cellGroupTitle: '背景图片',
-        currBgImage: '当前背景图片',
-        globalElBgColor: '全局元素背景色',
-        wallpaperBgColor: '壁纸背景色',
-        commentBgColor: '注释背景色'
+    backup: {
+        clean: {
+            cleanGroupTitle: '数据备份 · 清理',
+            cleanCurr: '清空当前',
+            cleanAll: '清空所有',
+            areYouSure: "您是否确认删除? 此操作不可逆",
+            confirm: '确认',
+            cleanSubmitText: '确认清空',
+            pleaseInput: '请输入: 确认',
+            cancelTip: '您已取消操作',
+        },
+        export: {
+            cellGroupTitle: '数据备份 · 导出',
+            exportCurr: '导出当前',
+            exportAll: '导出全部',
+            dialogTitle: "已经准备好了数据",
+            confirmButtonText: '结束',
+            copyBtnText: "复制到剪切板",
+            exportFileBtnText: "导出为文件",
+        },
+        import: {
+            fromText: "从输入",
+            fromFile: "从文件",
+            inputLabel: "导入数据",
+            submitText: "导入",
+            cellGroupTitle: "数据备份 · 导入",
+            importCellText: "导入",
+        },
     },
     about: {
         thankMsg: '鸣谢',
@@ -93,5 +115,13 @@ export default {
 
 英文: 溯水流光 (2402398917)
 `
-    }
+    },
+    fontSize: {
+        cellGroupTitle: '字体设置 · 像素单位',
+        xsFontSize: '最小字体',
+        smFontSize: '小字体',
+        mdFontSize: '中号字体',
+        lgFontSize: '最大字体',
+    },
+
 }

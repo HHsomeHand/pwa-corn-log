@@ -2,6 +2,7 @@
 import {DEFAULT_ENTRIES} from "@/components/CornLogFormPopup/const.js";
 import CornDateSelectButton from "@/components/CornLogFormPopup/cpn/CornDateSelectButton.vue";
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts";
+import {useI18n} from "vue-i18n";
 
 const modifyTime = ref(false);
 
@@ -81,7 +82,9 @@ function generateEntries(entries) {
 
 let this_id = 0;
 
-const submitText = ref("记录!");
+const {t} = useI18n();
+
+const submitText = ref(t('cornLogFormPopup.submitText'));
 
 const fieldRefs = ref([]);
 
@@ -91,7 +94,7 @@ defineExpose({
       ...DEFAULT_ENTRIES
     },
     id = null,
-    submitText: _submitText = "记录!"
+    submitText: _submitText = t('cornLogFormPopup.submitText')
   } = {}) => {
     // 如果 id 为 null, 就刷新
     if (!id || id !== this_id) {

@@ -57,8 +57,8 @@ export async function showInputPopup(options = {} as InputPopupOption)
 
 // 这里这样写, 主要是为了IDE的参数提示
 export function generateEntry({
-    label = "标签名",
-    placeholder = "提示",
+    label = "", // 标签名
+    placeholder = "", // 提示
     type = ENTRY_TYPE.STR, // STR -> 输入框, Date -> 选择按钮
     defaultVal = "", // 用于清空 popup 表单, 或设置初始值
     isReturnSubmit = false, // 是否在该条目, 回车时触发提交

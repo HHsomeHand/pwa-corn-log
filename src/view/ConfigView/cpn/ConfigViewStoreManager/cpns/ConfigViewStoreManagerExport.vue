@@ -4,6 +4,8 @@ import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store";
 import {showToast} from "vant";
 import {copyToClipboard, downloadString} from "@/utils";
+import type {StoreInfo} from "@/view/ConfigView/cpn/ConfigViewStoreManager/types";
+import {useI18n} from "vue-i18n";
 
 const appStore = useAppStore();
 
@@ -56,21 +58,26 @@ function downloadJson() {
   downloadString(json.value, 'store.backup.json');
 }
 
+const {t} = useI18n();
 </script>
 
 <template>
-  <van-cell-group title="数据备份 · 导出">
-    <van-cell title="导出当前" clickable @click="exportJson(getCurrStoreInfo)" is-link/>
+<!--  title="数据备份 · 导出"-->
+  <van-cell-group :title="t('config.backup.export.cellGroupTitle')">
+<!--   title="导出当前"  -->
+    <van-cell :title="t('config.backup.export.exportCurr')" clickable @click="exportJson(getCurrStoreInfo)" is-link/>
 
-    <van-cell title="导出全部" clickable @click="exportJson(getStoreInfos)" is-link/>
+<!--   title="导出全部" -->
+    <van-cell :title="t('config.backup.export.exportAll')" clickable @click="exportJson(getStoreInfos)" is-link/>
   </van-cell-group>
 
   <teleport to="body">
+<!--    title="已经准备好了数据" confirmButtonText="结束"-->
     <van-dialog
         class="json-dialog"
         v-model:show="showDialog"
-        title="已经准备好了数据"
-        confirmButtonText="结束"
+        :title="t('config.backup.export.dialogTitle')"
+        :confirmButtonText="t('config.backup.export.confirmButtonText')"
     >
       <div
           class="
@@ -79,9 +86,15 @@ function downloadJson() {
             flex flex-col items-center gap-2
           "
       >
-        <van-button class="w-full" plain type="primary" @click="copyJson">复制到剪切板</van-button>
+<!--        复制到剪切板-->
+        <van-button class="w-full" plain type="primary" @click="copyJson">
+          {{ t('config.backup.export.copyBtnText') }}
+        </van-button>
 
-        <van-button class="w-full" plain type="primary" @click="downloadJson">导出为文件</van-button>
+<!--        导出为文件-->
+        <van-button class="w-full" plain type="primary" @click="downloadJson">
+          {{ t('config.backup.export.exportFileBtnText') }}
+        </van-button>
       </div>
 
     </van-dialog>

@@ -9,6 +9,7 @@ import msgTabBar from './tab-bar.ts'
 import msgList from './list.ts'
 import msgConfig from './config.ts'
 import msgCornCellEnumNumber from './corn-cell-enum-number.ts'
+import msgCornLogFormPopup from './corn-log-form-popup.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -22,4 +23,5 @@ export default {
     list: msgList,
     config: msgConfig,
     cornCellEnumNumber: msgCornCellEnumNumber,
+    cornLogFormPopup: msgCornLogFormPopup,
 }

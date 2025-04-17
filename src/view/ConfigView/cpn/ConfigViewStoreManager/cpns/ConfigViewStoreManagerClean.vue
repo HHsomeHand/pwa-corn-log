@@ -5,6 +5,9 @@ import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store";
 import {LogStoreKey} from "@/injectionKeys.ts";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const appStore = useAppStore();
 
@@ -32,19 +35,25 @@ async function clearAll() {
 }
 
 async function getConfirm(): Promise<boolean> {
-  showToast("您是否确认删除? 此操作不可逆");
+  // "您是否确认删除? 此操作不可逆"
+  showToast(t('config.backup.clean.areYouSure'));
 
   const confirm = await showInputPopup({
-    label: '确认',
-    submitText: '确认清空',
-    placeholder: '请输入: 确认',
+    // label: '确认'
+    label: t('config.backup.clean.confirm'),
+    // submitText: '确认清空',
+    submitText: t('config.backup.clean.cleanSubmitText'),
+    // placeholder: '请输入: 确认',
+    placeholder:  t('config.backup.clean.pleaseInput'),
     isPending: false
   });
 
-  const isConfirm: boolean = confirm === "确认";
+  // "确认"
+  const isConfirm: boolean = confirm === t('config.backup.clean.confirm');
 
   if (!isConfirm) {
-    showToast("您已取消操作");
+    // "您已取消操作"
+    showToast(t('config.backup.clean.cancelTip'));
   }
 
   return isConfirm;
@@ -52,10 +61,13 @@ async function getConfirm(): Promise<boolean> {
 </script>
 
 <template>
-  <van-cell-group title="数据备份 · 清理">
-    <van-cell title="清空当前" clickable @click="clearCurr" is-link/>
+<!--  title="数据备份 · 清理-->
+  <van-cell-group :title="t('config.backup.clean.cleanGroupTitle')">
+<!--    title="清空当前"-->
+    <van-cell :title="t('config.backup.clean.cleanCurr')" clickable @click="clearCurr" is-link/>
 
-    <van-cell title="清空所有" clickable @click="clearAll" is-link/>
+<!--    title="清空所有"-->
+    <van-cell :title="t('config.backup.clean.cleanAll')" clickable @click="clearAll" is-link/>
   </van-cell-group>
 </template>
 
