@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue";
 
 import {showDatePickerDialog} from "@/dialog/CornDatePickerDialog/utils.js";
@@ -7,6 +7,9 @@ import {useRoute, useRouter} from "vue-router";
 import {isInvalidDate} from "@/utils/index.js";
 import {showActionSheet} from "@/components/CornActionSheet/utils.ts";
 import {useAppStore} from "@/store/app.store.js";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const props = defineProps({
   actions: {
@@ -15,18 +18,20 @@ const props = defineProps({
   }
 })
 
-const listRef = ref(null);
+const listRef = useTemplateRef('listRef');
 
 const actions = ref([
   {
-    name: '滚动到底部',
+    // '滚动到底部'
+    name: t('indexBase.scrollToBottom'),
     callback() {
       if (!listRef.value) return;
       listRef.value.toBottom();
     }
   },
   {
-    name: '滚动到日期',
+    // '滚动到日期'
+    name: t('indexBase.scrollToDate'),
     callback() {
       showDatePickerDialog(onDialogConfirm);
     }

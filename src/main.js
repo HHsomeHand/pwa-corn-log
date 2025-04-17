@@ -24,6 +24,7 @@ import 'vant/lib/index.css';
 
 
 import {createPinia} from 'pinia'
+import {i18n} from "@/i18n/index.js";
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate);
@@ -33,6 +34,8 @@ const app = createApp(App)
 app.use(pinia)
 
 setupRouterWithStore();
+
+app.use(i18n);
 
 app.use(router)
 app.use(VueVirtualScroller)
