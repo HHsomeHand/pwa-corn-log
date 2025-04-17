@@ -1,6 +1,13 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    fontSize: {
+        cellGroupTitle: '字体设置 · 像素单位',
+        xsFontSize: '最小字体',
+        smFontSize: '小字体',
+        mdFontSize: '中号字体',
+        lgFontSize: '最大字体',
+    },
     bgPlus: {
         cellGroupTitle: '背景图片・高级设置',
         bgSize: '背景图片大小',
