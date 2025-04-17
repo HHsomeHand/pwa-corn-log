@@ -1,6 +1,12 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    bgPlus: {
+        cellGroupTitle: '背景图片・高级设置',
+        bgSize: '背景图片大小',
+        xPos: '背景图片X轴位置',
+        yPos: '背景图片Y轴位置'
+    },
     bgBlur: {
         cellGroupTitle: '背景图片・毛玻璃特效 (背景色需透明) ',
         isEnable: '是否启用',
