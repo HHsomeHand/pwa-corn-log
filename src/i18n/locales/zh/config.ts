@@ -1,6 +1,17 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    logStyle: {
+        listStyleTitle: '日志样式 · 列表',
+        logEntryTitle: '日志样式 · 日志条目',
+        entryGap: '条目的间距',
+        dateGap: '日期的间距',
+        riseEntryHeight: '日志条目增高',
+        alwaysShowComment: '恒显示备注',
+        commentMiniHeight: '备注的最小高度',
+        timeFontSize: '时间文字大小',
+        dateMiniWidth: '日期最小宽度',
+    },
     lock: {
         cellGroupTitle: '隐私模式',
         enableStatus: '启用状态',
