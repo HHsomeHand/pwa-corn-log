@@ -3,6 +3,7 @@
 import CornCellColorPicker from "@/components/CornCellColorPicker.vue";
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
+import {useI18n} from "vue-i18n";
 
 
 const wallpaperStore = useWallpaperStore();
@@ -16,27 +17,36 @@ const {
   cornStrokeMultiple,
 } = storeToRefs(wallpaperStore);
 
+const {t} = useI18n();
 </script>
 
 <template>
+<!--  title="文字颜色"-->
+  <van-cell-group :title="t('config.text.textColorGroupTitle')">
+<!--    title="文字颜色1"-->
+    <corn-cell-color-picker :title="t('config.text.textColor1')" v-model="vantTextColor"/>
 
+<!--    title="文字颜色2"-->
+    <corn-cell-color-picker :title="t('config.text.textColor2')" v-model="vantTextColor2"/>
 
-  <van-cell-group title="文字颜色">
-    <corn-cell-color-picker title="文字颜色1" v-model="vantTextColor"/>
-    <corn-cell-color-picker title="文字颜色2" v-model="vantTextColor2"/>
-    <corn-cell-color-picker title="文字颜色3" v-model="vantTextColor3"/>
+<!--    title="文字颜色3"-->
+    <corn-cell-color-picker :title="t('config.text.textColor3')" v-model="vantTextColor3"/>
   </van-cell-group>
 
-  <van-cell-group title="文字包边">
-    <van-cell title="包边大小">
+<!--   title="文字包边"-->
+  <van-cell-group :title="t('config.text.textStrokeGroupTitle')">
+<!--    title="包边大小"-->
+    <van-cell :title="t('config.text.textStrokeSize')">
       <template #right-icon>
         <van-stepper :min="0" v-model="cornTextStrokeWidth"/>
       </template>
     </van-cell>
 
-    <corn-cell-color-picker title="文字包边颜色" v-model="cornTextStrokeColor"/>
+<!--    title="文字包边颜色"-->
+    <corn-cell-color-picker :title="t('config.text.textStrokeColor')" v-model="cornTextStrokeColor"/>
 
-    <van-cell title="包边乘积">
+<!--    title="包边乘积"-->
+    <van-cell :title="t('config.text.textStrokeMultiple')">
       <template #right-icon>
         <van-stepper v-model="cornStrokeMultiple"/>
       </template>

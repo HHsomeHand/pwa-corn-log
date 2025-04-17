@@ -1,6 +1,16 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    text: {
+        textColorGroupTitle: '文字颜色',
+        textColor1: '文字颜色1',
+        textColor2: '文字颜色2',
+        textColor3: '文字颜色3',
+        textStrokeGroupTitle: '文字包边',
+        textStrokeSize: '包边大小',
+        textStrokeColor: '文字包边颜色',
+        textStrokeMultiple: '包边乘积',
+    },
     modePlus: {
         cellGroupTitle: '模式 · 高级设置',
         addModeBtnText: '添加模式',
