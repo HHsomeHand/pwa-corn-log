@@ -12,6 +12,7 @@ import ConfigViewModePlus from "@/view/ConfigView/cpn/ConfigViewModePlus.vue";
 import ConfigViewStoreManager from "@/view/ConfigView/cpn/ConfigViewStoreManager/ConfigViewStoreManager.vue";
 import ConfigViewLogStyle from "@/view/ConfigView/cpn/ConfigViewLogStyle.vue";
 import ConfigViewAbout from "@/view/ConfigView/cpn/ConfigViewAbout.vue";
+import {useI18n} from "vue-i18n";
 
 function onClickLeft() {
   history.back();
@@ -31,13 +32,22 @@ function onDefaultClick() {
   bgConfigRef.value?.emptyPhoto();
 }
 
+const {t} = useI18n();
+
 </script>
 
 <template>
   <teleport to=".nav-teleport">
+<!--    <van-nav-bar-->
+<!--        title="设置"-->
+<!--        left-text="返回"-->
+<!--        left-arrow-->
+<!--        @click-left="onClickLeft"-->
+<!--    />-->
+
     <van-nav-bar
-        title="设置"
-        left-text="返回"
+        :title="t('config.navBackText')"
+        :left-text="t('config.navBackText')"
         left-arrow
         @click-left="onClickLeft"
     />
