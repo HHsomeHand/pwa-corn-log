@@ -1,6 +1,13 @@
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    bg: {
+        cellGroupTitle: '背景图片',
+        currBgImage: '当前背景图片',
+        globalElBgColor: '全局元素背景色',
+        wallpaperBgColor: '壁纸背景色',
+        commentBgColor: '注释背景色'
+    },
     about: {
         thankMsg: '鸣谢',
         detailTitle: '详细信息',

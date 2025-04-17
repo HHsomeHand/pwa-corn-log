@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {useWallpaperStore} from "@/store/wallpaper.store.ts";
 import {storeToRefs} from "pinia";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const wallpaperStore = useWallpaperStore();
 
