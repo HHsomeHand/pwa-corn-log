@@ -8,6 +8,7 @@ import msgTime from './time.ts'
 import msgTabBar from './tab-bar.ts'
 import msgList from './list.ts'
 import msgConfig from './config.ts'
+import msgCornCellEnumNumber from './corn-cell-enum-number.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -20,4 +21,5 @@ export default {
     tabBar: msgTabBar,
     list: msgList,
     config: msgConfig,
+    cornCellEnumNumber: msgCornCellEnumNumber,
 }

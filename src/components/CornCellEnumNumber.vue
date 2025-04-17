@@ -4,6 +4,9 @@ import {findKeyByValue} from "@/utils/object.ts";
 import {showNumberPopup} from "@/popup/CornNumberPopup/utils.ts";
 import {stringToNumber} from "@/utils/num.ts";
 import cornMitt from "@/mitt/mitt.ts";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 interface Props {
   title?: string;
@@ -28,7 +31,8 @@ const displayValue = computed(() => {
 });
 
 async function onClick() {
-  const CUSTOM_OPTION = "自定义";
+  // "自定义"
+  const CUSTOM_OPTION = t('cornCellEnumNumber.customOption');
 
   const result = await showActionSheetByArray([CUSTOM_OPTION, ...Object.values(props.mapper)]);
 
@@ -56,8 +60,10 @@ async function onClick() {
     cornMitt.on("popup:num:change", onNumChange);
 
     const result = await showNumberPopup({
-      submitText: '确认',
-      title: props.title + (props.formatStr ? ` (单位${props.formatStr})` : ""),
+      // '确认'
+      submitText:  t('cornCellEnumNumber.submitText'),
+      // title: props.title + (props.formatStr ? ` (单位${props.formatStr})` : ""),
+      title: props.title + (props.formatStr ? ` (${t('cornCellEnumNumber.unit')}${props.formatStr})` : ""),
       initNum: stringToNumber(model.value, props.defaultValue),
       minNum: props.minNum,
       maxNum: props.maxNum
