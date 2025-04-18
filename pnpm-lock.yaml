@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@quasar/extras':
-        specifier: ^1.16.17
-        version: 1.16.17
       '@vueuse/components':
         specifier: ^13.0.0
         version: 13.0.0(vue@3.5.13(typescript@5.8.2))
@@ -32,9 +29,6 @@ importers:
       pinia-plugin-persistedstate:
         specifier: ^4.2.0
         version: 4.2.0(pinia@3.0.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)))
-      quasar:
-        specifier: ^2.18.1
-        version: 2.18.1
       tailwindcss:
         specifier: ^4.0.14
         version: 4.0.14
@@ -48,8 +42,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.2)
       vue-i18n:
-        specifier: 12.0.0-alpha.2
-        version: 12.0.0-alpha.2(vue@3.5.13(typescript@5.8.2))
+        specifier: 9.13.1
+        version: 9.13.1(vue@3.5.13(typescript@5.8.2))
       vue-pick-colors:
         specifier: ^1.8.0
         version: 1.8.0(@popperjs/core@2.11.8)(vue@3.5.13(typescript@5.8.2))
@@ -60,9 +54,6 @@ importers:
         specifier: 2.0.0-beta.8
         version: 2.0.0-beta.8(vue@3.5.13(typescript@5.8.2))
     devDependencies:
-      '@quasar/vite-plugin':
-        specifier: ^1.9.0
-        version: 1.9.0(@vitejs/plugin-vue@5.2.3(vite@6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0))(vue@3.5.13(typescript@5.8.2)))(quasar@2.18.1)(vite@6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0))(vue@3.5.13(typescript@5.8.2))
       '@tailwindcss/postcss':
         specifier: ^4.1.1
         version: 4.1.1
@@ -804,23 +795,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@intlify/core-base@12.0.0-alpha.2':
-    resolution: {integrity: sha512-sPWvQ1Z4Wyw9Kp8xqjAk2sMOeZ4pO7p/NL3Eol8l9a7iPyMTuHyJ2DZVbOBG6zDnCupvLAqnRMAT1LAgvx0QRQ==}
+  '@intlify/core-base@9.13.1':
+    resolution: {integrity: sha512-+bcQRkJO9pcX8d0gel9ZNfrzU22sZFSA0WVhfXrf5jdJOS24a+Bp8pozuS9sBI9Hk/tGz83pgKfmqcn/Ci7/8w==}
     engines: {node: '>= 16'}
 
-  '@intlify/message-compiler@12.0.0-alpha.2':
-    resolution: {integrity: sha512-PD9C+oQbb7BF52hec0+vLnScaFkvnfX+R7zSbODYuRo/E2niAtGmHd0wPvEMsDhf9Z9b8f/qyDsVeZnD/ya9Ug==}
+  '@intlify/message-compiler@9.13.1':
+    resolution: {integrity: sha512-SKsVa4ajYGBVm7sHMXd5qX70O2XXjm55zdZB3VeMFCvQyvLew/dLvq3MqnaIsTMF1VkkOb9Ttr6tHcMlyPDL9w==}
     engines: {node: '>= 16'}
 
-  '@intlify/shared@12.0.0-alpha.2':
-    resolution: {integrity: sha512-P2DULVX9nz3y8zKNqLw9Es1aAgQ1JGC+kgpx5q7yLmrnAKkPR5MybQWoEhxanefNJgUY5ehsgo+GKif59SrncA==}
+  '@intlify/shared@9.13.1':
+    resolution: {integrity: sha512-u3b6BKGhE6j/JeRU6C/RL2FgyJfy6LakbtfeVF8fJXURpZZTzfh3e05J0bu0XPw447Q6/WUp3C4ajv4TMS4YsQ==}
     engines: {node: '>= 16'}
-
-  '@intlify/vue-i18n-core@12.0.0-alpha.2':
-    resolution: {integrity: sha512-y1NPEcPbD8xqWGiaEREkA9WxxWbxmd8IurN176w39MenZKEf5P20rYyk0w4r718+w/9jjm0m5zR1ed6uMaZT2Q==}
-    engines: {node: '>= 16'}
-    peerDependencies:
-      vue: ^3.0.0
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -864,18 +849,6 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
-  '@quasar/extras@1.16.17':
-    resolution: {integrity: sha512-4aX9XU/oj1+8O2C7LQCgywmoIw7suyUEZMPFFLWI61f21mF55VOsMdLCBhjeFgL5U4EWy079mfOR6/J8thi/ag==}
-
-  '@quasar/vite-plugin@1.9.0':
-    resolution: {integrity: sha512-r1MFtI2QZJ2g20pe75Zuv4aoi0uoK8oP0yEdzLWRoOLCbhtf2+StJpUza9TydYi3KcvCl9+4HUf3OAWVKoxDmQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@vitejs/plugin-vue': ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
-      quasar: ^2.16.0
-      vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
-      vue: ^3.0.0
 
   '@rollup/plugin-babel@5.3.1':
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
@@ -2291,10 +2264,6 @@ packages:
   quansync@0.2.10:
     resolution: {integrity: sha512-t41VRkMYbkHyCYmOvx/6URnN80H7k4X0lLdBMGsz+maAwrJQYB1djpV6vHrQIBE0WBSGqhtEHrK9U3DWWH8v7A==}
 
-  quasar@2.18.1:
-    resolution: {integrity: sha512-db/P64Mzpt1uXJ0MapaG+IYJQ9hHDb5KtTCoszwC78DR7sA+Uoj7nBW2EytwYykIExEmqavOvKrdasTvqhkgEg==}
-    engines: {node: '>= 10.18.1', npm: '>= 6.13.4', yarn: '>= 1.21.1'}
-
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -2920,8 +2889,8 @@ packages:
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
 
-  vue-i18n@12.0.0-alpha.2:
-    resolution: {integrity: sha512-ZSaZrDV/PhD4hLVybo84bkaNRnkGDF7GpI0Fcmn9Yj+2Kq5C3nE7I5iRbo+DiHyRGrwZ/IV1VP3naFAhcNJGsg==}
+  vue-i18n@9.13.1:
+    resolution: {integrity: sha512-mh0GIxx0wPtPlcB1q4k277y0iKgo25xmDPWioVVYanjPufDBpvu5ySTjP5wOrSvlYQ2m1xI+CFhGdauv/61uQg==}
     engines: {node: '>= 16'}
     peerDependencies:
       vue: ^3.0.0
@@ -3829,24 +3798,17 @@ snapshots:
   '@esbuild/win32-x64@0.25.1':
     optional: true
 
-  '@intlify/core-base@12.0.0-alpha.2':
+  '@intlify/core-base@9.13.1':
     dependencies:
-      '@intlify/message-compiler': 12.0.0-alpha.2
-      '@intlify/shared': 12.0.0-alpha.2
+      '@intlify/message-compiler': 9.13.1
+      '@intlify/shared': 9.13.1
 
-  '@intlify/message-compiler@12.0.0-alpha.2':
+  '@intlify/message-compiler@9.13.1':
     dependencies:
-      '@intlify/shared': 12.0.0-alpha.2
+      '@intlify/shared': 9.13.1
       source-map-js: 1.2.1
 
-  '@intlify/shared@12.0.0-alpha.2': {}
-
-  '@intlify/vue-i18n-core@12.0.0-alpha.2(vue@3.5.13(typescript@5.8.2))':
-    dependencies:
-      '@intlify/core-base': 12.0.0-alpha.2
-      '@intlify/shared': 12.0.0-alpha.2
-      '@vue/devtools-api': 6.6.4
-      vue: 3.5.13(typescript@5.8.2)
+  '@intlify/shared@9.13.1': {}
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
@@ -3912,15 +3874,6 @@ snapshots:
   '@polka/url@1.0.0-next.28': {}
 
   '@popperjs/core@2.11.8': {}
-
-  '@quasar/extras@1.16.17': {}
-
-  '@quasar/vite-plugin@1.9.0(@vitejs/plugin-vue@5.2.3(vite@6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0))(vue@3.5.13(typescript@5.8.2)))(quasar@2.18.1)(vite@6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0))(vue@3.5.13(typescript@5.8.2))':
-    dependencies:
-      '@vitejs/plugin-vue': 5.2.3(vite@6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0))(vue@3.5.13(typescript@5.8.2))
-      quasar: 2.18.1
-      vite: 6.2.2(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.80.2)(terser@5.39.0)
-      vue: 3.5.13(typescript@5.8.2)
 
   '@rollup/plugin-babel@5.3.1(@babel/core@7.26.10)(rollup@2.79.2)':
     dependencies:
@@ -5342,8 +5295,6 @@ snapshots:
 
   quansync@0.2.10: {}
 
-  quasar@2.18.1: {}
-
   queue-microtask@1.2.3: {}
 
   randombytes@2.1.0:
@@ -6035,11 +5986,10 @@ snapshots:
 
   vscode-uri@3.1.0: {}
 
-  vue-i18n@12.0.0-alpha.2(vue@3.5.13(typescript@5.8.2)):
+  vue-i18n@9.13.1(vue@3.5.13(typescript@5.8.2)):
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.2
-      '@intlify/shared': 12.0.0-alpha.2
-      '@intlify/vue-i18n-core': 12.0.0-alpha.2(vue@3.5.13(typescript@5.8.2))
+      '@intlify/core-base': 9.13.1
+      '@intlify/shared': 9.13.1
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.8.2)
 

@@ -45,41 +45,35 @@ function fmtFabIcon(str: string) {
   }
   return firstChar;
 }
+
+const primaryColor = "var(--van-primary-color)"
 </script>
 
 <template>
   <div class="fab-container absolute bottom-3 right-2">
-    <q-fab
-        v-model="isExpandFab"
-        color="primary"
-        push
-        icon="keyboard_arrow_up"
-        direction="up"
-    >
-      <q-fab-action
-          label-position="left"
-          external-label
-          color="primary"
-          @click="onAddClick"
-          icon="add"
-          label="添加"
-      />
+<!--    <vue-fab-->
+<!--        :clickAutoClose="false"-->
+<!--        :mainBtnColor="primaryColor"-->
+<!--    >-->
+<!--      <fab-item-->
+<!--          :color="primaryColor"-->
+<!--          @clickItem="onAddClick"-->
+<!--          title="添加"-->
+<!--      />-->
 
-      <q-fab-action
-          v-for="log in distinctLogs"
-          label-position="left"
-          external-label
-          color="primary"
-          @click="quickLog(log)"
-          :label="log"
-      >
-        <template #icon>
-              <span class="fab-container__displayer">
-              {{ fmtFabIcon(log) }}
-              </span>
-        </template>
-      </q-fab-action>
-    </q-fab>
+<!--      <fab-item-->
+<!--          v-for="log in distinctLogs"-->
+<!--          :color="primaryColor"-->
+<!--          @clickItem="quickLog(log)"-->
+<!--          :title="log"-->
+<!--      >-->
+<!--        <template>-->
+<!--              <span class="fab-container__displayer">-->
+<!--              {{ fmtFabIcon(log) }}-->
+<!--              </span>-->
+<!--        </template>-->
+<!--      </fab-item>-->
+<!--    </vue-fab>-->
   </div>
 </template>
 

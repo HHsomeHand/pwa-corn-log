@@ -10,7 +10,6 @@
     "ts-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.17",
     "@vueuse/components": "^13.0.0",
     "@vueuse/core": "^13.0.0",
     "dayjs": "^1.11.13",
@@ -18,18 +17,16 @@
     "mitt": "^3.0.1",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
-    "quasar": "^2.18.1",
     "tailwindcss": "^4.0.14",
     "underscore": "^1.13.7",
     "vant": "^4.9.18",
     "vue": "^3.5.13",
-    "vue-i18n": "12.0.0-alpha.2",
+    "vue-i18n": "9.13.1",
     "vue-pick-colors": "^1.8.0",
     "vue-router": "4",
     "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {
-    "@quasar/vite-plugin": "^1.9.0",
     "@tailwindcss/postcss": "^4.1.1",
     "@tailwindcss/vite": "^4.1.1",
     "@types/node": "^22.14.0",

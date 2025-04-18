@@ -1,3 +1,4 @@
+// vite.config.ts
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -8,15 +9,15 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { VantResolver } from '@vant/auto-import-resolver';
 import tailwindcss from '@tailwindcss/vite'
-import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // build: {
+  //   minify: false,
+  // },
   plugins: [
-    vue({
-      template: { transformAssetUrls }
-    }),
+    vue(),
     vueDevTools(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -42,12 +43,14 @@ export default defineConfig({
     tailwindcss(),
     // @quasar/plugin-vite options list:
     // https://github.com/quasarframework/quasar/blob/dev/vite-plugin/index.d.ts
-    quasar({
-      sassVariables: fileURLToPath(
-          new URL('./src/quasar-variables.sass', import.meta.url)
-      )
-    }),
-    vueJsx()
+    // 不要往稳定的项目中引入外部框架, 会把好好的项目干报废, 差之秋毫, 缪以千里哇!
+    // 这里的问题是项目的 i18n 无法正常加载, 所以移除 quasar
+    // quasar({
+    //   sassVariables: fileURLToPath(
+    //       new URL('./src/quasar-variables.sass', import.meta.url)
+    //   )
+    // }),
+    vueJsx(),
   ],
   resolve: {
     alias: {
