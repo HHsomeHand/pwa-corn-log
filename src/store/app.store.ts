@@ -13,6 +13,7 @@ import {useLogStoreFactory} from "@/store/logs.store";
 import {useI18n} from "vue-i18n";
 import {i18n} from "@/i18n";
 import {pickFields} from "@/utils/object.ts";
+import {ReloadPage} from "@/utils/brower.ts";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -187,10 +188,6 @@ export const useAppStore = defineStore('appStore', () => {
             component: appComponentMap[currentMode.value.componentKey],
         }
     })
-
-    function ReloadPage() {
-        window.location.reload(); // 刷新整个页面
-    }
 
     // 刷新 title
     function changeLanguage() {

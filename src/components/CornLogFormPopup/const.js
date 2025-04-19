@@ -1,18 +1,26 @@
 import {ENTRY_TYPE} from "@/components/CornLogFormPopup/ENTRY_TYPE.ts"; // 不可以清理
 import {generateEntry} from "@/components/CornLogFormPopup/utils.ts";
+import {i18n} from "@/i18n/index.js";
+import {useGlobalScopedI18n} from "@/hooks/useGlobalScopedI18n.js";
+
+const {t} = useGlobalScopedI18n('defaultEntry');
 
 export const LOG_ENTRY = Object.freeze(
     generateEntry({
-        label: "日志",
-        placeholder: "请输入日志内容",
+        // "日志"
+        label: t('logLabel'),
+        // "请输入日志内容"
+        placeholder: t('logPlaceholder'),
         isReturnSubmit: true
     }),
 );
 
 export const COMMENT_ENTRY = Object.freeze(
     generateEntry({
-        label: "备注",
-        placeholder: "请输入备注内容",
+        //  "备注"
+        label: t('commentLabel'),
+        // "请输入备注内容"
+        placeholder:  t('commentPlaceholder'),
     })
 );
 

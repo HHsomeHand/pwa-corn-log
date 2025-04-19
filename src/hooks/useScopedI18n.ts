@@ -6,3 +6,4 @@ export function useScopedI18n(scopePrefix: string) {
     const t = (key: string, ...args: any[]) => $t(`${scopePrefix}.${key}`, ...args)
     return { t }
 }
+
