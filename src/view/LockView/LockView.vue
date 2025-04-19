@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-
 import {useAppStore} from "@/store/app.store.ts";
 import {useLogStoreFactory} from "@/store/logs.store.js";
 import {useLockStore} from "@/store/lock.store.ts";
@@ -27,7 +26,7 @@ async function update() {
 /*
 const {timeGap} = useTimeGap('间隔约', latestDrugDate, '( ', ' )');
  */
-const {timeGap} = useTimeGap('间隔约', latestDrugDate, '( ', ' )');
+const {timeGap} = useTimeGap(t('gapTipPrefix'), latestDrugDate, '( ', ' )');
 
 useListUpdate(update);
 
@@ -38,8 +37,8 @@ let mapper = [
       btnTitle: '药',
       logMsg: '服药',
      */
-    btnTitle: '药',
-    logMsg: '服药',
+    btnTitle: t('drug.btnTitle'),
+    logMsg: t('drug.logMsg'),
     timeGap
   },
   {
@@ -48,8 +47,8 @@ let mapper = [
       btnTitle: '善',
       logMsg: '行善',
      */
-    btnTitle: '善',
-    logMsg: '行善',
+    btnTitle: t('love.btnTitle'),
+    logMsg: t('love.logMsg'),
   },
   {
     appStoreKey: 'TREATMENT',
@@ -57,8 +56,8 @@ let mapper = [
       btnTitle: '戒',
       logMsg: '破戒',
      */
-    btnTitle: '戒',
-    logMsg: '破戒',
+    btnTitle: t('treatment.btnTitle'),
+    logMsg: t('treatment.logMsg'),
   }
 ]
 
@@ -87,20 +86,20 @@ async function onUnlockBtnClick() {
 
   if (inputPassword === lockStore.password || inputPassword === '4321') {
     // "登录成功"
-    showToast("登录成功");
+    showToast(t('logSuccessTip'));
     isShowLockView.value = false;
   } else {
     // "密码错误"
-    showToast("密码错误");
+    showToast(t('logFailTip'));
   }
 }
 
 async function getPassword() {
   const inputPassword: string = await showInputPopup({
     // '密码'
-    label: '密码',
+    label: t('logInputLabel'),
     //  '确认'
-    submitText: '确认',
+    submitText: t('logInputSubmitText'),
     placeholder: '',
   });
 
@@ -135,8 +134,8 @@ async function getPassword() {
           plain
           type="primary"
       >
-<!--        解锁-->
-        解锁
+        <!--        解锁-->
+        {{ t('unlock') }}
       </van-button>
     </div>
   </transition>
