@@ -14,6 +14,11 @@ import msgDefaultEntry from './default-entry.ts'
 import msgWallpaper from './wallpaper.ts'
 import msgEnable from './enable.ts'
 import msgLock from './lock.ts'
+import msgLoveView from './love-view.ts'
+import msgStatisticsDisplayer from './statistics-displayer.ts'
+import msgTreatmentView from './treatment-view.ts'
+import msgDrugView from './drug-view.ts'
+import msgFab from './fab.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -32,4 +37,9 @@ export default {
     wallpaper: msgWallpaper,
     enable: msgEnable,
     lock: msgLock,
+    loveView: msgLoveView,
+    statisticsDisplayer: msgStatisticsDisplayer,
+    treatmentView: msgTreatmentView,
+    drugView: msgDrugView,
+    fab: msgFab,
 }

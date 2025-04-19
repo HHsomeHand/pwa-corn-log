@@ -15,8 +15,11 @@ const props = defineProps({
 const { t } = useScopedI18n('drugView');
 
 let _hint = "";
+
 if (props.hint === '') {
   _hint = t('hint');
+} else {
+  _hint = props.hint;
 }
 
 

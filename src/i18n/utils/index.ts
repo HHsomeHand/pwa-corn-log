@@ -12,9 +12,9 @@ export function changeLanguage(language: string) {
 
     setLanguage(language);
 
-    setTimeout(() => { // setTimeout 保证用户配置存储成功
-        ReloadPage();
-    }, 300);
+    // setTimeout(() => { // setTimeout 保证用户配置存储成功
+    //     ReloadPage();
+    // }, 300);
 }
 
 const languageKey = "corn-language";

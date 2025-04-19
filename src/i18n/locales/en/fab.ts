@@ -1,0 +1,3 @@
+export default {
+    addBtnText: "Add"
+}
