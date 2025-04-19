@@ -46,7 +46,7 @@ const {t} = useI18n();
 <!--    />-->
 
     <van-nav-bar
-        :title="t('config.navBackText')"
+        :title="t('config.navTitle')"
         :left-text="t('config.navBackText')"
         left-arrow
         @click-left="onClickLeft"

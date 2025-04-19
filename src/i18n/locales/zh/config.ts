@@ -1,3 +1,5 @@
+import translationStaffList from "@/i18n/constants/translation-staff-list.ts";
+
 export default {
     navBackText: "返回",
     navTitle: "设置",
@@ -111,9 +113,7 @@ export default {
 
 翻译人员名单:
 
-中文: 溯水流光 (2402398917)
-
-英文: 溯水流光 (2402398917)
+${translationStaffList}
 `
     },
     fontSize: {
