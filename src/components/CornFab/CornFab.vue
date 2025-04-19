@@ -2,6 +2,7 @@
 // 默认展开 fab
 import {LogStoreKey} from "@/injectionKeys.ts";
 import cornMitt from "@/mitt/mitt.ts";
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
 
 const isExpandFab = ref(true);
 
@@ -51,6 +52,8 @@ const primaryColor = "var(--van-primary-color)"
 function onMainBtnClick() {
   isExpandFab.value = !isExpandFab.value;
 }
+
+const {t} = useScopedI18n('fab')
 </script>
 
 <template>
@@ -64,8 +67,9 @@ function onMainBtnClick() {
           <div
               class="corn-fab__fab-item"
           >
+<!--            添加-->
             <div class="fab-item__label">
-              添加
+              {{t('addBtnText')}}
             </div>
 
             <div

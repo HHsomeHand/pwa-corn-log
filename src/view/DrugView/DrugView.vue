@@ -2,13 +2,23 @@
 import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.ts";
 import TimeGapDivider from "@/view/DrugView/cpns/TimeGapDivider.vue";
 import CornFab from "@/components/CornFab/CornFab.vue";
+import {useScopedI18n} from "@/hooks/useScopedI18n.js";
 
 const props = defineProps({
   hint: {
     type: String,
-    default: '距离上次服药约'
+    //  default: '距离上次服药约'
+    default: ''
   }
 })
+
+const { t } = useScopedI18n('drugView');
+
+let _hint = "";
+if (props.hint === '') {
+  _hint = t('hint');
+}
+
 
 const baseIndexViewRef = useTemplateRef("base-index-view-ref");
 
@@ -47,7 +57,7 @@ const lastLogEntry = computed(() => {
       <time-gap-divider
           v-if="logsCache?.length > 1"
           :target-date="lastLogEntry?.date"
-          :hint="hint"
+          :hint="_hint"
       />
       <slot name="list-bottom"></slot>
     </template>

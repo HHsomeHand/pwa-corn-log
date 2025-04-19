@@ -9,6 +9,7 @@ TODO:
 - 写 PWA 教程
 - ~~日历, 显示当天的日志条目数: 不可能实现, vant 的日历不支持 async 的 formatter~~
 - ~~锁模式~~
-- i18n
-- 允许设置字体大小
-- timeline, 展示时间间隔
+- ~~i18n~~
+- ~~允许设置字体大小~~
+- timeline, 展示吃药时间间隔
+- showLogFormPopup 选择时间后, 自动聚焦输入框, 使用事件总线 (CronMitt) 来完成

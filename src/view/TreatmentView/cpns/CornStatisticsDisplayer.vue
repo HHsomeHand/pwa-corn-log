@@ -2,6 +2,7 @@
 import {LogStoreKey} from "@/injectionKeys.ts";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 import {showToast} from "vant";
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
 
 let store = inject(LogStoreKey);
 
@@ -52,11 +53,16 @@ useListUpdate(update);
 function onCellClick(log: string, item: HourEntry) {
   showToast(`${log}: ${item.timeRange} 频率为: ${item.count}`);
 }
+
+const {t} = useScopedI18n('statisticsDisplayer');
 </script>
 
 <template>
   <template v-if="showData.length > 0">
+<!--
     <van-divider>统计 · 频率</van-divider>
+-->
+    <van-divider>{{t('title')}}</van-divider>
 
     <template v-for="data of showData">
       <van-divider content-position="left">{{data.log}}</van-divider>
