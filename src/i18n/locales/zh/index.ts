@@ -12,6 +12,7 @@ import msgCornCellEnumNumber from './corn-cell-enum-number.ts'
 import msgCornLogFormPopup from './corn-log-form-popup.ts'
 import msgDefaultEntry from './default-entry.ts'
 import msgWallpaper from './wallpaper.ts'
+import msgEnable from './enable.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -28,4 +29,5 @@ export default {
     cornLogFormPopup: msgCornLogFormPopup,
     defaultEntry: msgDefaultEntry,
     wallpaper: msgWallpaper,
+    enable: msgEnable,
 }

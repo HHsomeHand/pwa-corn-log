@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
+
 const props = defineProps({
   title: {
     type: String,
@@ -9,8 +11,11 @@ const props = defineProps({
 
 const booleanValue = defineModel();
 
+const {t} = useScopedI18n('enable');
+
 const statusText = computed(() => {
-  return booleanValue.value ? "启用" : "停用";
+  // "启用" : "停用"
+  return booleanValue.value ? t('enable') : t('disable');
 })
 
 function toggle() {
