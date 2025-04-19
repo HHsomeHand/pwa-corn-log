@@ -57,8 +57,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  // 允许外部设备访问
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0', // 允许外部设备访问
+    open: true, // 自动打开浏览器
   },
 })

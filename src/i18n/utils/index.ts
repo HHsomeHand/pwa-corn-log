@@ -10,7 +10,19 @@ export function changeLanguage(language: string) {
 
     appStore.changeLanguage();
 
+    setLanguage(language);
+
     setTimeout(() => { // setTimeout 保证用户配置存储成功
         ReloadPage();
     }, 300);
+}
+
+const languageKey = "corn-language";
+
+export function setLanguage(language: string) {
+    localStorage.setItem(languageKey, language);
+}
+
+export function getLanguage() {
+    return localStorage.getItem(languageKey);
 }

@@ -13,6 +13,7 @@ import msgCornLogFormPopup from './corn-log-form-popup.ts'
 import msgDefaultEntry from './default-entry.ts'
 import msgWallpaper from './wallpaper.ts'
 import msgEnable from './enable.ts'
+import msgLock from './lock.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -30,4 +31,5 @@ export default {
     defaultEntry: msgDefaultEntry,
     wallpaper: msgWallpaper,
     enable: msgEnable,
+    lock: msgLock,
 }

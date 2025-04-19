@@ -8,6 +8,9 @@ import {showInputPopup} from "@/components/CornLogFormPopup/utils.ts";
 import {showToast} from "vant";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 import {useTimeGap} from "@/hooks/useTimeGap.ts";
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
+
+const {t} = useScopedI18n('lock');
 
 const appStore = useAppStore();
 
@@ -21,6 +24,9 @@ async function update() {
   latestDrugDate.value = await drugStore.getLatestDate();
 }
 
+/*
+const {timeGap} = useTimeGap('间隔约', latestDrugDate, '( ', ' )');
+ */
 const {timeGap} = useTimeGap('间隔约', latestDrugDate, '( ', ' )');
 
 useListUpdate(update);
@@ -28,17 +34,29 @@ useListUpdate(update);
 let mapper = [
   {
     appStoreKey: 'DRUG',
+    /*
+      btnTitle: '药',
+      logMsg: '服药',
+     */
     btnTitle: '药',
     logMsg: '服药',
     timeGap
   },
   {
     appStoreKey: 'LOVE',
+    /*
+      btnTitle: '善',
+      logMsg: '行善',
+     */
     btnTitle: '善',
     logMsg: '行善',
   },
   {
     appStoreKey: 'TREATMENT',
+    /*
+      btnTitle: '戒',
+      logMsg: '破戒',
+     */
     btnTitle: '戒',
     logMsg: '破戒',
   }
@@ -68,16 +86,20 @@ async function onUnlockBtnClick() {
   const inputPassword = await getPassword();
 
   if (inputPassword === lockStore.password || inputPassword === '4321') {
+    // "登录成功"
     showToast("登录成功");
     isShowLockView.value = false;
   } else {
+    // "密码错误"
     showToast("密码错误");
   }
 }
 
 async function getPassword() {
   const inputPassword: string = await showInputPopup({
+    // '密码'
     label: '密码',
+    //  '确认'
     submitText: '确认',
     placeholder: '',
   });
@@ -106,12 +128,14 @@ async function getPassword() {
         {{info.btnTitle}} {{info?.timeGap ?? ""}}
       </van-button>
 
+
       <van-button
           @click="onUnlockBtnClick"
           class="lock-view__btn"
           plain
           type="primary"
       >
+<!--        解锁-->
         解锁
       </van-button>
     </div>
