@@ -47,33 +47,66 @@ function fmtFabIcon(str: string) {
 }
 
 const primaryColor = "var(--van-primary-color)"
+
+function onMainBtnClick() {
+  isExpandFab.value = !isExpandFab.value;
+}
 </script>
 
 <template>
   <div class="fab-container absolute bottom-3 right-2">
-<!--    <vue-fab-->
-<!--        :clickAutoClose="false"-->
-<!--        :mainBtnColor="primaryColor"-->
-<!--    >-->
-<!--      <fab-item-->
-<!--          :color="primaryColor"-->
-<!--          @clickItem="onAddClick"-->
-<!--          title="添加"-->
-<!--      />-->
+<!--    一整个的 FAB-->
+    <div
+        class="corn-fab"
+    >
+      <transition name="fade">
+        <div v-if="isExpandFab" class="corn-fab__container">
+          <div
+              class="corn-fab__fab-item"
+          >
+            <div class="fab-item__label">
+              添加
+            </div>
 
-<!--      <fab-item-->
-<!--          v-for="log in distinctLogs"-->
-<!--          :color="primaryColor"-->
-<!--          @clickItem="quickLog(log)"-->
-<!--          :title="log"-->
-<!--      >-->
-<!--        <template>-->
-<!--              <span class="fab-container__displayer">-->
-<!--              {{ fmtFabIcon(log) }}-->
-<!--              </span>-->
-<!--        </template>-->
-<!--      </fab-item>-->
-<!--    </vue-fab>-->
+            <div
+                class="fab__button fab-item__button"
+                @click="onAddClick"
+            >
+              <van-icon class="add-icon-font-size" name="plus" />
+
+            </div>
+          </div>
+
+          <div
+              class="corn-fab__fab-item"
+              v-for="log in distinctLogs"
+          >
+            <div class="fab-item__label">
+              {{log}}
+            </div>
+
+            <div
+                class="fab__button fab-item__button"
+                @click="quickLog(log)"
+            >
+           <span class="fab-container__displayer">
+              {{ fmtFabIcon(log) }}
+           </span>
+            </div>
+
+          </div>
+        </div>
+      </transition>
+
+<!--      大按钮-->
+      <van-button
+          type="primary"
+          class="fab__button corn-fab__button"
+          @click="onMainBtnClick"
+      >
+          <van-icon class="ellipsis-icon-font-size" name="ellipsis" />
+      </van-button>
+    </div>
   </div>
 </template>
 
@@ -81,24 +114,66 @@ const primaryColor = "var(--van-primary-color)"
 
 @import "tailwindcss";
 
-/* fab 小按钮 */
-.fab-container :deep(.q-fab__actions a) {
-  @apply w-15 h-15 flex justify-center items-center rounded-full
+.ellipsis-icon-font-size {
+  font-size: calc(var(--van-font-size-lg) * 1.75);
+}
+
+.add-icon-font-size {
+  font-size: calc(var(--van-font-size-lg) * 1.25);
+}
+
+.corn-fab__container {
+  @apply flex flex-col gap-2;
+
+  margin-bottom: 5px;
+
+  transform-origin: bottom;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  transform: translateY(20px) scale(0);
+  opacity: 0;
+}
+
+/* fab 按钮的基础样式 */
+.fab__button {
+  background-color: var(--van-primary-color);
+  @apply w-15 h-15 flex justify-center items-center rounded-full text-gray-100
 }
 
 /* fab 大按钮 */
-.fab-container :deep(.q-btn__content) {
+.corn-fab__button {
+  background-color: var(--van-primary-color);
   @apply p-1
 }
 
-/* fab 大按钮的弧度 */
-:deep(.q-fab a.q-btn) {
-  @apply rounded-full
+.corn-fab__fab-item {
+  position: relative;
 }
 
-/* fab 文字大小 */
-.fab-container :deep(.q-fab__label) {
-  font-size: var(--van-font-size-md)
+/* fab 小按钮 */
+.fab-item__button {
+}
+
+/* fab 标签 */
+.fab-item__label {
+  position: absolute;
+
+  /* 不换行 */
+  white-space: nowrap;
+
+  /* 距顶 父元素高度 50% */
+  top: 50%;
+
+  transform: translateY(-50%) translateX(calc(-100% - 5px));
+
+
+  font-size: var(--van-font-size-md);
+
+  @apply bg-gray-500/80 text-gray-50 px-2 py-1 rounded-lg;
 }
 
 .fab-container__displayer {
