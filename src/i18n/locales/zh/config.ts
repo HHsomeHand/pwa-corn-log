@@ -3,6 +3,7 @@ import translationStaffList from "@/i18n/constants/translation-staff-list.ts";
 export default {
     navBackText: "返回",
     navTitle: "设置",
+    setDefaultBtnText: "设为默认值",
     mode: {
         cellGroupTitle: '模式',
         currMode: '当前模式',

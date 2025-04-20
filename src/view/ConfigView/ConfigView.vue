@@ -13,6 +13,7 @@ import ConfigViewStoreManager from "@/view/ConfigView/cpn/ConfigViewStoreManager
 import ConfigViewLogStyle from "@/view/ConfigView/cpn/ConfigViewLogStyle.vue";
 import ConfigViewAbout from "@/view/ConfigView/cpn/ConfigViewAbout.vue";
 import {useI18n} from "vue-i18n";
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
 
 function onClickLeft() {
   history.back();
@@ -32,7 +33,7 @@ function onDefaultClick() {
   bgConfigRef.value?.emptyPhoto();
 }
 
-const {t} = useI18n();
+const {t} = useScopedI18n('config');
 
 </script>
 
@@ -46,8 +47,8 @@ const {t} = useI18n();
 <!--    />-->
 
     <van-nav-bar
-        :title="t('config.navTitle')"
-        :left-text="t('config.navBackText')"
+        :title="t('navTitle')"
+        :left-text="t('navBackText')"
         left-arrow
         @click-left="onClickLeft"
     />
@@ -78,7 +79,10 @@ const {t} = useI18n();
 
     <config-view-language />
 
-    <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">设为默认值</van-button>
+<!--    设为默认值-->
+    <van-button class="!m-2 shrink-0" plain type="primary" @click="onDefaultClick">
+      {{t('setDefaultBtnText')}}
+    </van-button>
   </div>
 </template>
 

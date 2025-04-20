@@ -3,6 +3,7 @@ import translationStaffList from "@/i18n/constants/translation-staff-list.ts";
 export default {
     navBackText: "Back",
     navTitle: "Settings",
+    setDefaultBtnText: "Set all default",
     mode: {
         cellGroupTitle: 'Mode',
         currMode: 'Current mode',

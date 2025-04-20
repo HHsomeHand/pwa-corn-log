@@ -6,5 +6,6 @@ export default {
     date: 'Date',
     log: 'Log',
     comment: 'Comment',
-    endTip: "This is the end of the logs"
+    endTip: "This is the end of the logs",
+    copySubmitText: 'Copy!',
 }

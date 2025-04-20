@@ -6,5 +6,6 @@ export default {
     date: '日期',
     log: '日志',
     comment: '备注',
-    endTip: "这里是日志的尽头"
+    endTip: "这里是日志的尽头",
+    copySubmitText: '复制!',
 }

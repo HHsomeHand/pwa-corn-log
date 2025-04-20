@@ -32,7 +32,7 @@ function showAboutDialog() {
     />-->
     <van-cell
         :title="t('config.about.version')"
-        value="1.0.1"
+        value="1.0.2"
     />
 
 <!--        <van-cell

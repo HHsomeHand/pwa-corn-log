@@ -1,4 +1,5 @@
 import {showToast} from "vant";
+import {useGlobalScopedI18n} from "@/hooks/useGlobalScopedI18n.ts";
 
 export function removeEmptyLines(text: string) {
     return text.split('\n') // 按换行符拆分成数组
@@ -6,11 +7,15 @@ export function removeEmptyLines(text: string) {
         .join('\n'); // 重新拼接为字符串
 }
 
-export function copyToClipboard(text: string, toastMsg = '文本已成功复制到剪切板！') {
+const {t} = useGlobalScopedI18n('str')
+
+// toastMsg = '文本已成功复制到剪切板！'
+export function copyToClipboard(text: string, toastMsg = t('copySuccess')) {
     navigator.clipboard.writeText(text).then(() => {
         showToast(toastMsg);
     }).catch(err => {
-        showToast('复制失败');
+        // '复制失败'
+        showToast(t('copyFail'));
     });
 }
 

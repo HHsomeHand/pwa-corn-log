@@ -19,6 +19,7 @@ import msgStatisticsDisplayer from './statistics-displayer.ts'
 import msgTreatmentView from './treatment-view.ts'
 import msgDrugView from './drug-view.ts'
 import msgFab from './fab.ts'
+import msgStr from './str.ts'
 
 export default {
     indexBase: msgIndexBase,
@@ -42,4 +43,5 @@ export default {
     treatmentView: msgTreatmentView,
     drugView: msgDrugView,
     fab: msgFab,
+    str: msgStr
 }

@@ -226,7 +226,11 @@ function onSeparatorClick(index) {
       name: 'comment',
       // '备注'
       text: t('list.comment')
-    }]
+    }],
+    /*
+      submitText: "复制!",
+     */
+    submitText: t('list.copySubmitText'),
   });
 }
 

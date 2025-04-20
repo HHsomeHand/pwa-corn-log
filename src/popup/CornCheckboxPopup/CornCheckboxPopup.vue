@@ -30,7 +30,7 @@ const toggle = (index) => {
 defineExpose({
   showPopup: (callback, {
     entries: _entries = [{name: "name", text: "测试数据"}],
-    submitText: _submitText = "复制!"
+    submitText: _submitText = ""
   } = {}) => {
     entries.value = _entries;
     submitText.value = _submitText;
