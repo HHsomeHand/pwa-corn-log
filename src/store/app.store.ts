@@ -14,6 +14,7 @@ import {useI18n} from "vue-i18n";
 import {i18n} from "@/i18n";
 import {pickFields} from "@/utils/object.ts";
 import {ReloadPage} from "@/utils/brower.ts";
+import {useGlobalScopedI18n} from "@/hooks/useGlobalScopedI18n.ts";
 
 export interface AppMode {
     LOG: Record<string, unknown>,
@@ -191,8 +192,13 @@ export const useAppStore = defineStore('appStore', () => {
 
     // 刷新 title
     function changeLanguage() {
+        const {t} = useGlobalScopedI18n('appStore');
+
+        /*
+            title: i18n.global.t('appStore.logTitle'),
+         */
         Object.entries(appModeEntryMap).map(([key, value]) => {
-            customAppMode.value[key].title = value.title;
+            customAppMode.value[key].title = t(key.toLowerCase() + 'Title');
         });
     }
 

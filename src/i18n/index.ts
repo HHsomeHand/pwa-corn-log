@@ -5,7 +5,7 @@ import { createI18n } from 'vue-i18n';
 // en: import chinese translation
 import zhMessage from './locales/zh' // ./locales/zh/index.ts
 import enMessage from './locales/en'
-import {getLanguage} from "@/i18n/utils";
+import {getLanguage, loadVantLang} from "@/i18n/utils";
 
 // zh: 合并模块到语言对象
 // en: merge module to language object
@@ -21,11 +21,15 @@ const getBrowserLocale = () => {
     return browserLocale.split('-')[0];
 };
 
+const currLang = getLanguage() ?? getBrowserLocale();
+
+loadVantLang(currLang);
+
 // 创建 i18n 实例
 export const i18n = createI18n({
     legacy: false,
     warnHtmlMessage: true,
-    locale: getLanguage() ?? getBrowserLocale(), // 默认语言
+    locale: currLang, // 默认语言
     fallbackLocale: 'en', // 回退语言
     messages
 });
