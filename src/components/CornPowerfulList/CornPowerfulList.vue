@@ -192,9 +192,9 @@ function onSeparatorClick(index) {
 
     checked = sortArray(checked);
 
-    while (fmtDate(logsCache.value[cursor]?.date) === _date_fmt) {
+    while (fmtDate(logsCache.value[cursor]?.date) === _date_fmt && cursor < logsCache.value.length) {
       for (let name of checked) {
-        let value =  logsCache.value[cursor][name];
+        let value =  logsCache.value[cursor]?.[name];
         if (!value) {
           continue;
         }
@@ -211,6 +211,7 @@ function onSeparatorClick(index) {
     }
 
     result = removeEmptyLines(result);
+
     copyToClipboard(result);
   }, {
     entries: [{
