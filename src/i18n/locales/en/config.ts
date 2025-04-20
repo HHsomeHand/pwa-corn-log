@@ -63,6 +63,8 @@ export default {
         alwaysShowComment: 'Always show comments',
         commentMiniHeight: 'Minimum comment height',
         timeFontSize: 'Time text size',
+        timeWidth: 'Time width',
+        timeHeight: 'Time height',
         dateMiniWidth: 'Minimum date width',
     },
     backup: {

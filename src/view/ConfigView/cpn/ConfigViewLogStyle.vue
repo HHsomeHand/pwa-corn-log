@@ -2,6 +2,7 @@
 import {useStyleStore} from "@/store/style.store.ts";
 import {storeToRefs} from "pinia";
 import {useI18n} from "vue-i18n";
+import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
 
 const styleStore = useStyleStore();
 
@@ -12,10 +13,13 @@ const {
     cornLogMarginBottom,
     cornListDateGap,
     cornLogTimeFontSize,
-    cornLogTimeDateMinWidth
+    cornLogTimeWidth,
+    cornLogTimeHeight,
+    cornLogTimeDateMinWidth,
 } = storeToRefs(styleStore);
 
 const {t} = useI18n();
+const {t: st} = useScopedI18n('config.logStyle');
 </script>
 
 <template>
@@ -57,6 +61,16 @@ const {t} = useI18n();
     <corn-num-stepper-cell title="时间文字大小" v-model="cornLogTimeFontSize" />
 -->
     <corn-num-stepper-cell :title="t('config.logStyle.timeFontSize')" v-model="cornLogTimeFontSize" />
+
+<!--
+    <corn-num-stepper-cell title="时间宽度" v-model="cornLogTimeWidth" />
+-->
+    <corn-num-stepper-cell :title="st('timeWidth')" v-model="cornLogTimeWidth" />
+
+<!--
+    <corn-num-stepper-cell title="时间高度" v-model="cornLogTimeHeight" />
+-->
+    <corn-num-stepper-cell :title="st('timeHeight')" v-model="cornLogTimeHeight" />
 
 <!--
     <corn-num-stepper-cell title="日期最小宽度" v-model="cornLogTimeDateMinWidth" />

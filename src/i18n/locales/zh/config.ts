@@ -63,6 +63,8 @@ export default {
         alwaysShowComment: '恒显示备注',
         commentMiniHeight: '备注的最小高度',
         timeFontSize: '时间文字大小',
+        timeWidth: '时间宽度',
+        timeHeight: '时间高度',
         dateMiniWidth: '日期最小宽度',
     },
     backup: {

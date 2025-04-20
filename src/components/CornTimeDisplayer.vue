@@ -16,7 +16,9 @@ function padNum(num) {
 let styleStore = useStyleStore();
 
 const {
-  cornLogTimeFontSize
+  cornLogTimeFontSize,
+  cornLogTimeWidth,
+  cornLogTimeHeight,
 } = storeToRefs(styleStore);
 
 const cornLogTimeFontSizeFmt = computed(() => cornLogTimeFontSize.value + 'px');
@@ -40,8 +42,13 @@ const cornLogTimeFontSizeFmt = computed(() => cornLogTimeFontSize.value + 'px');
 }
 
 .block {
-  display: inline-block;
-  padding: 10px 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: v-bind('cornLogTimeWidth + "px"');
+  height: v-bind('cornLogTimeHeight + "px"');
+
   color: #fff;
   font-size: v-bind(cornLogTimeFontSizeFmt);
   text-align: center;

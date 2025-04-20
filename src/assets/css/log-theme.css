@@ -6,6 +6,9 @@
 
     /* 日志条目 日期展示器 的 时间文字大小 */
     --corn-log-time-font-size: 12px;
+    --corn-log-time-width: 38px;
+    --corn-log-time-height: 44px;
+
     /* 日志条目 日期展示器 的 时间最小宽度 */
     --corn-log-time-date-min-width: 50px;
 
