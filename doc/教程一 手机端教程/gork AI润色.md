@@ -555,21 +555,27 @@ TABBAR 底部标签栏
 <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/17.jpg" alt="image-20250422145746669" style="zoom:50%;" />
 ![image-20250422145932467](./img/gork%20AI%E6%B6%A6%E8%89%B2/18.jpg)
 
-#### 12. 打包为 apk
+#### 12. 打包为APK
 
-https://www.pwabuilder.com/
+要将你的PWA应用打包为Android的APK文件，以便直接安装到手机，你可以使用 PWABuilder（https://www.pwabuilder.com/），一个简单高效的在线工具。以下是详细步骤：
 
-![image-20250422175611434](./img/gork%20AI%E6%B6%A6%E8%89%B2/19.jpg)
++ 点击 **Start** 按钮
 
-点击 start, 点击 package for Store 按钮
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/19.jpg" alt="image-20250422175611434" style="zoom: 50%;" />
 
-![image-20250422175720111](./img/gork%20AI%E6%B6%A6%E8%89%B2/20.jpg)
++ 找到 **Package for Store** 按钮并点击
 
-![image-20250422175750161](./img/gork%20AI%E6%B6%A6%E8%89%B2/21.jpg)
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/20.jpg" alt="image-20250422175720111" style="zoom:50%;" />
 
-![image-20250422175809054](./img/gork%20AI%E6%B6%A6%E8%89%B2/22.jpg)
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/21.jpg" alt="image-20250422175750161" style="zoom:50%;" />
 
-然后就可以获取一个压缩包, 解压出来就是 apk 了
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/22.jpg" alt="image-20250422175809054" style="zoom:50%;" />
+
+**下载并解压**：
+
+- 打包完成后，PWABuilder会提供一个压缩包下载链接。
+- 下载压缩包，解压后即可获得.apk文件。
+- 将APK文件传输到Android设备，点击安装即可（可能需启用“未知来源”安装权限）。
 
 
 
