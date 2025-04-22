@@ -555,6 +555,24 @@ TABBAR 底部标签栏
 <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/17.jpg" alt="image-20250422145746669" style="zoom:50%;" />
 ![image-20250422145932467](./img/gork%20AI%E6%B6%A6%E8%89%B2/18.jpg)
 
+#### 12. 打包为 apk
+
+https://www.pwabuilder.com/
+
+![image-20250422175611434](./img/gork%20AI%E6%B6%A6%E8%89%B2/19.jpg)
+
+点击 start, 点击 package for Store 按钮
+
+![image-20250422175720111](./img/gork%20AI%E6%B6%A6%E8%89%B2/20.jpg)
+
+![image-20250422175750161](./img/gork%20AI%E6%B6%A6%E8%89%B2/21.jpg)
+
+![image-20250422175809054](./img/gork%20AI%E6%B6%A6%E8%89%B2/22.jpg)
+
+然后就可以获取一个压缩包, 解压出来就是 apk 了
+
+
+
 ----
 
 ### 四、多端适配与注意事项
