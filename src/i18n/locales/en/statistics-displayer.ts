@@ -1,3 +1,4 @@
 export default {
-    title: 'Statistics · Frequency'
+    title: 'Statistics · Frequency',
+    frequency: 'Frequency is:',
 }

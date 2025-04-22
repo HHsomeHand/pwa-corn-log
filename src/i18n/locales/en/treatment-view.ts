@@ -1,3 +1,3 @@
 export default {
-    hint: 'You have abstained about'
+    hint: 'You have abstained about',
 }

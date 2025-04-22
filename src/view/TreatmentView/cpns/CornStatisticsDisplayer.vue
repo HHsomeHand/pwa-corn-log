@@ -50,11 +50,12 @@ async function update() {
 
 useListUpdate(update);
 
-function onCellClick(log: string, item: HourEntry) {
-  showToast(`${log}: ${item.timeRange} 频率为: ${item.count}`);
-}
+const {t} = useScopedI18n('statisticsDisplayer')
 
-const {t} = useScopedI18n('statisticsDisplayer');
+function onCellClick(log: string, item: HourEntry) {
+  // 频率为:
+  showToast(`${log}: ${item.timeRange} ${t('frequency')} ${item.count}`);
+}
 </script>
 
 <template>

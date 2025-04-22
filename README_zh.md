@@ -1,10 +1,26 @@
-# Corn Log
+# 玉米日志
 
-[Usage Guide](./doc/Usage Guide/Usage Guide.md): Detailed picture-and-text tutorial
+介绍帖: 
+
+## 推荐阅读
+
+### 说明书
+
+[使用手册](./doc/使用手册/使用手册.md): 非常详细的图文教程, 这个就是软件的说明书
+
+### 本软件支持国际化, i18n:
+
+翻译指南
+
+### 本软件支持社区贡献者:
+
+什么是社区贡献者
+
+### Git 使用引导
 
 
 
-# Dev Guide
+# 开发引导
 
 This template should help get you started developing with Vue 3 in Vite.
 
