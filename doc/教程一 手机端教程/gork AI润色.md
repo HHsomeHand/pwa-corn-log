@@ -239,7 +239,7 @@ Vant是轻量级移动端组件库，相比Vueitfy（中型）或Quasar（重型
    <style scoped></style>
    ```
    运行`pnpm dev`，看到以下界面说明成功：
-   ![image-20250421230630026](./img/gork%20AI%E6%B6%A6%E8%89%B2/4.jpg)
+   ![image-20250421230630026](./img/gork%20AI%E6%B6%A6%E8%89%B2/1.jpg)
 
 #### 5. 集成Tailwind CSS v4
 Tailwind CSS是一个原子化CSS框架，适合快速构建界面。
@@ -305,7 +305,7 @@ Tailwind CSS是一个原子化CSS框架，适合快速构建界面。
    <style scoped></style>
    ```
    运行`pnpm dev`，看到以下界面：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/6.1.jpg" alt="image-20250421234702874" style="zoom:50%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/2.jpg" alt="image-20250421234702874" style="zoom:50%;" />
 
 **Tailwind注意事项**：
 - Tailwind v4比v3更灵活，解决了粒度问题（如`p-96`直接支持）。
@@ -327,7 +327,7 @@ git switch dev
 git branch
 ```
 提交代码：
-<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/7.jpg" alt="image-20250421235107371" style="zoom: 50%;" />
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/3.jpg" alt="image-20250421235107371" style="zoom: 50%;" />
 
 #### 7. 搭建页面布局
 App包含导航栏（NAV）、内容区域（Main）和底部标签栏（Tabbar）。
@@ -437,7 +437,7 @@ TABBAR 底部标签栏
    ```
    
    效果如下：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/8.jpg" alt="image-20250422023925009" style="zoom:50%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/4.jpg" alt="image-20250422023925009" style="zoom:50%;" />
    
 4. 确认Hash路由：
    ```js
@@ -453,7 +453,7 @@ TABBAR 底部标签栏
    export default router
    ```
    地址栏显示`/#/`表示成功：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/9.jpg" alt="image-20250422123157730" style="zoom: 50%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/5.jpg" alt="image-20250422123157730" style="zoom: 50%;" />
 
 #### 8. 手机测试
 1. 运行`pnpm dev`，输入`u`获取网络地址（如`http://192.168.0.106:5173`）：
@@ -466,11 +466,11 @@ TABBAR 底部标签栏
 
 #### 9. 配置PWA图标
 1. 使用在线工具（https://favicon.inbrowser.app/tools/favicon-generator）生成图标：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/10.jpg" alt="image-20250422120922900" style="zoom:33%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/6.jpg" alt="image-20250422120922900" style="zoom:33%;" />
 2. 下载资源包：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/11.jpg" alt="image-20250422120947334" style="zoom:33%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/7.jpg" alt="image-20250422120947334" style="zoom:33%;" />
 3. 解压到`public`目录：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/12.jpg" alt="image-20250422121158221" style="zoom:50%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/8.jpg" alt="image-20250422121158221" style="zoom:50%;" />
 4. 修改`index.html`：
    ```html
    <!DOCTYPE html>
@@ -494,7 +494,7 @@ TABBAR 底部标签栏
    </html>
    ```
    成功效果：
-   ![image-20250422123258121](./img/gork%20AI%E6%B6%A6%E8%89%B2/14.jpg)
+   ![image-20250422123258121](./img/gork%20AI%E6%B6%A6%E8%89%B2/9.jpg)
 
 #### 10. PWA调试
 1. 构建项目：
@@ -510,11 +510,11 @@ TABBAR 底部标签栏
    http-server
    ```
 4. PWA需通过HTTPS或`localhost`访问。电脑打开`chrome://inspect/#devices`进行端口映射：
-   <img src="./img/%E6%95%99%E7%A8%8B%E4%B8%80%20%E6%89%8B%E6%9C%BA%E7%AB%AF%E6%95%99%E7%A8%8B/15.jpg" alt="image-20250422130015165" style="zoom:33%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/10.jpg" alt="image-20250422130015165" style="zoom:33%;" />
    绿灯表示成功：
-   ![](./img/gork%20AI%E6%B6%A6%E8%89%B2/15.1.jpg)
-   <img src="./img/%E6%95%99%E7%A8%8B%E4%B8%80%20%E6%89%8B%E6%9C%BA%E7%AB%AF%E6%95%99%E7%A8%8B/16.jpg" alt="b7242b11a0744df57eee843b713d2c6" style="zoom:33%;" />
-   <img src="./img/%E6%95%99%E7%A8%8B%E4%B8%80%20%E6%89%8B%E6%9C%BA%E7%AB%AF%E6%95%99%E7%A8%8B/17.jpg" alt="fc4ee6705e2acbc090fbd8989c1eaa6" style="zoom:33%;" />
+   ![](./img/gork%20AI%E6%B6%A6%E8%89%B2/11.jpg)
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/12.jpg" alt="b7242b11a0744df57eee843b713d2c6" style="zoom:33%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/13.jpg" alt="fc4ee6705e2acbc090fbd8989c1eaa6" style="zoom:33%;" />
 5. Chrome下载PWA需梯子（因依赖Google Play服务）。若无法添加桌面，可尝试Edge，但Edge显示不正常。
 
 #### 11. 部署到GitHub Pages
@@ -541,19 +541,19 @@ TABBAR 底部标签栏
    })
    ```
 6. 重新生成manifest，填入仓库地址（https://your-username.github.io/pwa-mobile-demo/）：
-   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/18.jpg" alt="image-20250422140742401" style="zoom:50%;" />
+   <img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/14.jpg" alt="image-20250422140742401" style="zoom:50%;" />
 7. 构建并部署：
    ```bash
    pnpm build
    pnpm run deploy
    ```
 8. 访问`https://your-username.github.io/pwa-mobile-demo/`：
-   ![image-20250422141129338](./img/gork%20AI%E6%B6%A6%E8%89%B2/19.jpg)
-   ![image-20250422141148656](./img/gork%20AI%E6%B6%A6%E8%89%B2/20.jpg)
+   ![image-20250422141129338](./img/gork%20AI%E6%B6%A6%E8%89%B2/15.jpg)
+   ![image-20250422141148656](./img/gork%20AI%E6%B6%A6%E8%89%B2/16.jpg)
 
 **Gitee Pages说明**：Gitee Pages已停止服务，请勿使用，推荐GitHub Pages：
-<img src="./img/%E6%95%99%E7%A8%8B%E4%B8%80%20%E6%89%8B%E6%9C%BA%E7%AB%AF%E6%95%99%E7%A8%8B/21.jpg" alt="image-20250422145746669" style="zoom:50%;" />
-![image-20250422145932467](./img/gork%20AI%E6%B6%A6%E8%89%B2/22)
+<img src="./img/gork%20AI%E6%B6%A6%E8%89%B2/17.jpg" alt="image-20250422145746669" style="zoom:50%;" />
+![image-20250422145932467](./img/gork%20AI%E6%B6%A6%E8%89%B2/18.jpg)
 
 ----
 
