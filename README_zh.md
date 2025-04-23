@@ -1,5 +1,11 @@
 # 如何下载
 
+推荐使用 Chrome 浏览器来下载应用, Edge Firefox 对 PWA 的兼容性不好, 并不推荐
+
+因为 Chrome 下载 PWA 应用需要使用 Google Play 服务, 所以推荐挂着梯子下载, 不然有可能无法下载
+
+
+
 <img src="./img/README_zh/03b60f25c1814c120a7696920ece409.jpg" alt="03b60f25c1814c120a7696920ece409" style="zoom:33%;" />
 
 <img src="./img/README_zh/27f82b2d8ae5dc5050f45afeb7917bd.jpg" alt="27f82b2d8ae5dc5050f45afeb7917bd" style="zoom:33%;" />
