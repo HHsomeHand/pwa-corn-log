@@ -1,0 +1,33 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    "baseUrl": ".",  // 设置基准目录为项目根目录
+    "paths": {
+      "@/*": ["src/*"]  // 将 @/ 映射到 src/ 目录
+    },
+
+    /* Linting */
+    "strict": false, // 关闭所有严格检查，包括 noImplicitAny
+    "noImplicitAny": false, // 允许隐式 any
+    "noUnusedLocals": false, // 检查代码中是否有声明了但没有被使用的局部变量/函数
+    "noUnusedParameters": false, // 检查代码中是否有声明了但没有被使用的参数变量/函数
+    "noImplicitReturns": false, // 要求代码显示编写 return
+    "noFallthroughCasesInSwitch": true, // 允许 switch case 贯穿
+    "noUncheckedSideEffectImports": true,
+    "strictNullChecks": true, // 开启对可能null值的成员访问的语法检查
+    "allowJs": true, // 允许处理 JS 文件
+    "checkJs": true, // 启用 JS 文件的类型检查
+
+    "jsx": "preserve",
+    "jsxImportSource": "vue"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "auto-imports.d.ts",
+    "components.d.ts"
+  ]
+}

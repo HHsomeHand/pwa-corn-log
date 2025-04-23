@@ -6,24 +6,42 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ts-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.0.14",
-    "@tailwindcss/vite": "^4.0.14",
-    "postcss": "^8.5.3",
+    "@vueuse/components": "^13.0.0",
+    "@vueuse/core": "^13.0.0",
+    "dayjs": "^1.11.13",
+    "idb": "^8.0.2",
+    "mitt": "^3.0.1",
+    "pinia": "^3.0.1",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "tailwindcss": "^4.0.14",
+    "underscore": "^1.13.7",
     "vant": "^4.9.18",
     "vue": "^3.5.13",
-    "vue-router": "4"
+    "vue-i18n": "9.13.1",
+    "vue-pick-colors": "^1.8.0",
+    "vue-router": "4",
+    "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.1",
+    "@tailwindcss/vite": "^4.1.1",
+    "@types/node": "^22.14.0",
     "@vant/auto-import-resolver": "^1.3.0",
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
+    "@vue/tsconfig": "^0.7.0",
+    "postcss": "^8.5.3",
+    "sass-embedded": "1.80.2",
+    "typescript": "^5.8.2",
     "unplugin-auto-import": "^19.1.1",
     "unplugin-vue-components": "^28.4.1",
     "vite": "^6.2.1",
     "vite-plugin-pwa": "^0.21.1",
-    "vite-plugin-vue-devtools": "^7.7.2"
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vue-tsc": "^2.2.8"
   }
 }

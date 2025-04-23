@@ -1,7 +1,27 @@
-:root {
+/* 指南: https://vant.pro/vant/#/zh-CN/config-provider */
+:root:root {
     /* vant 默认的 font-size 太小了, 这里用豆包每个加了 3px */
-    --van-font-size-xs: 13px !important;
-    --van-font-size-sm: 15px !important;
-    --van-font-size-md: 17px !important;
-    --van-font-size-lg: 19px !important;
+    --corn-stroke-multiple: 5;
+
+    --corn-font-size-xs: 13px;
+    --corn-font-size-sm: 15px;
+    --corn-font-size-md: 17px;
+    --corn-font-size-lg: 19px;
+
+    --van-font-size-xs: calc(var(--corn-font-size-xs) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-sm: calc(var(--corn-font-size-sm) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-md: calc(var(--corn-font-size-md) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+    --van-font-size-lg: calc(var(--corn-font-size-lg) + calc(var(--corn-text-stroke-width) * calc(var(--corn-stroke-multiple)))) !important;
+
+    --van-primary-color: #ff8917;
+
+    --corn-comment-color: white;
+
+    --van-primary-color-2: color-mix(in srgb, var(--van-primary-color) 11%, var(--corn-comment-color));
+
+    --van-dropdown-menu-shadow: none;
+
+    --van-dropdown-menu-background: transparent;
+
+    --van-overlay-background: rgba(0, 0, 0, 0.1);
 }

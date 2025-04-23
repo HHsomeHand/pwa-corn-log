@@ -1,21 +1,42 @@
-<script setup>
+<script lang="ts" setup>
+
+import CornFloatingBubble from "@/components/CornFloatingBubble.vue";
+// @ts-ignore
+import {showLogFormPopup} from "@/components/CornLogFormPopup/utils.js";
+import CornPowerfulList from "@/components/CornPowerfulList/CornPowerfulList.vue";
+import type {LogEntry} from "@/model/logs.type.ts";
+
+const baseIndexRef = useTemplateRef('baseIndexRef')
+
+const listRef = ref<InstanceType<typeof CornPowerfulList> | null>(null);
+
+onMounted(() => {
+  listRef.value = baseIndexRef.value?.listRef ?? null;
+})
+
+function onClick() {
+  async function onSubmit(logData: LogEntry) {
+    await listRef.value?.addEntry?.(logData);
+    listRef.value?.toBottom?.();
+  }
+
+  showLogFormPopup(onSubmit, {id: new Date().getTime() + ""});
+}
 
 </script>
 
 <template>
-  <div class="index-view">
-    <van-nav-bar
-        left-text="药律"
-        fixed
-        placeholder
-    />
+  <base-index-view ref="baseIndexRef">
+    <template #default>
+      <corn-floating-bubble @click="onClick"/>
 
-    <van-button class="!fixed bottom-20 right-5 !size-13" round type="primary" icon="plus" />
+      <slot></slot>
+    </template>
 
-<!--    <div class="fixed right-5 bottom-20 flex items-center justify-center w-18 h-18 bg-blue-100 rounded-full">-->
-<!--      <van-icon name="plus" color="#FAFAFA" size="30"/>-->
-<!--    </div>-->
-  </div>
+    <template #list-bottom>
+      <slot name="list-bottom"></slot>
+    </template>
+  </base-index-view>
 </template>
 
 <style scoped>

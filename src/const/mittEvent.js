@@ -1,0 +1,1 @@
+export const EVENT_SCROLL_TO = 'index-scroll-to';

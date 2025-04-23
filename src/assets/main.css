@@ -1,4 +1,6 @@
 @import "./css/vant.css";
+@import "./css/wallpaper.css";
+@import './css/theme.css';
 
 /* 项目的 ACSS 层 */
 /* tailwind 的 base 层实现了 normalize.css 保证了各浏览器样式一致*/
@@ -10,4 +12,38 @@
     body {
         @apply bg-gray-50;
     }
+}
+
+@layer utilities {
+    /*.flex {*/
+    /*    display: flex;*/
+    /*    flex-wrap: nowrap !important; !* 只覆盖 .flex *!*/
+    /*}*/
+
+    /* tailwind 的 flex 和 quasar 冲突 */
+    /* quasar 的 flex 带 flex-wrap: wrap, 这会导致布局混乱 */
+    /* 以后使用 tailwind, 一定要用前缀, 不然后期混入其他组件库, 会导致样式冲突 */
+    .my-flex {
+        display: flex;
+    }
+}
+
+@layer components {
+    .popup-btn {
+        @apply !mx-2;
+    }
+
+    .corn-view {
+        @apply overflow-y-scroll grow;
+    }
+
+    .corn-glass-card {
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* 阻止下拉刷新 */
+html, body {
+    overscroll-behavior: none;
 }
