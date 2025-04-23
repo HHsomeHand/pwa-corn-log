@@ -1,8 +1,25 @@
 # 如何下载
 
+> 如果无法通过浏览器安装, 可以尝试下载 APK:
+>
+> 软件 APK 下载地址:
+>
+> 蓝奏云: https://wwvs.lanzoue.com/iy3Gz2uach6d
+> 密码: corn
+>
+> 下载的 zip 解压出来便是 apk
+
 推荐使用 Chrome 浏览器来下载应用, Edge Firefox 对 PWA 的兼容性不好, 并不推荐
 
 因为 Chrome 下载 PWA 应用需要使用 Google Play 服务, 所以推荐挂着梯子下载, 不然有可能无法下载
+
+下载链接:
+
+```
+https://hhsomehand.github.io/pwa-corn-log/#/
+```
+
+
 
 <img src="./img/README_zh/03b60f25c1814c120a7696920ece409.jpg" alt="03b60f25c1814c120a7696920ece409" style="zoom:33%;" />
 
