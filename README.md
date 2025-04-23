@@ -4,8 +4,6 @@
 
 It is recommended to use the Chrome browser to download the app, as Edge and Firefox have poor compatibility with PWA and are not recommended.
 
-Since downloading a PWA app via Chrome requires Google Play Services, it’s best to use a VPN during the download; otherwise, it may fail.
-
 <img src="./img/README/6e106135ba45793688a2de2e339171a.jpg" alt="6e106135ba45793688a2de2e339171a" style="zoom: 33%;" />
 
 <img src="./img/README/21d3f79858b46ee794788a126224ef8.jpg" alt="21d3f79858b46ee794788a126224ef8" style="zoom:33%;" />
