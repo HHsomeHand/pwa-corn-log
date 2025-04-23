@@ -105,6 +105,7 @@ export default {
         redNote: 'Author\'s RedNote',
         about: 'About',
         copySuccessMsg: 'Copied successfully. Welcome to chat!',
+        copyTip: 'Copy',
         aboutMsg:  `
 This software is completely open - source and free!
 

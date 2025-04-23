@@ -37,19 +37,33 @@ function showAboutDialog() {
 
 <!--        <van-cell
         title="作者QQ"-->
-    <van-cell
-        :title="t('config.about.qq')"
-        :value="qq"
-        @click="copyToClipboard(qq, t('config.about.copySuccessMsg'))"
-        clickable
-    />
+<!--    <van-cell-->
+<!--        :title="t('config.about.qq')"-->
+<!--        :value="qq"-->
+<!--        @click="copyToClipboard(qq, t('config.about.copySuccessMsg'))"-->
+<!--        clickable-->
+<!--    />-->
 
 <!--        <van-cell
         title="作者小红书"-->
+<!--    <van-cell-->
+<!--        :title="t('config.about.redNote')"-->
+<!--        :value="redNoteId"-->
+<!--        @click="copyToClipboard(redNoteId, t('config.about.copySuccessMsg'))"-->
+<!--        clickable-->
+<!--    />-->
+
     <van-cell
-        :title="t('config.about.redNote')"
-        :value="redNoteId"
-        @click="copyToClipboard(redNoteId, t('config.about.copySuccessMsg'))"
+        title="Gitee"
+        :value="t('config.about.copyTip')"
+        @click="copyToClipboard('https://gitee.com/HHandHsome/pwa-corn-log', t('config.about.copySuccessMsg'))"
+        clickable
+    />
+
+    <van-cell
+        title="GitHub"
+        :value="t('config.about.copyTip')"
+        @click="copyToClipboard('https://github.com/HHsomeHand/pwa-corn-log', t('config.about.copySuccessMsg'))"
         clickable
     />
 
