@@ -1,34 +1,35 @@
-# 翻译指南
+# Translation Guide
 
-我们这里以目标语言为英文为例子:
+We take English as the target language for this example:
 
 
+## Opening the Source Code with VS Code
 
-## 用 VS Code 打开源码
-
-> VSCode 官网: https://code.visualstudio.com/
+> VS Code Official Website: https://code.visualstudio.com/
 >
-> WebStrom 官网: https://www.jetbrains.com/webstorm/
+> WebStorm Official Website: https://www.jetbrains.com/webstorm/
 
-VsCode 是一款开源且免费的代码编辑器, 使用非常广泛. 您也可以使用 WebStrom 来进行翻译.
+VS Code is an open-source and free code editor, widely used. You can also use WebStorm for translation.
 
-### VS Code vs WebStrom
+### VS Code vs WebStorm
 
-+ vsCode 开源免费, 需要自己配置插件
-+ WebStrom 2024·10·24 后允许非商业使用了, 开箱即用
+- VS Code is open-source and free, requiring manual plugin configuration.
+- WebStorm, as of October 24, 2024, allows non-commercial use and is ready to use out of the box.
 
-## 运行项目
+
+
+ ### Running the Project
 
 ```powershell
 pnpm install
 pnpm dev
 ```
 
-> 通过npm安装pnpm：确保已经安装了npm，在终端中输入 npm install -g pnpm 即可全局安装pnpm。
+> Install pnpm via npm: Ensure npm is installed, then run `npm install -g pnpm` in the terminal to install pnpm globally.
 >
-> npm的下载方式：Node.js 附带 npm: https://nodejs.org/zh-cn
+> npm Download: Node.js includes npm: https://nodejs.org/en
 
-这样整个项目就启动了:
+The project will start:
 
 ```powershell
   VITE v6.2.2  ready in 2887 ms
@@ -38,59 +39,54 @@ pnpm dev
   ➜  Vue DevTools: Open http://localhost:5173/__devtools__/ as a separate window
   ➜  Vue DevTools: Press Alt(⌥)+Shift(⇧)+D in App to toggle the Vue DevTools
   ➜  press h + enter to show help
-
 ```
 
-如果修改过程中, 忘记了地址, 直接终端继续输入`u` 加回车, 就可以再获取上面的地址.
+If you forget the address during modifications, simply type `u` and press Enter in the terminal to retrieve the address again.
 
- 
+## Copying the Folder
 
-## 复制文件夹
-
-复制`src/i18n/locales/zh`文件夹, 并粘贴为你要翻译语言的缩写, 我这里的目标语言是英语, 所以粘贴为`en`:
+Copy the `src/i18n/locales/zh` folder and paste it as the abbreviation for your target language. Since my target language is English, I paste it as `en`:
 
 ![image-20250419184144583](./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419184144583.png)
 
 `src/i18n/index.ts` 添加两行代码:
 
 ```js
-// zh: 导入中文翻译
-// en: import chinese translation
+// Import Chinese translation
 import zhMessage from './locales/zh' // ./locales/zh/index.ts
-import enMessage from './locales/en' // 添加的代码
+// Import English translation
+import enMessage from './locales/en' // Added code
 
-// zh: 合并模块到语言对象
-// en: merge module to language object
+// Merge module to language object
 const messages = {
-    zh: zhMessage, // chinese
-    en: enMessage, // 添加的代码
+    zh: zhMessage, // Chinese
+    en: enMessage, // Added code
 };
-
 ```
 
-## 添加语言切换选项
+## Adding Language Switching Option
 
-在 `src/i18n/constants/index.ts`, 添加:
+In `src/i18n/constants/index.ts`, add:
 
-```js
+```ts
 import type {ActionSheetEntry} from "@/components/CornActionSheet/CornActionSheet.type.ts";
 
 export const languageActionSheet: ActionSheetEntry[] = [
-    {showText: '中文', value: 'zh'}, // ctrl C + ctrl V 复制粘贴
-    {showText: 'English', value: 'en'}, // 新增
+    {showText: '中文', value: 'zh'},// Copy and paste
+    {showText: 'English', value: 'en'}, // Added
 ]
 
 ```
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419155242857.png" alt="image-20250419155242857" style="zoom: 33%;" />
 
-然后, 就支持切换了:
+Language switching is now supported:
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419155432992.png" alt="image-20250419155432992" style="zoom:33%;" />
 
-## 开始翻译!
+## Start Translating!
 
-切换后, 就可以开始翻译了, 我们可以稍做修改, 看看是否成功应用了翻译, `src/i18n/locales/[语言文件夹名]/app-store.ts`:
+Once switched, you can begin translating. Make slight modifications to test if the translation is applied successfully in `src/i18n/locales/[language_folder]/app-store.ts`:
 
 ```js
 // for app.store.js
@@ -104,49 +100,50 @@ export default {
 
 ```
 
-修改后, 查看浏览器是否发生了修改:
+After modifying, check the browser to see if the changes are reflected:
+
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419194136776.png" alt="image-20250419194136776" style="zoom:50%;" />
 
-### 致谢和提示
+### Acknowledgments and Tips
 
-很感谢您能翻译这款软件, 这是对我最大的认可, 但翻译其实是一件枯燥且劳动量大的活, 我推荐您可以使用 AI, 如豆包或GPT, 直接把文件内容贴过去翻译就OK
+Thank you so much for translating this software—it’s the greatest recognition for me! However, translation can be tedious and labor-intensive. I recommend using AI tools like Doubao or GPT by pasting the file content for translation.
 
-### 文件作用概览
+### File Overview
 
 ```text
 .
-|-- app-store.ts // app 相关
-|-- calc.ts // 日历页面
-|-- config.ts // 设置页面
+|-- app-store.ts // App-related
+|-- calc.ts // Calendar page
+|-- config.ts // Settings page
 |-- corn-cell-enum-number.ts
 |-- corn-date-select-button.ts
 |-- corn-log-form-popup.ts
 |-- corn-log.ts
 |-- default-entry.ts
 |-- enable.ts
-|-- index-base.ts // 首页的
-|-- index.ts // 无需修改
-|-- list.ts // 首页列表相关
-|-- lock.ts // 隐私页面
-|-- search.ts // 搜索页面的
-|-- tab-bar.ts // 底部 tabbar 的
+|-- index-base.ts // Homepage
+|-- index.ts // No modification needed
+|-- list.ts // Homepage list-related
+|-- lock.ts // Privacy page
+|-- search.ts // Search page
+|-- tab-bar.ts // Bottom tab bar
 |-- time.ts
-`-- wallpaper.ts // 壁纸设置
+`-- wallpaper.ts // Wallpaper settings
 
 0 directories, 17 files
 ```
 
-### app-store.js
+### app-store.ts
 
-首页的标题:
+Homepage titles:
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419201142648.png" alt="image-20250419201142648" style="zoom:50%;" />
 
-设置页面的选择:
+Settings page options:
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419201252179.png" alt="image-20250419201252179" style="zoom:50%;" />
 
 ### tab-bar.ts
 
-这是底部的 Tab Bar的
+Bottom Tab Bar:
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419202035575.png" alt="image-20250419202035575" style="zoom: 50%;" />
 
@@ -154,13 +151,13 @@ export default {
 
 ### calc.ts
 
-这是日历页面的:
+Calendar page:
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419201528700.png" alt="image-20250419201528700" style="zoom:50%;" />
 
 ### search.ts
 
-是搜索页面的:
+Search page:
 ![image-20250419202247391](./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419202247391.png)
 
 ### index-base.ts
@@ -187,13 +184,13 @@ export default {
 
 ## list.ts
 
-首页的 list
+Homepage list:
 
 ![image-20250419203830683](./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419203830683.png)
 
 ### Config.ts
 
-设置页面的
+Settings page:
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419210101944.png" alt="image-20250419210101944" style="zoom:50%;" />
 
@@ -233,10 +230,10 @@ export default {
 
 <img src="./img/%E7%BF%BB%E8%AF%91%E6%8C%87%E5%8D%97/image-20250419234520534.png" alt="image-20250419234520534" style="zoom:50%;" />
 
-## 联系我
+## Contact Me
 
-如果你遇到了什么问题, 欢迎联系我!
+If you encounter any issues, feel free to reach out!
 
-我的 QQ 是 2402398917, 欢迎来聊天哇!
+My QQ is 2402398917—welcome to chat!
 
-我没有什么国外的社交媒体, 您如果是国际友人, 可以直接通过 Github 仓库的 issue 来和我交流!
+I don’t have international social media accounts. If you’re an international friend, you can communicate with me via GitHub repository issues!

@@ -1,3 +1,11 @@
+# 如何下载
+
+<img src="./img/README_zh/03b60f25c1814c120a7696920ece409.jpg" alt="03b60f25c1814c120a7696920ece409" style="zoom:33%;" />
+
+<img src="./img/README_zh/27f82b2d8ae5dc5050f45afeb7917bd.jpg" alt="27f82b2d8ae5dc5050f45afeb7917bd" style="zoom:33%;" />
+
+或者你可以访问 Github Release 来获取 apk! :D
+
 # 🌽 玉米日志使用手册
 
 > **提示**：本手册基于早期版本编写，后续版本可能有细微变化，但核心功能保持一致。建议使用 **Typora** 查看以获得最佳阅读体验。
@@ -162,6 +170,6 @@
 
 <img src="./img/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/19.jpg" alt="戒律统计" style="zoom:33%;" />
 
-> 本软件支持 i18n, 翻译手册:
->
-> [click me](./doc/Localization Guide/翻译指南.md)
+本软件支持 i18n, 翻译手册:
+
+[click me](./doc/Localization_Guide/翻译指南.md)
