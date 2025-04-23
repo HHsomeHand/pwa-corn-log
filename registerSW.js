@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/pwa-corn-log/sw.js', { scope: '/pwa-corn-log/' })})}
