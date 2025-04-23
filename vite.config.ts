@@ -61,4 +61,5 @@ export default defineConfig({
     host: '0.0.0.0', // 允许外部设备访问
     open: true, // 自动打开浏览器
   },
+  base: "/pwa-corn-log/",
 })
