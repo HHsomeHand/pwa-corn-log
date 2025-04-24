@@ -23,6 +23,13 @@ const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store
 
 async function initList() {
   logsCache.value = [];
+  isEnd.value = false;
+
+  await nextTick(); // 确保 DOM 已完全更新, 不可以去除, 去了 scrollerRef 就为 null 了
+  if (!scrollerRef.value) {
+    console.error('scrollerRef is still null after nextTick');
+    return;
+  }
 
   const scrollerEl = getDomElement(scrollerRef.value);
 
@@ -41,15 +48,7 @@ async function initList() {
 }
 
 // 让体内元素可以滚动
-onMounted( async () => {
-  await nextTick(); // 确保 DOM 已完全更新, 不可以去除, 去了 scrollerRef 就为 null 了
-  if (!scrollerRef.value) {
-    console.error('scrollerRef is still null after nextTick');
-    return;
-  }
-
-  await initList();
-});
+onMounted(initList);
 
 cornMitt.on('lockView:add', initList);
 
