@@ -21,13 +21,8 @@ const scrollerRef = useTemplateRef("scrollerRef")
 
 const {isEnd, onScroll, updateToDate, update} = useUpdateLogs(scrollerRef, store, logsCache);
 
-// 让体内元素可以滚动
-onMounted( async () => {
-  await nextTick(); // 确保 DOM 已完全更新, 不可以去除, 去了 scrollerRef 就为 null 了
-  if (!scrollerRef.value) {
-    console.error('scrollerRef is still null after nextTick');
-    return;
-  }
+async function initList() {
+  logsCache.value = [];
 
   const scrollerEl = getDomElement(scrollerRef.value);
 
@@ -43,10 +38,22 @@ onMounted( async () => {
   await nextTick(() => {
     scrollerEl.scrollTop = scrollerEl.scrollHeight; // 滚动到底部
   })
+}
 
-  const instance = getCurrentInstance()
+// 让体内元素可以滚动
+onMounted( async () => {
+  await nextTick(); // 确保 DOM 已完全更新, 不可以去除, 去了 scrollerRef 就为 null 了
+  if (!scrollerRef.value) {
+    console.error('scrollerRef is still null after nextTick');
+    return;
+  }
+
+  await initList();
 });
 
+cornMitt.on('lockView:add', initList);
+
+// 自然地滚动到底部
 function toBottom() {
   if (!scrollerRef.value) return;
   const scrollerEl = getDomElement(scrollerRef.value);

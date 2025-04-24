@@ -8,6 +8,7 @@ import {showToast} from "vant";
 import {useListUpdate} from "@/hooks/useListUpdate.ts";
 import {useTimeGap} from "@/hooks/useTimeGap.ts";
 import {useScopedI18n} from "@/hooks/useScopedI18n.ts";
+import cornMitt from "@/mitt/mitt.ts";
 
 const {t} = useScopedI18n('lock');
 
@@ -70,6 +71,8 @@ function onBtnClick(index) {
   const logStore = useLogStoreFactory(appStore.appModeEntryMap[appStoreKey].storeName)();
 
   logStore.addLog({log: logStoreInfo.logMsg});
+
+  cornMitt.emit('lockView:add');
 
   update();
 }
