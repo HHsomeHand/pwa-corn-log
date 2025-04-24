@@ -104,7 +104,8 @@ export default {
         qq: 'Author\'s QQ',
         redNote: 'Author\'s RedNote',
         about: 'About',
-        copySuccessMsg: 'Copied successfully. Welcome to chat!',
+        copySuccessMsg: 'Copied successfully! Welcome to report issues!',
+        copyTip: 'Copy',
         aboutMsg:  `
 This software is completely open - source and free!
 

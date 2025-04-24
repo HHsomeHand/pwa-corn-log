@@ -1,3 +1,27 @@
+[中文版](./README_zh.md) 
+
+# How to install?
+
+It is recommended to use the Chrome browser to download the app, as Edge and Firefox have poor compatibility with PWA and are not recommended.
+
+Download url: 
+
+```
+https://hhsomehand.github.io/pwa-corn-log/#/
+```
+
+
+
+<img src="./img/README/6e106135ba45793688a2de2e339171a.jpg" alt="6e106135ba45793688a2de2e339171a" style="zoom: 33%;" />
+
+<img src="./img/README/21d3f79858b46ee794788a126224ef8.jpg" alt="21d3f79858b46ee794788a126224ef8" style="zoom:33%;" />
+
+Or you can access github release page to download apk! :D
+
+## How to switch language?
+
+![bf01cbe0f81e8867f633a6187712f4f](./img/README/bf01cbe0f81e8867f633a6187712f4f.jpg)
+
 # Corn Log User Manual
 
 > **Tip**: This manual is based on an earlier version. Subsequent versions may have minor changes, but core functions remain consistent. For the best reading experience, we recommend using **Typora**.
@@ -181,8 +205,8 @@ Customize the size of the time text:
 
 <img src="./img/Usage%20Guide/55b8c72719cdcea74aa0314486476a7.jpg" alt="55b8c72719cdcea74aa0314486476a7" style="zoom:33%;" />
 
-> the app support i18n, Localization Guide:
->
-> [click me](./doc/Localization Guide/Localization Guidemd)
->
-> Welcome to PR! I will merge! :)
+the app support i18n, Localization Guide:
+
+[click me](./doc/Localization_Guide/Localization_Guide.md)
+
+Welcome to PR! I will merge! :)

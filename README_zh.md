@@ -1,10 +1,37 @@
+# 如何下载
+
+> 如果无法通过浏览器安装, 可以尝试下载 APK:
+>
+> 软件 APK 下载地址:
+>
+> 蓝奏云: https://wwvs.lanzoue.com/iy3Gz2uach6d
+> 密码: corn
+>
+> 下载的 zip 解压出来便是 apk
+
+推荐使用 Chrome 浏览器来下载应用, Edge Firefox 对 PWA 的兼容性不好, 并不推荐
+
+因为 Chrome 下载 PWA 应用需要使用 Google Play 服务, 所以推荐挂着梯子下载, 不然有可能无法下载
+
+下载链接:
+
+```
+https://hhsomehand.github.io/pwa-corn-log/#/
+```
+
+
+
+<img src="./img/README_zh/03b60f25c1814c120a7696920ece409.jpg" alt="03b60f25c1814c120a7696920ece409" style="zoom:33%;" />
+
+<img src="./img/README_zh/27f82b2d8ae5dc5050f45afeb7917bd.jpg" alt="27f82b2d8ae5dc5050f45afeb7917bd" style="zoom:33%;" />
+
+或者你可以访问 Github Release 来获取 apk! :D
+
 # 🌽 玉米日志使用手册
 
 > **提示**：本手册基于早期版本编写，后续版本可能有细微变化，但核心功能保持一致。建议使用 **Typora** 查看以获得最佳阅读体验。
 
 [TOC]
-
-[原稿](./使用手册(原稿).md)
 
 <img src="./img/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1.jpg" alt="玉米日志界面" style="zoom: 50%;" />
 
@@ -146,7 +173,6 @@
 <img src="./img/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/deea04ffa2611fde6106736472269c5.jpg" alt="时间文字大小" style="zoom:33%;" />
 
 > **探索更多**：其他细节功能可自行摸索。  
-> **分享与反馈**：若调出满意的界面，欢迎加 QQ 分享（QQ: 2402398917）。遇到问题也可联系我！
 
 ## 常见问题
 
@@ -162,6 +188,6 @@
 
 <img src="./img/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/19.jpg" alt="戒律统计" style="zoom:33%;" />
 
-> 本软件支持 i18n, 翻译手册:
->
-> [click me](./doc/Localization Guide/翻译指南.md)
+本软件支持 i18n, 翻译手册:
+
+[click me](./doc/Localization_Guide/翻译指南.md)

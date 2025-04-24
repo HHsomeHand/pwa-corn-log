@@ -104,7 +104,8 @@ export default {
         qq: '作者QQ',
         redNote: '作者小红书',
         about: '关于',
-        copySuccessMsg: '成功复制, 欢迎来聊天!',
+        copySuccessMsg: '成功复制, 欢迎来提 issue!',
+        copyTip: '点击复制',
         aboutMsg:  `
 本软件为完全开源且免费!
 

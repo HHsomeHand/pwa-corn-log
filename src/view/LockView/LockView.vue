@@ -19,6 +19,7 @@ const drugStore = useLogStoreFactory(drugStoreName)();
 
 const latestDrugDate = ref<Date | null>(null);
 
+// list 更新时, 这里的日期也更新
 async function update() {
   latestDrugDate.value = await drugStore.getLatestDate();
 }
